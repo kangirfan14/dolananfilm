@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOLANAN FILM | A Production house from Cirebon</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -25,7 +25,6 @@
             color: var(--text-light);
             line-height: 1.6;
             scroll-behavior: smooth;
-            overflow-x: hidden;
         }
 
         /* --- NAVIGATION --- */
@@ -37,86 +36,114 @@
             padding: 0 5%;
         }
 
-        .logo-nav { font-size: 1.2rem; font-weight: 700; letter-spacing: 2px; color: var(--accent-gold); text-decoration: none; }
+        .logo-nav { font-size: 1.2rem; font-weight: 700; color: var(--accent-gold); text-decoration: none; letter-spacing: 2px; }
         nav ul { display: flex; list-style: none; }
-        nav ul li { margin: 0 10px; }
-        nav ul li a { text-decoration: none; color: var(--text-light); font-size: 0.75rem; text-transform: uppercase; transition: 0.3s; }
-        nav ul li a:hover, nav ul li a.active { color: var(--accent-gold); }
+        nav ul li { margin: 0 15px; }
+        nav ul li a { text-decoration: none; color: var(--text-light); font-size: 0.7rem; text-transform: uppercase; }
 
         /* --- HERO SECTION --- */
-        #home {
-            position: relative;
-            min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; padding: 100px 5% 60px;
-            overflow: hidden;
+        header {
+            position: relative; min-height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center; overflow: hidden;
+            padding: 120px 5% 50px;
         }
 
-        /* Video Background Styling */
         .video-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; z-index: -1; opacity: 0.5;
+            object-fit: cover; z-index: -1; opacity: 0.4;
         }
 
         .hero-title h1 {
-            font-size: clamp(2rem, 8vw, 4rem); letter-spacing: 8px; margin-bottom: 10px;
+            font-size: clamp(3rem, 12vw, 6rem); font-weight: 900; letter-spacing: 12px;
             background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: shine 4s linear infinite; background-size: 200% auto;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* Pamflet Pulse Animation */
+        @keyframes shine { to { background-position: 200% center; } }
+
+        /* --- JARGON POP-UP --- */
+        .jargon-wrapper { height: 60px; margin: 10px 0; }
+        #jargon-text {
+            font-size: clamp(1.4rem, 6vw, 3rem); font-weight: 700; color: var(--accent-gold);
+            text-transform: uppercase; letter-spacing: 6px; opacity: 0; transform: translateY(20px);
+            transition: 0.6s ease;
+        }
+        #jargon-text.show { opacity: 1; transform: translateY(0); text-shadow: 0 0 20px rgba(197, 160, 89, 0.6); }
+
+        /* --- HIGHLIGHT CARD (UKURAN BESAR & BERDENYUT) --- */
         @keyframes pulse-gold {
-            0% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(197, 160, 89, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.5); border-color: rgba(197, 160, 89, 0.3); }
+            50% { box-shadow: 0 0 30px 5px rgba(197, 160, 89, 0.3); border-color: rgba(197, 160, 89, 0.8); }
+            100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.5); border-color: rgba(197, 160, 89, 0.3); }
         }
 
-        .highlight-pamflet {
-            margin-top: 40px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(197, 160, 89, 0.3);
-            padding: 25px; max-width: 850px; width: 100%; display: flex; align-items: center; gap: 30px;
-            border-radius: 12px; backdrop-filter: blur(10px);
-            animation: pulse-gold 3s infinite ease-in-out;
+        .highlight-card {
+            background: rgba(255, 255, 255, 0.03); 
+            border: 2px solid rgba(197, 160, 89, 0.3);
+            padding: 40px; 
+            max-width: 950px; /* Ukuran diperbesar */
+            width: 100%; 
+            border-radius: 20px;
+            display: flex; 
+            align-items: center; 
+            gap: 40px; 
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            margin-top: 40px;
+            animation: pulse-gold 3s infinite ease-in-out; /* Efek Berdenyut Aktif */
         }
 
-        .pamflet-container { position: relative; width: 180px; flex-shrink: 0; margin: 0 auto; }
-        .pamflet-img-home { width: 100%; aspect-ratio: 1080/1350; border-radius: 8px; object-fit: cover; border: 1px solid var(--accent-gold); }
+        .pamflet-box { position: relative; width: 220px; flex-shrink: 0; } /* Pamflet diperbesar */
+        .pamflet-img { width: 100%; border-radius: 12px; border: 1px solid var(--accent-gold); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
 
-        .countdown-overlay {
-            position: absolute; bottom: 10px; left: 5px; right: 5px;
-            background: rgba(0,0,0,0.85); backdrop-filter: blur(5px);
-            display: flex; justify-content: space-around; padding: 8px 5px;
-            border-radius: 4px; border: 1px solid rgba(197, 160, 89, 0.3);
+        .countdown-strip {
+            position: absolute; bottom: 12px; left: 8px; right: 8px;
+            background: rgba(0,0,0,0.9); display: flex; justify-content: space-around; 
+            padding: 10px 5px; border-radius: 8px; text-align: center;
+            border: 1px solid rgba(197, 160, 89, 0.4);
         }
-        .time-box span { display: block; font-size: 0.8rem; font-weight: bold; color: var(--accent-gold); }
-        .time-box p { font-size: 0.4rem; text-transform: uppercase; color: white; margin: 0; }
+        .time-item { flex: 1; }
+        .time-item span { color: var(--accent-gold); font-weight: bold; display: block; font-size: 1rem; }
+        .time-item p { color: white; font-size: 0.5rem; text-transform: uppercase; margin: 0; opacity: 0.8; }
 
-        .pamflet-info { text-align: left; flex: 1; }
-        .btn-more {
-            display: inline-block; padding: 10px 25px; border: 1px solid var(--accent-gold);
-            color: var(--accent-gold); text-decoration: none; font-size: 0.75rem; letter-spacing: 2px;
-            text-transform: uppercase; transition: 0.4s; font-weight: bold; margin-top: 15px;
+        .btn-selengkapnya {
+            display: inline-block; padding: 12px 28px; border: 2px solid var(--accent-gold);
+            color: var(--accent-gold); text-decoration: none; font-size: 0.8rem; 
+            font-weight: 700; text-transform: uppercase; letter-spacing: 3px;
+            margin-top: 25px; transition: 0.4s; border-radius: 5px;
         }
-        .btn-more:hover { background: var(--accent-gold); color: #000; }
+        .btn-selengkapnya:hover { background: var(--accent-gold); color: #000; transform: translateY(-3px); }
 
-        /* --- REVEAL ANIMATION (FADE-IN) --- */
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease-out; }
+        /* --- SECTIONS --- */
+        section { padding: 120px 10%; }
+        .section-title { 
+            font-size: 2.5rem; color: var(--accent-gold); text-align: center; 
+            margin-bottom: 60px; text-transform: uppercase; letter-spacing: 10px;
+        }
+
+        .card-box { background: var(--secondary-dark); padding: 50px; border-radius: 20px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
+
+        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .gallery-item { height: 350px; border-radius: 15px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s ease; }
+        .gallery-item:hover img { transform: scale(1.1); }
+
+        /* --- REVEAL --- */
+        .reveal { opacity: 0; transform: translateY(50px); transition: 1.2s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        section { padding: 100px 8%; }
-        h2.section-title { font-size: 2rem; text-align: center; margin-bottom: 50px; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 5px; }
-
-        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .gallery-item { height: 250px; overflow: hidden; border-radius: 8px; border: 1px solid rgba(197,160,89,0.2); }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: 0.5s; }
-        .gallery-item:hover img { filter: grayscale(0%); transform: scale(1.1); }
-
-        /* RESPONSIVE FOR HP */
+        /* --- MOBILE --- */
         @media (max-width: 768px) {
-            nav { height: auto; padding: 15px 0; flex-direction: column; }
-            nav ul { margin-top: 10px; }
-            .highlight-pamflet { flex-direction: column; text-align: center; }
-            .pamflet-info { text-align: center; }
+            nav { flex-direction: column; height: auto; padding: 15px 0; }
+            nav ul { margin-top: 15px; }
+            .highlight-card { flex-direction: column; text-align: center; padding: 30px 20px; }
+            .gallery { grid-template-columns: 1fr 1fr; gap: 15px; }
+            .gallery-item { height: 220px; }
+            .pamflet-box { width: 180px; }
         }
 
-        footer { padding: 40px; text-align: center; background: #050505; color: var(--text-gray); font-size: 0.7rem; letter-spacing: 2px; border-top: 1px solid rgba(255,255,255,0.05); }
+        footer { padding: 60px; text-align: center; font-size: 0.8rem; color: var(--text-gray); border-top: 1px solid #1a1a1a; letter-spacing: 2px; }
     </style>
 </head>
 <body>
@@ -124,7 +151,7 @@
     <nav>
         <a href="#" class="logo-nav">DOLANAN FILM</a>
         <ul>
-            <li><a href="#home">Beranda</a></li>
+            <li><a href="#home">Home</a></li>
             <li><a href="#profil">Profil</a></li>
             <li><a href="#program">Program</a></li>
             <li><a href="#kegiatan">Kegiatan</a></li>
@@ -133,44 +160,72 @@
     </nav>
 
     <header id="home">
-        <!-- Background Video (Pastikan file .mp4 sudah ada di GitHub) -->
         <video autoplay muted loop playsinline class="video-bg">
             <source src="DJI_0008.mp4" type="video/mp4">
         </video>
-
+        
         <div class="hero-title reveal active">
             <h1>DOLANAN FILM</h1>
-            <p style="letter-spacing: 4px; font-weight: 300;">A Production house from Cirebon</p>
         </div>
 
-        <div class="highlight-pamflet reveal active" id="event-highlight">
-            <div class="pamflet-container">
-                <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=500" alt="Pamflet" class="pamflet-img-home">
-                <div class="countdown-overlay">
-                    <div class="time-box"><span id="days">00</span><p>Hari</p></div>
-                    <div class="time-box"><span id="hours">00</span><p>Jam</p></div>
-                    <div class="time-box"><span id="minutes">00</span><p>Menit</p></div>
-                    <div class="time-box"><span id="seconds">00</span><p>Detik</p></div>
+        <div class="jargon-wrapper reveal active">
+            <p id="jargon-text">Crafting Stories</p>
+        </div>
+
+        <!-- Highlight Card yang Diperbesar & Berdenyut -->
+        <div id="event-highlight" class="reveal active highlight-card">
+            <div class="pamflet-box">
+                <!-- Gunakan link gambar asli Anda di sini -->
+                <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=500" class="pamflet-img">
+                <div class="countdown-strip">
+                    <div class="time-item"><span id="days">00</span><p>Hari</p></div>
+                    <div class="time-item"><span id="hours">00</span><p>Jam</p></div>
+                    <div class="time-item"><span id="minutes">00</span><p>Menit</p></div>
+                    <div class="time-item"><span id="seconds">00</span><p>Detik</p></div>
                 </div>
             </div>
-            <div class="pamflet-info">
-                <p style="color:var(--accent-gold); font-size: 0.7rem; letter-spacing: 2px;">ACARA MENDATANG</p>
-                <h3 style="margin: 10px 0;">NYABAR VOL.3 2026</h3>
-                <p style="color: var(--text-gray); font-size: 0.85rem;">Saksikan karya-karya terbaik dari kami dalam acara tahunan rutin.</p>
-                <a href="event.html" class="btn-more">Lihat Selengkapnya</a>
+            <div style="text-align: left; flex: 1;">
+                <p style="color:var(--accent-gold); font-size: 0.8rem; letter-spacing: 3px; font-weight: 700;">NEXT BIG EVENT</p>
+                <h3 style="font-size: 2rem; margin: 10px 0 15px; font-weight: 900;">NYABAR VOL.3 2026</h3>
+                <p style="color: var(--text-gray); font-size: 1rem; max-width: 500px;">Saksikan karya terbaik kami secara rutin dalam pemutaran film tahunan yang paling ditunggu di Cirebon.</p>
+                <a href="event.html" class="btn-selengkapnya">Lihat Selengkapnya</a>
             </div>
         </div>
     </header>
 
     <section id="profil" class="reveal">
         <h2 class="section-title">Profil</h2>
-        <div style="background: var(--secondary-dark); padding: 40px; border-radius: 8px; text-align: center;">
-            <p style="color: var(--text-gray);">DOLANAN FILM adalah rumah produksi kreatif yang berfokus pada penceritaan visual sinematik dan pengembangan brand lokal dari Cirebon.</p>
+        <div class="card-box">
+            <p style="font-size: 1.2rem;">COMING SOON</p>
         </div>
     </section>
 
+    <!-- BAGIAN PROGRAM -->
+<section id="program" class="reveal">
+    <h2 class="section-title">Program</h2>
+    <div class="card-box">
+        <p style="font-size: 1.2rem; margin-bottom: 20px;">
+            COMING SOON
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; text-align: left;">
+            <div style="padding: 20px; border-left: 3px solid var(--accent-gold); background: rgba(255,255,255,0.02);">
+                <h4 style="color: var(--accent-gold);">COMING SOON</h4>
+                <p style="font-size: 0.85rem; color: var(--text-gray);">COMING SOON.</p>
+            </div>
+            <div style="padding: 20px; border-left: 3px solid var(--accent-gold); background: rgba(255,255,255,0.02);">
+                <h4 style="color: var(--accent-gold);">COMING SOON</h4>
+                <p style="font-size: 0.85rem; color: var(--text-gray);">COMING SOON.</p>
+            </div>
+            <div style="padding: 20px; border-left: 3px solid var(--accent-gold); background: rgba(255,255,255,0.02);">
+                <h4 style="color: var(--accent-gold);">COMING SOON</h4>
+                <p style="font-size: 0.85rem; color: var(--text-gray);">COMING SOON.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
     <section id="kegiatan" class="reveal">
-        <h2 class="section-title">Kegiatan DF</h2>
+        <h2 class="section-title">Kegiatan</h2>
         <div class="gallery">
             <div class="gallery-item"><img src="WhatsApp Image 2026-05-04 at 12.28.16 (1).jpeg"></div>
             <div class="gallery-item"><img src="WhatsApp Image 2026-05-04 at 12.28.16.jpeg"></div>
@@ -181,44 +236,51 @@
 
     <section id="kontak" class="reveal">
         <h2 class="section-title">Kontak</h2>
-        <div style="text-align: center; padding: 40px 0;">
-            <a href="https://www.instagram.com/dolanan_film/" target="_blank" style="font-size: 1.2rem; color: var(--text-light); text-decoration: none; letter-spacing: 3px;">@dolanan_film</a>
+        <div class="card-box">
+            <a href="https://www.instagram.com/dolanan_film/" target="_blank" style="color: var(--accent-gold); text-decoration: none; font-weight: 900; font-size: 2rem; letter-spacing: 3px;">@dolanan_film</a>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 DOLANAN FILM • CRAFTING STORIES THROUGH LENS</p>
+        <p>&copy; 2026 DOLANAN FILM • A Production house from Cirebon</p>
     </footer>
 
     <script>
-        // Logika Hitung Mundur & Menghilang Otomatis
-        const eventDate = new Date("July 12, 2026 19:00:00").getTime();
-        const x = setInterval(function() {
-            const now = new Date().getTime();
-            const distance = eventDate - now;
-            
-            document.getElementById("days").innerHTML = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-            document.getElementById("hours").innerHTML = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-            document.getElementById("minutes").innerHTML = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-            document.getElementById("seconds").innerHTML = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+        // Jargon Switcher
+        const jargons = ["A Production house from Cirebon", "Kreatif & Inovatif", "Muda Bertalenta", "Karangsari Pride"];
+        let idx = 0;
+        const jEl = document.getElementById("jargon-text");
+        function switchJargon() {
+            jEl.classList.remove("show");
+            setTimeout(() => {
+                jEl.innerText = jargons[idx];
+                jEl.classList.add("show");
+                idx = (idx + 1) % jargons.length;
+            }, 600);
+        }
+        setInterval(switchJargon, 3500);
+        switchJargon();
 
-            if (distance < 0) {
-                clearInterval(x);
-                document.getElementById("event-highlight").style.display = "none";
-            }
+        // Countdown Logika Lengkap
+        const target = new Date("July 12, 2026 19:00:00").getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const d = target - now;
+            if (d < 0) { document.getElementById("event-highlight").style.display = "none"; return; }
+            document.getElementById("days").innerText = Math.floor(d / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+            document.getElementById("hours").innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+            document.getElementById("minutes").innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            document.getElementById("seconds").innerText = Math.floor((d % (1000 * 60)) / 1000).toString().padStart(2, '0');
         }, 1000);
 
-        // Logika Reveal Animation (Muncul Saat Scroll)
-        window.addEventListener('scroll', () => {
-            const reveals = document.querySelectorAll('.reveal');
-            reveals.forEach(reveal => {
-                const windowHeight = window.innerHeight;
-                const revealTop = reveal.getBoundingClientRect().top;
-                if (revealTop < windowHeight - 150) {
-                    reveal.classList.add('active');
-                }
+        // Reveal Scroll
+        function reveal() {
+            document.querySelectorAll(".reveal").forEach(r => {
+                if (r.getBoundingClientRect().top < window.innerHeight - 100) r.classList.add('active');
             });
-        });
+        }
+        window.addEventListener("scroll", reveal);
+        reveal();
     </script>
 </body>
 </html>
