@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOLANAN FILM | A Production house from Cirebon</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-dark: #0a0a0a;
+            --secondary-dark: #161616;
+            --accent-gold: #c5a059;
+            --text-light: #ffffff;
+            --text-gray: #a0a0a0;
+            --gold-gradient: linear-gradient(45deg, #c5a059, #f9dfa5);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            overflow-x: hidden; /* Mencegah layar goyang ke samping di HP */
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex; justify-content: space-around; align-items: center;
+            background-color: rgba(10, 10, 10, 0.98); height: 80px;
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+            padding: 0 5%;
+        }
+
+        .logo-nav { font-size: 1.2rem; font-weight: 700; letter-spacing: 2px; color: var(--accent-gold); text-decoration: none; }
+        nav ul { display: flex; list-style: none; }
+        nav ul li { margin: 0 10px; }
+        nav ul li a { text-decoration: none; color: var(--text-light); font-size: 0.75rem; text-transform: uppercase; transition: 0.3s; }
+        nav ul li a:hover { color: var(--accent-gold); }
+
+        /* --- HERO & HIGHLIGHT --- */
+        #home {
+            min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), 
+            url('DJI_0008.MOV.00_00_02_00.Still001.png') no-repeat center center/cover;
+            padding: 100px 5% 60px;
+        }
+
+        .hero-title h1 {
+            font-size: clamp(1.8rem, 8vw, 4rem); letter-spacing: 5px; margin-bottom: 10px;
+            background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        @keyframes pulse-gold {
+            0% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(197, 160, 89, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); }
+        }
+
+        .highlight-pamflet {
+            margin-top: 40px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(197, 160, 89, 0.3);
+            padding: 25px; max-width: 850px; width: 100%; display: flex; align-items: center; gap: 30px;
+            border-radius: 12px; backdrop-filter: blur(10px);
+            animation: pulse-gold 3s infinite ease-in-out;
+        }
+
+        .pamflet-container { position: relative; width: 180px; flex-shrink: 0; margin: 0 auto; }
+        .pamflet-img-home { width: 100%; aspect-ratio: 1080/1350; border-radius: 8px; object-fit: cover; border: 1px solid var(--accent-gold); }
+
+        .countdown-overlay {
+            position: absolute; bottom: 10px; left: 5px; right: 5px;
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(5px);
+            display: flex; justify-content: space-around; padding: 8px 5px;
+            border-radius: 4px; border: 1px solid rgba(197, 160, 89, 0.3);
+        }
+        .time-box span { display: block; font-size: 0.8rem; font-weight: bold; color: var(--accent-gold); }
+        .time-box p { font-size: 0.4rem; text-transform: uppercase; color: white; margin: 0; }
+
+        .pamflet-info { text-align: left; flex: 1; }
+        .btn-more {
+            display: inline-block; padding: 10px 25px; border: 1px solid var(--accent-gold);
+            color: var(--accent-gold); text-decoration: none; font-size: 0.75rem; letter-spacing: 2px;
+            text-transform: uppercase; transition: 0.4s; font-weight: bold; margin-top: 15px;
+        }
+
+        /* --- SECTIONS --- */
+        section { padding: 80px 8%; }
+        h2.section-title { font-size: 1.8rem; text-align: center; margin-bottom: 40px; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 4px; }
+        .content-box { background-color: var(--secondary-dark); padding: 30px; border: 1px solid rgba(255,255,255,0.05); text-align: center; border-radius: 4px; }
+
+        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .gallery-item { height: 200px; overflow: hidden; border-radius: 4px; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: 0.4s; }
+        .gallery-item:hover img { filter: grayscale(0%); transform: scale(1.05); }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 768px) {
+            nav { height: auto; padding: 15px 0; flex-direction: column; }
+            nav ul { margin-top: 10px; gap: 5px; }
+            nav ul li { margin: 0 5px; }
+            nav ul li a { font-size: 0.65rem; }
+
+            .highlight-pamflet { 
+                flex-direction: column; /* Menumpuk vertikal di HP */
+                text-align: center; 
+                padding: 30px 15px;
+            }
+            .pamflet-container { width: 160px; }
+            .pamflet-info { text-align: center; }
+            .pamflet-info h3 { font-size: 1.4rem; }
+            
+            section { padding: 60px 5%; }
+            .hero-title h1 { letter-spacing: 4px; }
+        }
+
+        /* --- KONTAK --- */
+        .contact-container { display: flex; flex-direction: column; align-items: center; padding: 40px 0; }
+        .ig-logo { width: 50px; height: 50px; margin-bottom: 15px; fill: var(--accent-gold); }
+        .ig-link { font-size: 1.1rem; color: var(--text-light); text-decoration: none; letter-spacing: 2px; }
+
+        footer { padding: 30px; text-align: center; background: #050505; color: var(--text-gray); font-size: 0.65rem; letter-spacing: 2px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo-nav">DOLANAN FILM</a>
+        <ul>
+            <li><a href="#home">Beranda</a></li>
+            <li><a href="#profil">Profil</a></li>
+            <li><a href="#program">Program</a></li>
+            <li><a href="#kegiatan">Kegiatan</a></li>
+            <li><a href="#kontak">Kontak</a></li>
+        </ul>
+    </nav>
+
+    <header id="home">
+        <div class="hero-title">
+            <h1>DOLANAN FILM</h1>
+            <p style="letter-spacing: 3px; font-weight: 300; font-size: 0.8rem;">A Production house from Cirebon</p>
+        </div>
+
+        <div class="highlight-pamflet" id="event-highlight">
+            <div class="pamflet-container">
+                <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=500" alt="Pamflet" class="pamflet-img-home">
+                <div class="countdown-overlay">
+                    <div class="time-box"><span id="days">00</span><p>Hari</p></div>
+                    <div class="time-box"><span id="hours">00</span><p>Jam</p></div>
+                    <div class="time-box"><span id="minutes">00</span><p>Menit</p></div>
+                    <div class="time-box"><span id="seconds">00</span><p>Detik</p></div>
+                </div>
+            </div>
+            <div class="pamflet-info">
+                <p style="color:var(--accent-gold); font-size: 0.7rem; letter-spacing: 2px;">ACARA MENDATANG</p>
+                <h3 style="font-size: 1.5rem; margin: 10px 0;">NYABAR VOL.3 2026</h3>
+                <p style="color: var(--text-gray); font-size: 0.85rem;">Kegiatan Tahunan Rutin. Saksikan karya-karya terbaik.</p>
+                <a href="event.html" class="btn-more">Lihat Selengkapnya</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="profil">
+        <h2 class="section-title">Profil</h2>
+        <div class="content-box">
+            <p style="font-size: 1rem; color: var(--text-gray);">COMING SOON</p>
+        </div>
+    </section>
+
+    <section id="program">
+        <h2 class="section-title">Program DF</h2>
+        <div class="content-box" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: left;">
+            <div>
+                <h4 style="color:var(--accent-gold); margin-bottom: 10px;">PROGRAM UNGGULAN</h4>
+                <p style="font-size: 0.85rem; color: var(--text-gray);">COMING SOON</p>
+            </div>
+            <div>
+                <h4 style="color:var(--accent-gold); margin-bottom: 10px;">PROGRAM KERJA</h4>
+                <p style="font-size: 0.85rem; color: var(--text-gray);">COMING SOON</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="kegiatan">
+        <h2 class="section-title">Kegiatan DF</h2>
+        <div class="gallery">
+            <div class="gallery-item"><img src="WhatsApp Image 2026-05-04 at 12.28.16 (1).jpeg"></div>
+            <div class="gallery-item"><img src="WhatsApp Image 2026-05-04 at 12.28.16.jpeg"></div>
+            <div class="gallery-item"><img src="WhatsApp Image 2026-05-04 at 12.28.17 (1).jpeg"></div>
+            <div class="gallery-item"><img src="WhatsApp Image 2026-05-04 at 12.28.17.jpeg"></div>
+        </div>
+    </section>
+
+    <section id="kontak">
+        <div class="contact-container">
+            <svg class="ig-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.332 3.608 1.308.975.975 1.245 2.242 1.308 3.607.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.063 1.366-.333 2.633-1.308 3.608-.975.975-2.242 1.245-3.607 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.063-2.633-.333-3.608-1.308-.975-.975-1.245-2.242-1.308-3.607-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.332-2.633 1.308-3.608.975-.975 2.242-1.245 3.607-1.308 1.266-.058-1.646-.07 4.85-.07zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.668-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            <a href="https://www.instagram.com/dolanan_film/" target="_blank" class="ig-link">@dolananfilm</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 DOLANAN FILM • A Production house from Cirebon</p>
+    </footer>
+
+    <script>
+        const eventDate = new Date("July 12, 2026 19:00:00").getTime();
+        const x = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+            const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById("days").innerHTML = d.toString().padStart(2, '0');
+            document.getElementById("hours").innerHTML = h.toString().padStart(2, '0');
+            document.getElementById("minutes").innerHTML = m.toString().padStart(2, '0');
+            document.getElementById("seconds").innerHTML = s.toString().padStart(2, '0');
+
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("event-highlight").style.display = "none";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
