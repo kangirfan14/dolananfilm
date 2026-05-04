@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasil Karya | DOLANAN FILM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #0a0a0a;
+            --secondary-dark: #161616;
+            --accent-gold: #c5a059;
+            --text-light: #ffffff;
+            --text-gray: #a0a0a0;
+        }
+        /* --- NAVIGATION (SAMA DENGAN DASHBOARD) --- */
+nav {
+    display: flex; justify-content: space-between; align-items: center;
+    background-color: rgba(10, 10, 10, 0.98); height: 80px;
+    position: fixed; width: 100%; top: 0; z-index: 1000;
+    border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+    padding: 0 5%;
+}
+
+/* Style Logo agar konsisten di semua halaman */
+.nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.logo-img { width: 35px; height: 35px; object-fit: contain; border-radius: 5px; }
+.logo-nav { font-size: 1.1rem; font-weight: 700; color: var(--accent-gold); letter-spacing: 1px; }
+
+/* Tambahkan padding-top pada container agar konten tidak tertutup navigasi */
+.container { padding: 120px 8% 60px; }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--primary-dark);
+            color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+        }
+
+        
+        
+        nav {
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container { padding: 60px 8%; }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header-section h1 {
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            font-weight: 900;
+        }
+
+        .grid-karya {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .video-item {
+            background: var(--secondary-dark);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .video-item:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+        }
+
+        /* Container Video YouTube (Agar Rasio 16:9 Tetap Terjaga) */
+        .youtube-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* Rasio 16:9 */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .youtube-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .v-desc {
+            padding: 25px;
+        }
+
+        .v-desc h3 {
+            color: var(--accent-gold);
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        .v-desc p {
+            color: var(--text-gray);
+            font-size: 0.85rem;
+        }
+
+        .btn-back {
+            display: inline-block;
+            margin-top: 50px;
+            padding: 12px 35px;
+            border: 2px solid var(--accent-gold);
+            color: var(--accent-gold);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            transition: 0.3s;
+        }
+
+        .btn-back:hover {
+            background: var(--accent-gold);
+            color: #000;
+        }
+
+        @media (max-width: 600px) {
+            .grid-karya { grid-template-columns: 1fr; }
+        }
+
+        footer {
+            padding: 40px;
+            text-align: center;
+            font-size: 0.7rem;
+            color: var(--text-gray);
+            border-top: 1px solid #1a1a1a;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+   <!-- NAVIGATION (IDENTIK DENGAN DASHBOARD) -->
+<nav>
+    <a href="index.html" class="nav-brand">
+        <!-- Logo Dolanan Film -->
+        <img src="logdf.png" alt="Logo" class="logo-img">
+        <span class="logo-nav">DOLANAN FILM</span>
+    </a>
+    <a href="index.html#karyaSlider" style="color: var(--text-light); text-decoration: none; font-size: 0.7rem; text-transform: uppercase; font-weight: 700; border-bottom: 1px solid var(--accent-gold);">
+        Kembali ke Beranda
+    </a>
+</nav>
+
+    <div class="container">
+        <div class="header-section">
+            <h1>KARYA KAMI</h1>
+            <p style="color: var(--text-gray); margin-top: 10px;">Kumpulan Video karya Dolanan Film.</p>
+        </div>
+        
+        <div class="grid-karya">
+            
+           <div class="video-item">
+    <div class="youtube-container">
+        <!-- Contoh ID video: dQw4w9WgXcQ (Ganti dengan milik Anda) -->
+        <iframe 
+            src="https://www.youtube.com/embed/-TQjawS3qoQ?rel=0&modestbranding=1" 
+            title="YouTube video player" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen>
+        </iframe>
+    </div>
+    <div class="v-desc">
+        <h3>SEPERTI SEHARUSNYA - Film Pendek</h3>
+        <p>Anak harus di bimbing dengan baik tanpa tindak kekerasan maka jika masih ada kekerasan terhadap anak harus di cegah!!! </p>
+    </div>
+</div>
+
+            <div class="video-item">
+                <div class="youtube-container">
+                   <iframe 
+    src="https://www.youtube.com/embed/NqhYDYUJ1vs?rel=0&modestbranding=1" 
+    title="YouTube video player" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+    allowfullscreen>
+</iframe>
+                </div>
+                <div class="v-desc">
+                    <h3>LARAS - Film Pendek</h3>
+                    <p>Laras menceritakan tentang seorang perempuan yang tertarik pada salah satu kesenian daerah Cirebon dimana kesenian itu adalah Tarian topeng Kelana,dimana awal mula ia tertarik semenjak ia mengunjungi salah satu museum budaya di Cirebon.</p>
+                </div>
+            </div>
+
+            <div class="video-item">
+                <div class="youtube-container">
+                    <iframe 
+                        src="https://www.youtube.com/embed/NqhYDYUJ1vs&t" 
+                        title="YouTube video player" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="v-desc">
+                    <h3>BELUM TERSEDIA !</h3>
+                    <p>BELUM TERSEDIA !</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="text-align: center;">
+            <a href="index.html#karyaSlider" class="btn-back">Kembali ke Beranda</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 DOLANAN FILM • A Production house from Cirebon</p>
+    </footer>
+
+</body>
+</html>

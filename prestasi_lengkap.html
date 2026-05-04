@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Prestasi | DOLANAN FILM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #0a0a0a;
+            --secondary-dark: #161616;
+            --accent-gold: #c5a059;
+            --text-light: #ffffff;
+            --text-gray: #a0a0a0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+       /* --- NAVIGATION (DIUBAH) --- */
+nav {
+    display: flex; justify-content: space-between; align-items: center;
+    background-color: rgba(10, 10, 10, 0.98); height: 80px;
+    position: fixed; width: 100%; top: 0; z-index: 1000;
+    border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+    padding: 0 5%;
+}
+
+/* Penambahan Style Logo agar sama dengan Index */
+.nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.logo-img { width: 35px; height: 35px; object-fit: contain; border-radius: 5px; }
+.logo-nav { font-size: 1.1rem; font-weight: 700; color: var(--accent-gold); letter-spacing: 1px; }
+
+/* Penyesuaian Jarak Container karena Navigasi sekarang Fixed */
+.container { max-width: 900px; margin: 0 auto; padding: 120px 5% 60px; }
+
+        .article-header { text-align: center; margin-bottom: 50px; }
+        .article-header h1 { font-size: clamp(1.8rem, 5vw, 2.5rem); color: var(--accent-gold); text-transform: uppercase; letter-spacing: 3px; }
+
+        /* ARTIKEL STYLE */
+        .achievement-article {
+            background: var(--secondary-dark);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 40px;
+        }
+
+        .article-image {
+            width: 100%;
+            height: clamp(250px, 40vw, 500px);
+            object-fit: cover;
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .article-content {
+            padding: clamp(20px, 5vw, 40px);
+        }
+
+        .article-content h2 {
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .article-content p {
+            color: var(--text-gray);
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .btn-back {
+            display: inline-block;
+            padding: 12px 30px;
+            border: 2px solid var(--accent-gold);
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        .btn-back:hover {
+            background: var(--accent-gold);
+            color: #000;
+        }
+
+        footer { padding: 40px; text-align: center; font-size: 0.7rem; color: var(--text-gray); border-top: 1px solid #1a1a1a; margin-top: 60px; }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION (BAGIAN YANG DIGANTI) -->
+<nav>
+    <a href="index.html" class="nav-brand">
+        <!-- Logo logdf.png sekarang muncul di sini -->
+        <img src="logdf.png" alt="Logo" class="logo-img">
+        <span class="logo-nav">DOLANAN FILM</span>
+    </a>
+    <a href="index.html#prestasi" style="color: var(--text-light); text-decoration: none; font-size: 0.7rem; text-transform: uppercase; font-weight: 700; border-bottom: 1px solid var(--accent-gold);">
+        Kembali ke Beranda
+    </a>
+</nav>
+
+    <div class="container">
+        <div class="article-header">
+            <h1>Arsip Prestasi</h1>
+            <p style="color: var(--text-gray);">Dedikasi dan Pencapaian Dolanan Film dalam Industri Kreatif.</p>
+        </div>
+
+        <!-- ARTIKEL PRESTASI 1 -->
+        <article class="achievement-article">
+            <img src="juara1.png" alt="Juara Kompetisi" class="article-image">
+            <div class="article-content">
+                <h2>Juara 1 Video Pendek Tingkat Kab.Cirebon 2024</h2>
+                <p>Lomba pembuatan video pendek tingkat SMP/SMA/SMK Se-Kabupaten Cirebon dalam rangka hari anak nasional (HAN) ke-40 Tingkat Kabupaten Cirebon Tahun 2024.</p>
+                <p>Penghargaan ini menjadi motivasi bagi tim Dolanan Film untuk terus berkarya dan memberikan kontribusi nyata bagi publikasi di wilayah Cirebon.</p>
+            </div>
+        </article>
+
+        <!-- ARTIKEL PRESTASI 2 -->
+        <article class="achievement-article">
+            <img src=" " alt="Belum ada foto" class="article-image">
+            <div class="article-content">
+                <h2>Belum ada info</h2>
+                <p> .</p>
+                <p> .</p>
+            </div>
+        </article>
+
+         <article class="achievement-article">
+            <img src=" " alt="Belum ada foto"article-image">
+            <div class="article-content">
+                <h2>Belum ada info</h2>
+                <p> .</p>
+                <p> .</p>
+            </div>
+        </article>
+
+        <div style="text-align: center;">
+            <a href="index.html#prestasi" class="btn-back">Kembali ke Beranda</a>
+        </div>
+
+        
+    </div>
+
+    <footer>
+        <p>&copy; 2026 DOLANAN FILM • A Production house from Cirebon</p>
+    </footer>
+
+</body>
+</html>

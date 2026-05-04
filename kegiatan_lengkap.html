@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeri Kegiatan | DOLANAN FILM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #0a0a0a;
+            --secondary-dark: #161616;
+            --accent-gold: #c5a059;
+            --text-light: #ffffff;
+            --text-gray: #a0a0a0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+       /* --- NAVIGATION (SAMA DENGAN DASHBOARD) --- */
+nav {
+    display: flex; justify-content: space-between; align-items: center;
+    background-color: rgba(10, 10, 10, 0.98); height: 80px;
+    position: fixed; width: 100%; top: 0; z-index: 1000;
+    border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+    padding: 0 5%;
+}
+
+.nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.logo-img { width: 35px; height: 35px; object-fit: contain; border-radius: 5px; }
+.logo-nav { font-size: 1.1rem; font-weight: 700; color: var(--accent-gold); letter-spacing: 1px; }
+
+/* Tambahkan padding-top pada container agar tidak tertutup navigasi fixed */
+.container { padding: 120px 8% 60px; text-align: center; }
+        
+        .header-page { margin-bottom: 50px; }
+        .header-page h1 { font-size: 2.5rem; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 5px; }
+
+        .full-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative; height: 350px;
+            border-radius: 12px; overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+
+        .gallery-caption {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            padding: 20px; text-align: left; transform: translateY(100%);
+            transition: 0.4s ease-in-out;
+        }
+
+        .gallery-item:hover .gallery-caption { transform: translateY(0); }
+        .gallery-item:hover img { transform: scale(1.1); filter: brightness(0.6); }
+
+        .btn-back {
+            display: inline-block; margin-top: 50px;
+            padding: 10px 25px; background: var(--accent-gold);
+            color: #000; text-decoration: none; font-weight: 700;
+            border-radius: 5px; text-transform: uppercase; font-size: 0.8rem;
+        }
+
+        footer { padding: 40px; text-align: center; font-size: 0.7rem; color: var(--text-gray); border-top: 1px solid #1a1a1a; margin-top: 60px; }
+
+        @media (max-width: 768px) {
+            .full-gallery { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION (IDENTIK DENGAN DASHBOARD) -->
+<nav>
+    <a href="index.html" class="nav-brand">
+        <img src="logdf.png" alt="Logo" class="logo-img">
+        <span class="logo-nav">DOLANAN FILM</span>
+    </a>
+    <a href="index.html#kegiatan" style="color: var(--text-light); text-decoration: none; font-size: 0.7rem; text-transform: uppercase; font-weight: 700; border-bottom: 1px solid var(--accent-gold);">
+        Kembali ke Beranda
+    </a>
+</nav>
+
+    <div class="container">
+        <div class="header-page">
+            <h1>Arsip Kegiatan</h1>
+            <p style="color: var(--text-gray);">Dokumentasi lengkap perjalanan kreatif Dolanan Film.</p>
+        </div>
+
+        <div class="full-gallery">
+            <!-- Tambahkan semua foto kegiatan Anda di sini -->
+          <div class="gallery-item">
+                <img src="IMG-20240808-WA0042-01.jpeg">
+                <div class="gallery-caption">
+                    <h4>Kebersamaan Crew</h4>
+                    <p>Suka cita perayaan juara 1 Dolanan Film tingkat Kab.Cirebon 2024.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="WhatsApp Image 2026-05-04 at 12.28.16 (1).jpeg">
+                <div class="gallery-caption">
+                    <h4>Nyabar Vol.2</h4>
+                    <p>Dokumentasi acara pemutaran film tahun 2025.</p>
+                </div>
+            </div>
+           
+            <div class="gallery-item">
+                <img src="WhatsApp Image 2026-05-04 at 12.28.17 (1).jpeg">
+                <div class="gallery-caption">
+                    <h4>Kebersamaan</h4>
+                    <p>Momentum berbagi kebahagiaan melalui doorprize.</p>
+                </div>
+            </div>
+            <!-- Anda bisa menambahkan lebih banyak foto di bawah ini -->
+        </div>
+
+        <a href="index.html#kegiatan" class="btn-back">Kembali ke Beranda</a>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 DOLANAN FILM • A Production house from Cirebon</p>
+    </footer>
+
+</body>
+</html>
