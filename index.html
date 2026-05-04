@@ -8,6 +8,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     
     <style>
+        
+       html {
+          scroll-behavior: smooth;
+}
+
         :root {
             --primary-dark: #0a0a0a;
             --secondary-dark: #161616;
@@ -18,6 +23,7 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
 
         body {
             font-family: 'Montserrat', sans-serif;
@@ -79,32 +85,125 @@
         #jargon-text.show { opacity: 1; transform: translateY(0); text-shadow: 0 0 15px rgba(197, 160, 89, 0.5); }
 
         /* --- HIGHLIGHT PERMANEN --- */
-        @keyframes pulse-gold {
-            0% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.4); border-color: rgba(197, 160, 89, 0.3); }
-            50% { box-shadow: 0 0 20px 2px rgba(197, 160, 89, 0.2); border-color: rgba(197, 160, 89, 0.7); }
-            100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.4); border-color: rgba(197, 160, 89, 0.3); }
-        }
+        /* --- HIGHLIGHT PERMANEN (DIPERBESAR) --- */
+@keyframes pulse-gold {
+    0% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.4); border-color: rgba(197, 160, 89, 0.3); }
+    50% { box-shadow: 0 0 30px 5px rgba(197, 160, 89, 0.2); border-color: rgba(197, 160, 89, 0.8); }
+    100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.4); border-color: rgba(197, 160, 89, 0.3); }
+}
 
-        .highlight-permanen {
-            background: rgba(255, 255, 255, 0.04); 
-            border: 1px solid rgba(197, 160, 89, 0.3);
-            padding: 20px; max-width: 850px; width: 90%; 
-            border-radius: 15px; display: flex; align-items: center; 
-            gap: 20px; backdrop-filter: blur(10px); margin-top: 20px;
-            animation: pulse-gold 3s infinite ease-in-out;
-        }
+/* --- SECTION HASIL KARYA --- */
+.karya-preview-container {
+    margin-top: 50px;
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    overflow: hidden;
+    cursor: grab;
+}
 
-        .pamflet-box { position: relative; width: clamp(100px, 20vw, 160px); flex-shrink: 0; }
-        .pamflet-img { width: 100%; border-radius: 8px; border: 1px solid var(--accent-gold); }
+.karya-card {
+    background: var(--secondary-dark);
+    border-radius: 20px;
+    border: 1px solid rgba(197, 160, 89, 0.3);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: 0.5s;
+}
 
-        .countdown-strip {
-            position: absolute; bottom: 8px; left: 4px; right: 4px;
-            background: rgba(0,0,0,0.9); display: flex; justify-content: space-around; 
-            padding: 5px 2px; border-radius: 4px;
-        }
-        .time-item span { color: var(--accent-gold); font-weight: bold; display: block; font-size: clamp(0.6rem, 1.5vw, 0.9rem); }
-        .time-item p { color: white; font-size: 0.3rem; text-transform: uppercase; margin: 0; }
+.video-preview-box {
+    width: 100%;
+    height: clamp(200px, 40vw, 450px);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--accent-gold);
+}
 
+.video-preview-box video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.instruction-swipe {
+    margin-top: 15px;
+    color: var(--accent-gold);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    animation: bounceLR 2s infinite;
+}
+
+@keyframes bounceLR {
+    0%, 100% { transform: translateX(0); opacity: 0.5; }
+    50% { transform: translateX(15px); opacity: 1; }
+}
+
+.karya-title-overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    text-align: left;
+}
+
+.highlight-permanen {
+    background: rgba(255, 255, 255, 0.05); 
+    border: 2px solid rgba(197, 160, 89, 0.4);
+    padding: clamp(25px, 5vw, 40px); /* Padding diperbesar */
+    max-width: 1000px; /* Lebar maksimal diperbesar */
+    width: 92%; 
+    border-radius: 20px;
+    display: flex; 
+    align-items: center; 
+    gap: clamp(20px, 5vw, 50px); 
+    backdrop-filter: blur(15px);
+    margin-top: 30px;
+    animation: pulse-gold 3s infinite ease-in-out;
+}
+
+/* Ukuran Pamflet diperbesar */
+.pamflet-box { 
+    position: relative; 
+    width: clamp(150px, 30vw, 240px); 
+    flex-shrink: 0; 
+}
+
+.pamflet-img { 
+    width: 100%; 
+    border-radius: 12px; 
+    border: 1px solid var(--accent-gold); 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+/* Strip Countdown diperjelas */
+.countdown-strip {
+    position: absolute; 
+    bottom: 12px; left: 8px; right: 8px;
+    background: rgba(0,0,0,0.92); 
+    display: flex; 
+    justify-content: space-around; 
+    padding: 10px 4px; 
+    border-radius: 8px; 
+    border: 1px solid rgba(197, 160, 89, 0.4);
+}
+
+.time-item span { 
+    color: var(--accent-gold); 
+    font-weight: 900; 
+    display: block; 
+    font-size: clamp(0.8rem, 2vw, 1.1rem); 
+}
+
+.time-item p { 
+    color: white; 
+    font-size: 0.45rem; 
+    text-transform: uppercase; 
+    margin: 0; 
+    font-weight: 700;
+}
         /* --- POP-UP MODAL --- */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -121,6 +220,7 @@
         @keyframes modalPop { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         .close-modal { position: absolute; top: 15px; right: 15px; color: var(--accent-gold); font-size: 1.5rem; cursor: pointer; }
 
+        
         /* --- SECTIONS --- */
         section { padding: 80px 8%; width: 100%; }
         .section-title { font-size: clamp(1.5rem, 5vw, 2.5rem); color: var(--accent-gold); text-align: center; margin-bottom: 40px; text-transform: uppercase; letter-spacing: 5px; }
@@ -140,6 +240,73 @@
 
         .card-box { background: var(--secondary-dark); padding: clamp(20px, 5vw, 40px); border-radius: 15px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
         
+        /* PRESTASI */
+       /* --- PRESTASI (UKURAN MAKSIMAL & PRESISI) --- */
+.achievement-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.achievement-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 3px solid var(--accent-gold); /* Garis bingkai dipertebal agar kokoh */
+    padding: 15px; /* Padding dikurangi agar gambar bisa lebih besar lagi */
+    border-radius: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 450px; /* Tinggi kartu ditambah untuk ruang gambar besar */
+    transition: 0.3s;
+    overflow: hidden;
+}
+
+.achievement-card img { 
+    width: 100%; 
+    height: 300px; /* Tinggi area gambar ditingkatkan signifikan */
+    object-fit: cover; /* Foto memenuhi area bingkai secara penuh (Full Fit) */
+    border-radius: 12px;
+    margin-bottom: 20px;
+    filter: none;
+    display: block;
+}
+
+.achievement-card h3 { 
+    color: var(--accent-gold); 
+    font-size: 1.5rem; /* Judul diperbesar mengikuti skala gambar */
+    margin-bottom: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    padding: 0 10px;
+}
+
+.achievement-card p { 
+    font-size: 1rem; 
+    color: var(--text-light);
+    line-height: 1.5;
+    padding: 0 15px 15px;
+}
+
+.achievement-card:hover {
+    background: rgba(197, 160, 89, 0.12);
+    transform: translateY(-5px);
+}
+
+.achievement-card h3 { 
+    color: var(--accent-gold); 
+    font-size: 1.2rem; 
+    margin-bottom: 12px;
+    font-weight: 900;
+}
+
+.achievement-card p { 
+    font-size: 0.9rem; 
+    color: var(--text-gray);
+    line-height: 1.5;
+}
+
         /* GALLERY WITH CAPTION */
         .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
         .gallery-item { 
@@ -159,20 +326,46 @@
         .gallery-caption h4 { color: var(--accent-gold); font-size: 0.9rem; margin-bottom: 5px; }
         .gallery-caption p { font-size: 0.75rem; color: var(--text-gray); }
 
+        /* TOMBOL KEGIATAN SELENGKAPNYA */
+        .btn-more {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 30px;
+            border: 2px solid var(--accent-gold);
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            transition: 0.3s;
+        }
+        .btn-more:hover {
+            background: var(--accent-gold);
+            color: #000;
+        }
+
         .reveal { opacity: 0; transform: translateY(30px); transition: 1s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         @media (min-width: 769px) { .gallery { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); } }
         
-        @media (max-width: 768px) {
-            nav { flex-direction: column; height: auto; padding: 10px 0; }
-            nav ul { margin-top: 10px; }
-            nav ul li { margin: 0 8px; }
-            .profile-container { flex-direction: column; text-align: center; }
-            .profile-text { text-align: center; }
-            .highlight-permanen { flex-direction: column; text-align: center; width: 95%; }
-            header { padding-top: 130px; }
-        }
+       @media (max-width: 768px) {
+    .highlight-permanen { 
+        flex-direction: column; 
+        text-align: center; 
+        width: 95%; 
+        padding: 30px 20px;
+    }
+    .pamflet-box { 
+        width: 200px; /* Ukuran pamflet di HP diperbesar */
+        margin-bottom: 15px;
+    }
+    .highlight-info h3 {
+        font-size: 1.6rem !important; /* Judul di HP diperbesar */
+    }
+}
 
         footer { padding: 40px; text-align: center; font-size: 0.7rem; color: var(--text-gray); border-top: 1px solid #1a1a1a; }
     </style>
@@ -195,9 +388,10 @@
             <span class="logo-nav">DOLANAN FILM</span>
         </a>
         <ul>
-            <li><a href="#home">Home</a></li>
+            <li><a href="#home">Beranda</a></li>
             <li><a href="#profil">Profil</a></li>
             <li><a href="#program">Program</a></li>
+            <li><a href="#prestasi">Prestasi</a></li>
             <li><a href="#kegiatan">Kegiatan</a></li>
             <li><a href="#kontak">Kontak</a></li>
         </ul>
@@ -214,33 +408,53 @@
             <p id="jargon-text">A Production house from Cirebon</p>
         </div>
 
-        <div class="reveal active highlight-permanen">
-            <div class="pamflet-box">
-                <img src="WhatsApp Image 2026-05-04 at 12.28.16 (1).jpeg" class="pamflet-img">
-                <div class="countdown-strip">
-                    <div class="time-item"><span id="days">00</span><p>Hari</p></div>
-                    <div class="time-item"><span id="hours">00</span><p>Jam</p></div>
-                    <div class="time-item"><span id="mins">00</span><p>Min</p></div>
-                    <div class="time-item"><span id="secs">00</span><p>Det</p></div>
-                </div>
-            </div>
-            <div style="text-align: left; flex: 1;">
-                <p style="color:var(--accent-gold); font-size: 0.6rem; letter-spacing: 2px; font-weight: 700;">ACARA MENDATANG</p>
-                <h3 style="font-size: clamp(1.2rem, 3vw, 1.8rem); margin: 5px 0; font-weight: 900;">NYABAR VOL.3 2026</h3>
-                <p style="color: var(--text-gray); font-size: 0.8rem; max-width: 400px;">Saksikan karya - karya terbaik dalam pemutaran film tahunan rutin.</p>
-                <a href="event.html" style="display: inline-block; margin-top: 10px; color: var(--accent-gold); text-decoration: none; font-size: 0.7rem; font-weight: bold; border-bottom: 1px solid var(--accent-gold);">LIHAT SELENGKAPNYA</a>
+       <div class="reveal active highlight-permanen">
+    <div class="pamflet-box">
+        <img src="WhatsApp Image 2026-05-04 at 12.28.16 (1).jpeg" class="pamflet-img">
+        <div class="countdown-strip">
+            <div class="time-item"><span id="days">00</span><p>Hari</p></div>
+            <div class="time-item"><span id="hours">00</span><p>Jam</p></div>
+            <div class="time-item"><span id="mins">00</span><p>Min</p></div>
+            <div class="time-item"><span id="secs">00</span><p>Det</p></div>
+        </div>
+    </div>
+
+    <div class="highlight-info" style="text-align: left; flex: 1;">
+        <p style="color:var(--accent-gold); font-size: 0.75rem; letter-spacing: 3px; font-weight: 700;">ACARA MENDATANG !</p>
+        <h3 style="font-size: clamp(1.8rem, 4vw, 2.5rem); margin: 10px 0; font-weight: 900; line-height: 1.2;">NYABAR VOL.3 2026</h3>
+        <p style="color: var(--text-gray); font-size: 1rem; max-width: 480px; margin-bottom: 20px;">Saksikan karya - karya terbaik dan juga pemutaran film tahunan rutin yang paling dinantikan di Cirebon.</p>
+        <a href="event.html" style="display: inline-block; padding: 12px 25px; border: 2px solid var(--accent-gold); color: var(--accent-gold); text-decoration: none; font-size: 0.8rem; font-weight: bold; border-radius: 5px; text-transform: uppercase; transition: 0.3s;">Lihat Selengkapnya</a>
+    </div>
+</div>
+        </div>
+
+        <!-- HASIL KARYA PREVIEW -->
+<div class="reveal active karya-preview-container" id="karyaSlider">
+    <div class="karya-card" onclick="location.href='hasil_karya.html'">
+        <div class="video-preview-box">
+            <!-- GANTI 'preview_karya.mp4' DENGAN VIDEO SINGKAT PORTOFOLIO ANDA -->
+            <video autoplay muted loop playsinline>
+                <source src="kumpul.mp4" type="video/mp4">
+            </video>
+            <div class="karya-title-overlay">
+                <p style="color:var(--accent-gold); font-size: 0.6rem; font-weight: 700;">HASIL KARYA</p>
+                <h2 style="font-size: 1.5rem; font-weight: 900;">LIHAT SEMUA VIDEO</h2>
             </div>
         </div>
+        <p class="instruction-swipe">Geser untuk lihat semua Video ➔</p>
+    </div>
+</div>
     </header>
 
     <section id="profil" class="reveal">
         <h2 class="section-title">Profil</h2>
         <div class="profile-container">
-            <!-- GANTI 'profil-anda.jpg' DENGAN FILE FOTO ANDA -->
             <img src="BLU.png" alt="Profil Dolanan Film" class="profile-img">
             <div class="profile-text">
-                <p style="font-size: 1.1rem; color: var(--accent-gold); font-weight: bold; margin-bottom: 10px;">DOLANAN FILM PRODUCTION</p>
-                <p>COMING SOON.</p>
+                <p style="font-size: 1.1rem; color: var(--accent-gold); font-weight: bold; margin-bottom: 10px;">Kula Nuun,</p>
+                <p>Dolanan Film merupakan rumah produksi film lokal yang berdiri pada 10 Oktober 2022 dan berlokasi di Karangsari, Cirebon, Jawa Barat, Indonesia. Hadir sebagai wadah kreatif bagi generasi muda, Dolanan Film berfokus pada produksi film pendek yang mengangkat berbagai isu sosial, budaya, dan kehidupan sehari-hari.
+
+Selain kegiatan produksi, Dolanan Film juga aktif menyelenggarakan program nonton bareng (screening) sebagai upaya mendekatkan film kepada masyarakat sekaligus membangun ruang apresiasi dan diskusi. Keterlibatan dalam berbagai kegiatan kepemudaan menjadikan Dolanan Film tidak hanya sebagai rumah produksi, tetapi juga sebagai komunitas yang mendorong kolaborasi, kreativitas, dan pengembangan potensi generasi muda.</p>
             </div>
         </div>
     </section>
@@ -251,20 +465,48 @@
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; text-align: left;">
                 <div style="padding: 15px; border-left: 3px solid var(--accent-gold); background: rgba(255,255,255,0.02);">
                     <h4>COMING SOON</h4>
-                    <p style="font-size: 0.75rem;">COMING SOON.</p>
+                    <p style="font-size: 0.75rem;"> .</p>
                 </div>
                 <div style="padding: 15px; border-left: 3px solid var(--accent-gold); background: rgba(255,255,255,0.02);">
                     <h4>COMING SOON</h4>
-                    <p style="font-size: 0.75rem;">COMING SOON.</p>
+                    <p style="font-size: 0.75rem;"> .</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- BAGIAN PRESTASI DENGAN GAMBAR -->
+    <section id="prestasi" class="reveal">
+    <h2 class="section-title">Prestasi</h2>
+    <div class="achievement-grid">
+        <div class="achievement-card">
+            <!-- Gunakan logo asli Anda (juara.png, dll) -->
+            <img src="juara1.png" alt="Juara 1">
+            <h3>Juara 1 Lomba Video</h3>
+            <p>Juara pertama dalam kompetisi video pendek tingkat Kabupaten Cirebon tahun 2024.</p>
+        </div>
+        <div class="achievement-card">
+            <img src="sertif.png" alt="Belum ada foto">
+            <h3> </h3>
+            <p> Admin masih bobo.</p>
+        </div>
+        <div class="achievement-card">
+            <img src="mitra.png" alt="Belum ada foto">
+            <h3> </h3>
+            <p>Admin masih bobo.</p>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 40px;">
+        <a href="prestasi_lengkap.html" class="btn-more">Prestasi Lainnya</a>
+    </div>
+</section>
+    </section>
+    </section>
+
     <section id="kegiatan" class="reveal">
         <h2 class="section-title">Kegiatan</h2>
         <div class="gallery">
-            <!-- FOTO 1 -->
             <div class="gallery-item">
                 <img src="WhatsApp Image 2026-05-04 at 12.28.16 (1).jpeg">
                 <div class="gallery-caption">
@@ -272,7 +514,6 @@
                     <p>Antusias warga menghadiri pemutaran film dari acara nyabar vol.2 2025.</p>
                 </div>
             </div>
-            <!-- FOTO 2 -->
             <div class="gallery-item">
                 <img src="WhatsApp Image 2026-05-04 at 12.28.16.jpeg">
                 <div class="gallery-caption">
@@ -280,15 +521,7 @@
                     <p>Foto Anak-anak dan hadiah hasil sesi tanya jawab.</p>
                 </div>
             </div>
-            <!-- FOTO 3 -->
-            <div class="gallery-item">
-                <img src="WhatsApp Image 2026-05-04 at 12.28.17 (1).jpeg">
-                <div class="gallery-caption">
-                    <h4>Antusias Penonton</h4>
-                    <p>Pembagian Hadiah kepada penonton.</p>
-                </div>
-            </div>
-            <!-- FOTO 4 -->
+            
             <div class="gallery-item">
                 <img src="WhatsApp Image 2026-05-04 at 12.28.17.jpeg">
                 <div class="gallery-caption">
@@ -296,6 +529,19 @@
                     <p>Sesi tanya jawab penonton dan pemberian DoorPrize.</p>
                 </div>
             </div>
+            <div class="gallery-item">
+                <img src="IMG-20240808-WA0042-01.jpeg">
+                <div class="gallery-caption">
+                    <h4>Kebersamaan Crew</h4>
+                    <p>Suka cita perayaan juara 1 Dolanan Film tingkat Kab.Cirebon 2024.</p>
+                </div>
+            </div>
+
+        </div>
+        
+        <!-- TOMBOL KEGIATAN SELENGKAPNYA -->
+        <div style="text-align: center;">
+            <a href="kegiatan_lengkap.html" class="btn-more">Kegiatan Selengkapnya</a>
         </div>
     </section>
 
@@ -311,12 +557,66 @@
     </footer>
 
     <script>
-        const modal = document.getElementById("eventModal");
-        const closeBtn = document.getElementById("closeBtn");
-        window.onload = function() { setTimeout(() => { modal.style.display = "flex"; }, 2000); }
-        closeBtn.onclick = function() { modal.style.display = "none"; }
-        window.onclick = function(e) { if (e.target == modal) modal.style.display = "none"; }
 
+// Logika Geser untuk Hasil Karya
+const slider = document.getElementById('karyaSlider');
+let isDown = false;
+let startX;
+let scrollLeft;
+
+slider.addEventListener('mousedown', (e) => {
+    isDown = true;
+    startX = e.pageX - slider.offsetLeft;
+});
+slider.addEventListener('mouseleave', () => { isDown = false; });
+slider.addEventListener('mouseup', () => {
+    isDown = false;
+    // Jika digeser cukup jauh, pindah halaman
+    window.location.href = 'hasil_karya.html';
+});
+slider.addEventListener('mousemove', (e) => {
+    if(!isDown) return;
+    e.preventDefault();
+});
+
+// Touch event untuk Mobile
+slider.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; });
+slider.addEventListener('touchend', (e) => {
+    let endX = e.changedTouches[0].clientX;
+    if(startX - endX > 50) { // Geser ke kiri
+        window.location.href = 'hasil_karya.html';
+    }
+});
+
+       // --- LOGIKA POP-UP (Hanya muncul sekali per sesi) ---
+const modal = document.getElementById("eventModal");
+const closeBtn = document.getElementById("closeBtn");
+
+window.onload = function() {
+    // Mengecek apakah kunci 'popupShown' sudah ada di sessionStorage
+    const popupShown = sessionStorage.getItem("popupShown");
+
+    if (!popupShown) {
+        // Jika belum pernah muncul, tampilkan pop-up setelah 2 detik
+        setTimeout(() => {
+            modal.style.display = "flex";
+            // Simpan status ke sessionStorage agar tidak muncul lagi
+            sessionStorage.setItem("popupShown", "true");
+        }, 2000);
+    }
+}
+
+// Klik tombol close
+closeBtn.onclick = function() {
+    modal.style.display = "none";
+}
+
+// Klik di luar area modal untuk menutup
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
         const jargons = ["A Production house from Cirebon", "Kreatif & Inovatif", "Karangsari Pride"];
         let idx = 0;
         const jEl = document.getElementById("jargon-text");
