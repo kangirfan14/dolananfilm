@@ -25,27 +25,32 @@
             color: var(--text-light);
             line-height: 1.6;
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
         /* --- NAVIGATION --- */
         nav {
-            display: flex; justify-content: space-around; align-items: center;
+            display: flex; justify-content: space-between; align-items: center;
             background-color: rgba(10, 10, 10, 0.98); height: 80px;
             position: fixed; width: 100%; top: 0; z-index: 1000;
             border-bottom: 1px solid rgba(197, 160, 89, 0.2);
             padding: 0 5%;
         }
 
-        .logo-nav { font-size: 1.2rem; font-weight: 700; color: var(--accent-gold); text-decoration: none; letter-spacing: 2px; }
+        .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-img { width: 35px; height: 35px; object-fit: contain; border-radius: 5px; }
+        .logo-nav { font-size: 1.1rem; font-weight: 700; color: var(--accent-gold); letter-spacing: 1px; }
+        
         nav ul { display: flex; list-style: none; }
-        nav ul li { margin: 0 15px; }
-        nav ul li a { text-decoration: none; color: var(--text-light); font-size: 0.7rem; text-transform: uppercase; }
+        nav ul li { margin-left: 20px; }
+        nav ul li a { text-decoration: none; color: var(--text-light); font-size: 0.7rem; text-transform: uppercase; transition: 0.3s; }
+        nav ul li a:hover { color: var(--accent-gold); }
 
         /* --- HERO SECTION --- */
         header {
             position: relative; min-height: 100vh; display: flex; flex-direction: column;
             justify-content: center; align-items: center; text-align: center; overflow: hidden;
-            padding: 120px 5% 50px;
+            padding: 100px 5% 40px;
         }
 
         .video-bg {
@@ -54,102 +59,141 @@
         }
 
         .hero-title h1 {
-            font-size: clamp(3rem, 12vw, 6rem); font-weight: 900; letter-spacing: 12px;
-            background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            animation: shine 4s linear infinite; background-size: 200% auto;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            font-size: clamp(2.2rem, 10vw, 5rem); font-weight: 900; 
+            letter-spacing: clamp(5px, 2vw, 12px);
+            background: linear-gradient(to right, #c5a059 0%, #f9dfa5 25%, #ffffff 50%, #f9dfa5 75%, #c5a059 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 4s linear infinite;
         }
 
         @keyframes shine { to { background-position: 200% center; } }
 
-        /* --- JARGON POP-UP --- */
-        .jargon-wrapper { height: 60px; margin: 10px 0; }
+        .jargon-wrapper { height: 40px; margin-bottom: 10px; width: 100%; }
         #jargon-text {
-            font-size: clamp(1.4rem, 6vw, 3rem); font-weight: 700; color: var(--accent-gold);
-            text-transform: uppercase; letter-spacing: 6px; opacity: 0; transform: translateY(20px);
+            font-size: clamp(0.8rem, 4vw, 2rem); font-weight: 700; color: var(--accent-gold);
+            text-transform: uppercase; letter-spacing: 3px; opacity: 0; transform: translateY(10px);
             transition: 0.6s ease;
         }
-        #jargon-text.show { opacity: 1; transform: translateY(0); text-shadow: 0 0 20px rgba(197, 160, 89, 0.6); }
+        #jargon-text.show { opacity: 1; transform: translateY(0); text-shadow: 0 0 15px rgba(197, 160, 89, 0.5); }
 
-        /* --- HIGHLIGHT CARD (UKURAN BESAR & BERDENYUT) --- */
+        /* --- HIGHLIGHT PERMANEN --- */
         @keyframes pulse-gold {
-            0% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.5); border-color: rgba(197, 160, 89, 0.3); }
-            50% { box-shadow: 0 0 30px 5px rgba(197, 160, 89, 0.3); border-color: rgba(197, 160, 89, 0.8); }
-            100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.5); border-color: rgba(197, 160, 89, 0.3); }
+            0% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.4); border-color: rgba(197, 160, 89, 0.3); }
+            50% { box-shadow: 0 0 20px 2px rgba(197, 160, 89, 0.2); border-color: rgba(197, 160, 89, 0.7); }
+            100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.4); border-color: rgba(197, 160, 89, 0.3); }
         }
 
-        .highlight-card {
-            background: rgba(255, 255, 255, 0.03); 
-            border: 2px solid rgba(197, 160, 89, 0.3);
-            padding: 40px; 
-            max-width: 950px; /* Ukuran diperbesar */
-            width: 100%; 
-            border-radius: 20px;
-            display: flex; 
-            align-items: center; 
-            gap: 40px; 
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            margin-top: 40px;
-            animation: pulse-gold 3s infinite ease-in-out; /* Efek Berdenyut Aktif */
+        .highlight-permanen {
+            background: rgba(255, 255, 255, 0.04); 
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            padding: 20px; max-width: 850px; width: 90%; 
+            border-radius: 15px; display: flex; align-items: center; 
+            gap: 20px; backdrop-filter: blur(10px); margin-top: 20px;
+            animation: pulse-gold 3s infinite ease-in-out;
         }
 
-        .pamflet-box { position: relative; width: 220px; flex-shrink: 0; } /* Pamflet diperbesar */
-        .pamflet-img { width: 100%; border-radius: 12px; border: 1px solid var(--accent-gold); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .pamflet-box { position: relative; width: clamp(100px, 20vw, 160px); flex-shrink: 0; }
+        .pamflet-img { width: 100%; border-radius: 8px; border: 1px solid var(--accent-gold); }
 
         .countdown-strip {
-            position: absolute; bottom: 12px; left: 8px; right: 8px;
+            position: absolute; bottom: 8px; left: 4px; right: 4px;
             background: rgba(0,0,0,0.9); display: flex; justify-content: space-around; 
-            padding: 10px 5px; border-radius: 8px; text-align: center;
-            border: 1px solid rgba(197, 160, 89, 0.4);
+            padding: 5px 2px; border-radius: 4px;
         }
-        .time-item { flex: 1; }
-        .time-item span { color: var(--accent-gold); font-weight: bold; display: block; font-size: 1rem; }
-        .time-item p { color: white; font-size: 0.5rem; text-transform: uppercase; margin: 0; opacity: 0.8; }
+        .time-item span { color: var(--accent-gold); font-weight: bold; display: block; font-size: clamp(0.6rem, 1.5vw, 0.9rem); }
+        .time-item p { color: white; font-size: 0.3rem; text-transform: uppercase; margin: 0; }
 
-        .btn-selengkapnya {
-            display: inline-block; padding: 12px 28px; border: 2px solid var(--accent-gold);
-            color: var(--accent-gold); text-decoration: none; font-size: 0.8rem; 
-            font-weight: 700; text-transform: uppercase; letter-spacing: 3px;
-            margin-top: 25px; transition: 0.4s; border-radius: 5px;
+        /* --- POP-UP MODAL --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9); display: none; justify-content: center; align-items: center;
+            z-index: 9999; backdrop-filter: blur(8px);
         }
-        .btn-selengkapnya:hover { background: var(--accent-gold); color: #000; transform: translateY(-3px); }
+
+        .modal-content {
+            background: var(--secondary-dark); border: 2px solid var(--accent-gold); border-radius: 20px;
+            max-width: 450px; width: 90%; padding: 25px; position: relative; text-align: center;
+            animation: modalPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes modalPop { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .close-modal { position: absolute; top: 15px; right: 15px; color: var(--accent-gold); font-size: 1.5rem; cursor: pointer; }
 
         /* --- SECTIONS --- */
-        section { padding: 120px 10%; }
-        .section-title { 
-            font-size: 2.5rem; color: var(--accent-gold); text-align: center; 
-            margin-bottom: 60px; text-transform: uppercase; letter-spacing: 10px;
+        section { padding: 80px 8%; width: 100%; }
+        .section-title { font-size: clamp(1.5rem, 5vw, 2.5rem); color: var(--accent-gold); text-align: center; margin-bottom: 40px; text-transform: uppercase; letter-spacing: 5px; }
+        
+        /* PROFIL WITH IMAGE */
+        .profile-container {
+            display: flex; flex-direction: row; align-items: center; gap: 40px;
+            background: var(--secondary-dark); padding: clamp(20px, 5vw, 40px);
+            border-radius: 15px; border: 1px solid rgba(255,255,255,0.05);
         }
+        .profile-img {
+            width: clamp(150px, 25vw, 300px); height: auto;
+            border-radius: 10px; border: 2px solid var(--accent-gold);
+            object-fit: cover; flex-shrink: 0;
+        }
+        .profile-text { text-align: left; flex: 1; }
 
-        .card-box { background: var(--secondary-dark); padding: 50px; border-radius: 20px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
+        .card-box { background: var(--secondary-dark); padding: clamp(20px, 5vw, 40px); border-radius: 15px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
+        
+        /* GALLERY WITH CAPTION */
+        .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        .gallery-item { 
+            position: relative; height: clamp(200px, 35vw, 400px); 
+            border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); 
+        }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        
+        .gallery-caption {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            padding: 20px; color: white; transform: translateY(100%);
+            transition: 0.4s ease-in-out; text-align: left;
+        }
+        .gallery-item:hover .gallery-caption { transform: translateY(0); }
+        .gallery-item:hover img { transform: scale(1.1); filter: brightness(0.6); }
+        .gallery-caption h4 { color: var(--accent-gold); font-size: 0.9rem; margin-bottom: 5px; }
+        .gallery-caption p { font-size: 0.75rem; color: var(--text-gray); }
 
-        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-        .gallery-item { height: 350px; border-radius: 15px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s ease; }
-        .gallery-item:hover img { transform: scale(1.1); }
-
-        /* --- REVEAL --- */
-        .reveal { opacity: 0; transform: translateY(50px); transition: 1.2s ease-out; }
+        .reveal { opacity: 0; transform: translateY(30px); transition: 1s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* --- MOBILE --- */
+        @media (min-width: 769px) { .gallery { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); } }
+        
         @media (max-width: 768px) {
-            nav { flex-direction: column; height: auto; padding: 15px 0; }
-            nav ul { margin-top: 15px; }
-            .highlight-card { flex-direction: column; text-align: center; padding: 30px 20px; }
-            .gallery { grid-template-columns: 1fr 1fr; gap: 15px; }
-            .gallery-item { height: 220px; }
-            .pamflet-box { width: 180px; }
+            nav { flex-direction: column; height: auto; padding: 10px 0; }
+            nav ul { margin-top: 10px; }
+            nav ul li { margin: 0 8px; }
+            .profile-container { flex-direction: column; text-align: center; }
+            .profile-text { text-align: center; }
+            .highlight-permanen { flex-direction: column; text-align: center; width: 95%; }
+            header { padding-top: 130px; }
         }
 
-        footer { padding: 60px; text-align: center; font-size: 0.8rem; color: var(--text-gray); border-top: 1px solid #1a1a1a; letter-spacing: 2px; }
+        footer { padding: 40px; text-align: center; font-size: 0.7rem; color: var(--text-gray); border-top: 1px solid #1a1a1a; }
     </style>
 </head>
 <body>
 
+    <div class="modal-overlay" id="eventModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeBtn">&times;</span>
+            <p style="color:var(--accent-gold); font-size: 0.7rem; letter-spacing: 3px; font-weight: 700; margin-bottom: 10px;">ACARA MENDATANG !</p>
+            <img src="COMING.png" style="width: 100%; border-radius: 10px; border: 1px solid var(--accent-gold);" alt="Event">
+            <h3 style="font-size: 1.5rem; margin: 15px 0; font-weight: 900;">NYABAR VOL.3 2026</h3>
+            <a href="event.html" style="display: block; padding: 12px; background: var(--accent-gold); color: #000; text-decoration: none; font-weight: 900; border-radius: 8px; text-transform: uppercase;">Dapatkan Info Lengkap</a>
+        </div>
+    </div>
+
     <nav>
-        <a href="#" class="logo-nav">DOLANAN FILM</a>
+        <a href="#" class="nav-brand">
+            <img src="logdf.png" alt="Logo" class="logo-img">
+            <span class="logo-nav">DOLANAN FILM</span>
+        </a>
         <ul>
             <li><a href="#home">Home</a></li>
             <li><a href="#profil">Profil</a></li>
@@ -163,81 +207,102 @@
         <video autoplay muted loop playsinline class="video-bg">
             <source src="DJI_0008.mp4" type="video/mp4">
         </video>
-        
         <div class="hero-title reveal active">
             <h1>DOLANAN FILM</h1>
         </div>
-
         <div class="jargon-wrapper reveal active">
-            <p id="jargon-text">Crafting Stories</p>
+            <p id="jargon-text">A Production house from Cirebon</p>
         </div>
 
-        <!-- Highlight Card yang Diperbesar & Berdenyut -->
-        <div id="event-highlight" class="reveal active highlight-card">
+        <div class="reveal active highlight-permanen">
             <div class="pamflet-box">
-                <!-- Gunakan link gambar asli Anda di sini -->
-                <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=500" class="pamflet-img">
+                <img src="WhatsApp Image 2026-05-04 at 12.28.16 (1).jpeg" class="pamflet-img">
                 <div class="countdown-strip">
                     <div class="time-item"><span id="days">00</span><p>Hari</p></div>
                     <div class="time-item"><span id="hours">00</span><p>Jam</p></div>
-                    <div class="time-item"><span id="minutes">00</span><p>Menit</p></div>
-                    <div class="time-item"><span id="seconds">00</span><p>Detik</p></div>
+                    <div class="time-item"><span id="mins">00</span><p>Min</p></div>
+                    <div class="time-item"><span id="secs">00</span><p>Det</p></div>
                 </div>
             </div>
             <div style="text-align: left; flex: 1;">
-                <p style="color:var(--accent-gold); font-size: 0.8rem; letter-spacing: 3px; font-weight: 700;">ACARA MENDATANG</p>
-                <h3 style="font-size: 2rem; margin: 10px 0 15px; font-weight: 900;">NYABAR VOL.3 2026</h3>
-                <p style="color: var(--text-gray); font-size: 1rem; max-width: 500px;">Saksikan karya - karya terbaik secara rutin dalam pemutaran film tahunan yang paling ditunggu di Cirebon.</p>
-                <a href="event.html" class="btn-selengkapnya">Lihat Selengkapnya</a>
+                <p style="color:var(--accent-gold); font-size: 0.6rem; letter-spacing: 2px; font-weight: 700;">ACARA MENDATANG</p>
+                <h3 style="font-size: clamp(1.2rem, 3vw, 1.8rem); margin: 5px 0; font-weight: 900;">NYABAR VOL.3 2026</h3>
+                <p style="color: var(--text-gray); font-size: 0.8rem; max-width: 400px;">Saksikan karya - karya terbaik dalam pemutaran film tahunan rutin.</p>
+                <a href="event.html" style="display: inline-block; margin-top: 10px; color: var(--accent-gold); text-decoration: none; font-size: 0.7rem; font-weight: bold; border-bottom: 1px solid var(--accent-gold);">LIHAT SELENGKAPNYA</a>
             </div>
         </div>
     </header>
 
     <section id="profil" class="reveal">
         <h2 class="section-title">Profil</h2>
-        <div class="card-box">
-            <p style="font-size: 1.2rem;">COMING SOON</p>
+        <div class="profile-container">
+            <!-- GANTI 'profil-anda.jpg' DENGAN FILE FOTO ANDA -->
+            <img src="BLU.png" alt="Profil Dolanan Film" class="profile-img">
+            <div class="profile-text">
+                <p style="font-size: 1.1rem; color: var(--accent-gold); font-weight: bold; margin-bottom: 10px;">DOLANAN FILM PRODUCTION</p>
+                <p>COMING SOON.</p>
+            </div>
         </div>
     </section>
 
-    <!-- BAGIAN PROGRAM -->
-<section id="program" class="reveal">
-    <h2 class="section-title">Program</h2>
-    <div class="card-box">
-        <p style="font-size: 1.2rem; margin-bottom: 20px;">
-            COMING SOON
-        </p>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; text-align: left;">
-            <div style="padding: 20px; border-left: 3px solid var(--accent-gold); background: rgba(255,255,255,0.02);">
-                <h4 style="color: var(--accent-gold);">COMING SOON</h4>
-                <p style="font-size: 0.85rem; color: var(--text-gray);">COMING SOON.</p>
-            </div>
-            <div style="padding: 20px; border-left: 3px solid var(--accent-gold); background: rgba(255,255,255,0.02);">
-                <h4 style="color: var(--accent-gold);">COMING SOON</h4>
-                <p style="font-size: 0.85rem; color: var(--text-gray);">COMING SOON.</p>
-            </div>
-            <div style="padding: 20px; border-left: 3px solid var(--accent-gold); background: rgba(255,255,255,0.02);">
-                <h4 style="color: var(--accent-gold);">COMING SOON</h4>
-                <p style="font-size: 0.85rem; color: var(--text-gray);">COMING SOON.</p>
+    <section id="program" class="reveal">
+        <h2 class="section-title">Program</h2>
+        <div class="card-box">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; text-align: left;">
+                <div style="padding: 15px; border-left: 3px solid var(--accent-gold); background: rgba(255,255,255,0.02);">
+                    <h4>COMING SOON</h4>
+                    <p style="font-size: 0.75rem;">COMING SOON.</p>
+                </div>
+                <div style="padding: 15px; border-left: 3px solid var(--accent-gold); background: rgba(255,255,255,0.02);">
+                    <h4>COMING SOON</h4>
+                    <p style="font-size: 0.75rem;">COMING SOON.</p>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <section id="kegiatan" class="reveal">
         <h2 class="section-title">Kegiatan</h2>
         <div class="gallery">
-            <div class="gallery-item"><img src="WhatsApp Image 2026-05-04 at 12.28.16 (1).jpeg"></div>
-            <div class="gallery-item"><img src="WhatsApp Image 2026-05-04 at 12.28.16.jpeg"></div>
-            <div class="gallery-item"><img src="WhatsApp Image 2026-05-04 at 12.28.17 (1).jpeg"></div>
-            <div class="gallery-item"><img src="WhatsApp Image 2026-05-04 at 12.28.17.jpeg"></div>
+            <!-- FOTO 1 -->
+            <div class="gallery-item">
+                <img src="WhatsApp Image 2026-05-04 at 12.28.16 (1).jpeg">
+                <div class="gallery-caption">
+                    <h4>Pemutaran Film</h4>
+                    <p>Antusias warga menghadiri pemutaran film dari acara nyabar vol.2 2025.</p>
+                </div>
+            </div>
+            <!-- FOTO 2 -->
+            <div class="gallery-item">
+                <img src="WhatsApp Image 2026-05-04 at 12.28.16.jpeg">
+                <div class="gallery-caption">
+                    <h4>Hadiah & DoorPrize</h4>
+                    <p>Foto Anak-anak dan hadiah hasil sesi tanya jawab.</p>
+                </div>
+            </div>
+            <!-- FOTO 3 -->
+            <div class="gallery-item">
+                <img src="WhatsApp Image 2026-05-04 at 12.28.17 (1).jpeg">
+                <div class="gallery-caption">
+                    <h4>Antusias Penonton</h4>
+                    <p>Pembagian Hadiah kepada penonton.</p>
+                </div>
+            </div>
+            <!-- FOTO 4 -->
+            <div class="gallery-item">
+                <img src="WhatsApp Image 2026-05-04 at 12.28.17.jpeg">
+                <div class="gallery-caption">
+                    <h4>DOORPRIZE</h4>
+                    <p>Sesi tanya jawab penonton dan pemberian DoorPrize.</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <section id="kontak" class="reveal">
         <h2 class="section-title">Kontak</h2>
         <div class="card-box">
-            <a href="https://www.instagram.com/dolanan_film/" target="_blank" style="color: var(--accent-gold); text-decoration: none; font-weight: 900; font-size: 2rem; letter-spacing: 3px;">@dolanan_film</a>
+            <a href="https://www.instagram.com/dolanan_film/" target="_blank" style="color: var(--accent-gold); text-decoration: none; font-weight: 900; font-size: clamp(1.2rem, 5vw, 1.8rem); letter-spacing: 2px;">@dolanan_film</a>
         </div>
     </section>
 
@@ -246,8 +311,13 @@
     </footer>
 
     <script>
-        // Jargon Switcher
-        const jargons = ["A Production house from Cirebon", "Kreatif & Inovatif", "Muda Bertalenta", "Karangsari Pride"];
+        const modal = document.getElementById("eventModal");
+        const closeBtn = document.getElementById("closeBtn");
+        window.onload = function() { setTimeout(() => { modal.style.display = "flex"; }, 2000); }
+        closeBtn.onclick = function() { modal.style.display = "none"; }
+        window.onclick = function(e) { if (e.target == modal) modal.style.display = "none"; }
+
+        const jargons = ["A Production house from Cirebon", "Kreatif & Inovatif", "Karangsari Pride"];
         let idx = 0;
         const jEl = document.getElementById("jargon-text");
         function switchJargon() {
@@ -261,22 +331,20 @@
         setInterval(switchJargon, 3500);
         switchJargon();
 
-        // Countdown Logika Lengkap
         const target = new Date("July 12, 2026 19:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
             const d = target - now;
-            if (d < 0) { document.getElementById("event-highlight").style.display = "none"; return; }
+            if (d < 0) return;
             document.getElementById("days").innerText = Math.floor(d / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
             document.getElementById("hours").innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-            document.getElementById("minutes").innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-            document.getElementById("seconds").innerText = Math.floor((d % (1000 * 60)) / 1000).toString().padStart(2, '0');
+            document.getElementById("mins").innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            document.getElementById("secs").innerText = Math.floor((d % (1000 * 60)) / 1000).toString().padStart(2, '0');
         }, 1000);
 
-        // Reveal Scroll
         function reveal() {
             document.querySelectorAll(".reveal").forEach(r => {
-                if (r.getBoundingClientRect().top < window.innerHeight - 100) r.classList.add('active');
+                if (r.getBoundingClientRect().top < window.innerHeight - 80) r.classList.add('active');
             });
         }
         window.addEventListener("scroll", reveal);
