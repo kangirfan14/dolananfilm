@@ -1,654 +1,1007 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DOLANAN FILM | A Production house from Cirebon</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
-    
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+
     <style>
-        
-       html {
-          scroll-behavior: smooth;
-}
+      /* --- RESET & VARIABLES --- */
+      :root {
+        --accent-gold: #c5a059;
+        --primary-dark: #0a0a0a;
+        --secondary-dark: #151515;
+        --text-light: #ffffff;
+        --text-gray: #a0a0a0;
+        --nav-height: 80px;
+        --container-width: 1300px;
+      }
 
-        :root {
-            --primary-dark: #0a0a0a;
-            --secondary-dark: #161616;
-            --accent-gold: #c5a059;
-            --text-light: #ffffff;
-            --text-gray: #a0a0a0;
-            --gold-gradient: linear-gradient(45deg, #c5a059, #f9dfa5);
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background-color: var(--primary-dark);
+        background-image:
+          radial-gradient(
+            circle at 20% 30%,
+            rgba(197, 160, 89, 0.05) 0%,
+            transparent 40%
+          ),
+          radial-gradient(
+            circle at 80% 70%,
+            rgba(197, 160, 89, 0.05) 0%,
+            transparent 40%
+          ),
+          url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c5a059' fill-opacity='0.03' fill-rule='evenodd'%3E%3Cpath d='M30 10l-2-2h-6l-2 2H10v16h40V10H30zm0 12c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4zM5 40h10v10H5V40zm2 2v6h6v-6H7zm15-2h10v10H22V40zm2 2v6h6v-6h-6zm15-2h10v10H39V40zm2 2v6h6v-6h-6z'/%3E%3C/g%3E%3C/svg%3E");
+        background-attachment: fixed;
+        color: var(--text-light);
+        font-family: "Segoe UI", Roboto, sans-serif;
+        overflow-x: hidden;
+      }
+
+      /* --- NAVIGASI --- */
+      nav {
+        background-color: rgba(10, 10, 10, 0.98);
+        height: var(--nav-height);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 2000;
+        border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+        display: flex;
+        align-items: center;
+      }
+
+      .nav-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 95%;
+        max-width: var(--container-width);
+        margin: 0 auto;
+        gap: 40px;
+      }
+
+      .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+      }
+      .logo-img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+      }
+      .logo-nav {
+        color: var(--accent-gold);
+        font-weight: 900;
+        font-size: 1.1rem;
+        letter-spacing: 1px;
+      }
+
+      .nav-menu {
+        display: flex;
+        list-style: none;
+        gap: 25px;
+      }
+      .nav-menu li a {
+        color: var(--text-light);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        transition: 0.3s;
+      }
+
+      .hamburger {
+        display: none;
+        cursor: pointer;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .hamburger span {
+        width: 25px;
+        height: 2px;
+        background: var(--accent-gold);
+      }
+
+      /* --- HERO --- */
+      header {
+        position: relative;
+        min-height: 100vh;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 120px 20px 60px;
+      }
+
+      .video-container-hero {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+
+      .video-bg {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        transform: translate(-50%, -50%);
+        object-fit: cover;
+      }
+
+      .video-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+      }
+
+      .hero-title h1 {
+        font-size: clamp(2.5rem, 10vw, 6rem);
+        font-weight: 900;
+        letter-spacing: clamp(5px, 2vw, 15px);
+        background: linear-gradient(
+          to right,
+          #c5a059 0%,
+          #ffffff 50%,
+          #c5a059 100%
+        );
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shine 4s linear infinite;
+      }
+      @keyframes shine {
+        to {
+          background-position: 200% center;
         }
+      }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+      .jargon-wrapper {
+        height: 40px;
+        margin-top: 10px;
+        width: 100%;
+      }
+      #jargon-text {
+        font-size: clamp(0.9rem, 4vw, 1.5rem);
+        font-weight: 900;
+        color: var(--accent-gold);
+        text-transform: uppercase;
+        letter-spacing: 5px;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: 0.6s ease;
+      }
+      #jargon-text.show {
+        opacity: 1;
+        transform: translateY(0);
+        text-shadow: 0 0 15px rgba(197, 160, 89, 0.5);
+      }
 
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--primary-dark);
-            color: var(--text-light);
-            line-height: 1.6;
-            scroll-behavior: smooth;
-            overflow-x: hidden;
+      /* --- HIGHLIGHT ACARA (PULSE EFFECT)[cite: 1] --- */
+      .highlight-permanen {
+        background: rgba(21, 21, 21, 0.9);
+        border: 2px solid var(--accent-gold);
+        padding: clamp(20px, 5vw, 40px);
+        max-width: 1000px;
+        width: 100%;
+        border-radius: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        backdrop-filter: blur(15px);
+        margin-top: 40px;
+        animation: pulse-border 3s infinite ease-in-out; /* Efek berdenyut[cite: 1] */
+      }
+
+      @keyframes pulse-border {
+        0% {
+          box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.4);
+          border-color: rgba(197, 160, 89, 0.4);
         }
-
-        /* --- NAVIGATION --- */
-        nav {
-            display: flex; justify-content: space-between; align-items: center;
-            background-color: rgba(10, 10, 10, 0.98); height: 80px;
-            position: fixed; width: 100%; top: 0; z-index: 1000;
-            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
-            padding: 0 5%;
+        50% {
+          box-shadow: 0 0 20px 5px rgba(197, 160, 89, 0.2);
+          border-color: rgba(197, 160, 89, 1);
         }
-
-        .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-        .logo-img { width: 35px; height: 35px; object-fit: contain; border-radius: 5px; }
-        .logo-nav { font-size: 1.1rem; font-weight: 700; color: var(--accent-gold); letter-spacing: 1px; }
-        
-        nav ul { display: flex; list-style: none; }
-        nav ul li { margin-left: 20px; }
-        nav ul li a { text-decoration: none; color: var(--text-light); font-size: 0.7rem; text-transform: uppercase; transition: 0.3s; }
-        nav ul li a:hover { color: var(--accent-gold); }
-
-        /* --- HERO SECTION --- */
-        header {
-            position: relative; min-height: 100vh; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; text-align: center; overflow: hidden;
-            padding: 100px 5% 40px;
+        100% {
+          box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.4);
+          border-color: rgba(197, 160, 89, 0.4);
         }
+      }
 
-        .video-bg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; z-index: -1; opacity: 0.4;
+      .pamflet-box {
+        width: clamp(200px, 35vw, 300px);
+        flex-shrink: 0;
+        position: relative;
+      }
+      .pamflet-img {
+        width: 100%;
+        border-radius: 12px;
+        border: 2px solid var(--accent-gold);
+      }
+
+      .countdown-strip {
+        position: absolute;
+        bottom: 10px;
+        left: 5px;
+        right: 5px;
+        background: rgba(0, 0, 0, 0.92);
+        display: flex;
+        justify-content: space-around;
+        padding: 10px 4px;
+        border-radius: 8px;
+      }
+      .time-item span {
+        color: var(--accent-gold);
+        font-weight: 900;
+        font-size: 1.1rem;
+        display: block;
+      }
+      .time-item p {
+        font-size: 0.5rem;
+        text-transform: uppercase;
+        color: #fff;
+      }
+
+      /* --- HASIL KARYA --- */
+      .karya-container {
+        width: 100%;
+        max-width: 1000px;
+        margin-top: 50px;
+      }
+      .karya-card {
+        background: rgba(21, 21, 21, 0.8);
+        border: 2px solid var(--accent-gold);
+        border-radius: 20px;
+        padding: 10px;
+        width: 100%;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .video-wrapper {
+        width: 100%;
+        aspect-ratio: 16/9;
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+        background: #000;
+      }
+      .video-wrapper video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .swipe-instruction {
+        color: var(--accent-gold);
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-top: 15px;
+        animation: bounce 2s infinite;
+      }
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+          opacity: 0.5;
         }
-
-        .hero-title h1 {
-            font-size: clamp(2.2rem, 10vw, 5rem); font-weight: 900; 
-            letter-spacing: clamp(5px, 2vw, 12px);
-            background: linear-gradient(to right, #c5a059 0%, #f9dfa5 25%, #ffffff 50%, #f9dfa5 75%, #c5a059 100%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shine 4s linear infinite;
+        50% {
+          transform: translateY(-5px);
+          opacity: 1;
         }
+      }
 
-        @keyframes shine { to { background-position: 200% center; } }
+      /* --- SECTIONS --- */
+      section {
+        padding: 100px 5%;
+        max-width: var(--container-width);
+        margin: 0 auto;
+        width: 100%;
+      }
+      .section-title {
+        font-size: clamp(2rem, 6vw, 3rem);
+        color: var(--accent-gold);
+        text-align: center;
+        margin-bottom: 60px;
+        text-transform: uppercase;
+        letter-spacing: 8px;
+      }
 
-        .jargon-wrapper { height: 40px; margin-bottom: 10px; width: 100%; }
-        #jargon-text {
-            font-size: clamp(0.8rem, 4vw, 2rem); font-weight: 700; color: var(--accent-gold);
-            text-transform: uppercase; letter-spacing: 3px; opacity: 0; transform: translateY(10px);
-            transition: 0.6s ease;
+      .grid-flex {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        width: 100%;
+      }
+
+      .achievement-card,
+      .gallery-item {
+        background: rgba(21, 21, 21, 0.8);
+        border-radius: 20px;
+        border: 2px solid var(--accent-gold);
+        overflow: hidden;
+        transition: 0.4s;
+      }
+      .achievement-card img,
+      .gallery-item img {
+        width: 100%;
+        height: 280px;
+        object-fit: cover;
+      }
+      .achievement-card:hover,
+      .gallery-item:hover {
+        transform: translateY(-10px);
+        background: rgba(197, 160, 89, 0.1);
+      }
+
+      .gallery-caption {
+        padding: 20px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+        color: #fff;
+        text-align: left;
+      }
+
+      /* --- MOBILE --- */
+      @media (max-width: 768px) {
+        .nav-container {
+          justify-content: space-between;
+          padding: 0 20px;
         }
-        #jargon-text.show { opacity: 1; transform: translateY(0); text-shadow: 0 0 15px rgba(197, 160, 89, 0.5); }
-
-        /* --- HIGHLIGHT PERMANEN --- */
-        /* --- HIGHLIGHT PERMANEN (DIPERBESAR) --- */
-@keyframes pulse-gold {
-    0% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.4); border-color: rgba(197, 160, 89, 0.3); }
-    50% { box-shadow: 0 0 30px 5px rgba(197, 160, 89, 0.2); border-color: rgba(197, 160, 89, 0.8); }
-    100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.4); border-color: rgba(197, 160, 89, 0.3); }
-}
-
-/* --- SECTION HASIL KARYA --- */
-.karya-preview-container {
-    margin-top: 50px;
-    position: relative;
-    width: 100%;
-    max-width: 900px;
-    overflow: hidden;
-    cursor: grab;
-}
-
-.karya-card {
-    background: var(--secondary-dark);
-    border-radius: 20px;
-    border: 1px solid rgba(197, 160, 89, 0.3);
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: 0.5s;
-}
-
-.video-preview-box {
-    width: 100%;
-    height: clamp(200px, 40vw, 450px);
-    border-radius: 12px;
-    overflow: hidden;
-    position: relative;
-    border: 1px solid var(--accent-gold);
-}
-
-.video-preview-box video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.instruction-swipe {
-    margin-top: 15px;
-    color: var(--accent-gold);
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    animation: bounceLR 2s infinite;
-}
-
-@keyframes bounceLR {
-    0%, 100% { transform: translateX(0); opacity: 0.5; }
-    50% { transform: translateX(15px); opacity: 1; }
-}
-
-.karya-title-overlay {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    text-align: left;
-}
-
-.highlight-permanen {
-    background: rgba(255, 255, 255, 0.05); 
-    border: 2px solid rgba(197, 160, 89, 0.4);
-    padding: clamp(25px, 5vw, 40px); /* Padding diperbesar */
-    max-width: 1000px; /* Lebar maksimal diperbesar */
-    width: 92%; 
-    border-radius: 20px;
-    display: flex; 
-    align-items: center; 
-    gap: clamp(20px, 5vw, 50px); 
-    backdrop-filter: blur(15px);
-    margin-top: 30px;
-    animation: pulse-gold 3s infinite ease-in-out;
-}
-
-/* Ukuran Pamflet diperbesar */
-.pamflet-box { 
-    position: relative; 
-    width: clamp(150px, 30vw, 240px); 
-    flex-shrink: 0; 
-}
-
-.pamflet-img { 
-    width: 100%; 
-    border-radius: 12px; 
-    border: 1px solid var(--accent-gold); 
-    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-}
-
-/* Strip Countdown diperjelas */
-.countdown-strip {
-    position: absolute; 
-    bottom: 12px; left: 8px; right: 8px;
-    background: rgba(0,0,0,0.92); 
-    display: flex; 
-    justify-content: space-around; 
-    padding: 10px 4px; 
-    border-radius: 8px; 
-    border: 1px solid rgba(197, 160, 89, 0.4);
-}
-
-.time-item span { 
-    color: var(--accent-gold); 
-    font-weight: 900; 
-    display: block; 
-    font-size: clamp(0.8rem, 2vw, 1.1rem); 
-}
-
-.time-item p { 
-    color: white; 
-    font-size: 0.45rem; 
-    text-transform: uppercase; 
-    margin: 0; 
-    font-weight: 700;
-}
-        /* --- POP-UP MODAL --- */
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.9); display: none; justify-content: center; align-items: center;
-            z-index: 9999; backdrop-filter: blur(8px);
+        .hamburger {
+          display: flex;
         }
-
-        .modal-content {
-            background: var(--secondary-dark); border: 2px solid var(--accent-gold); border-radius: 20px;
-            max-width: 450px; width: 90%; padding: 25px; position: relative; text-align: center;
-            animation: modalPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        .nav-menu {
+          position: fixed;
+          left: -100%;
+          top: 0;
+          width: 280px;
+          height: 100vh;
+          background: var(--secondary-dark);
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          transition: 0.4s ease;
+          border-right: 2px solid var(--accent-gold);
         }
-
-        @keyframes modalPop { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .close-modal { position: absolute; top: 15px; right: 15px; color: var(--accent-gold); font-size: 1.5rem; cursor: pointer; }
-
-        
-        /* --- SECTIONS --- */
-        section { padding: 80px 8%; width: 100%; }
-        .section-title { font-size: clamp(1.5rem, 5vw, 2.5rem); color: var(--accent-gold); text-align: center; margin-bottom: 40px; text-transform: uppercase; letter-spacing: 5px; }
-        
-        /* PROFIL WITH IMAGE */
-        .profile-container {
-            display: flex; flex-direction: row; align-items: center; gap: 40px;
-            background: var(--secondary-dark); padding: clamp(20px, 5vw, 40px);
-            border-radius: 15px; border: 1px solid rgba(255,255,255,0.05);
+        .nav-menu.active {
+          left: 0;
         }
-        .profile-img {
-            width: clamp(150px, 25vw, 300px); height: auto;
-            border-radius: 10px; border: 2px solid var(--accent-gold);
-            object-fit: cover; flex-shrink: 0;
-        }
-        .profile-text { text-align: left; flex: 1; }
+      }
 
-        .card-box { background: var(--secondary-dark); padding: clamp(20px, 5vw, 40px); border-radius: 15px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
-        
-        /* PRESTASI */
-       /* --- PRESTASI (UKURAN MAKSIMAL & PRESISI) --- */
-.achievement-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 25px;
-    margin-top: 40px;
-}
+      /* --- MODAL --- */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.95);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        backdrop-filter: blur(10px);
+      }
+      .modal-content {
+        background: var(--secondary-dark);
+        border: 2px solid var(--accent-gold);
+        padding: 40px;
+        border-radius: 25px;
+        width: 90%;
+        max-width: 500px;
+        text-align: center;
+      }
 
-.achievement-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 3px solid var(--accent-gold); /* Garis bingkai dipertebal agar kokoh */
-    padding: 15px; /* Padding dikurangi agar gambar bisa lebih besar lagi */
-    border-radius: 20px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 450px; /* Tinggi kartu ditambah untuk ruang gambar besar */
-    transition: 0.3s;
-    overflow: hidden;
-}
-
-.achievement-card img { 
-    width: 100%; 
-    height: 300px; /* Tinggi area gambar ditingkatkan signifikan */
-    object-fit: cover; /* Foto memenuhi area bingkai secara penuh (Full Fit) */
-    border-radius: 12px;
-    margin-bottom: 20px;
-    filter: none;
-    display: block;
-}
-
-.achievement-card h3 { 
-    color: var(--accent-gold); 
-    font-size: 1.5rem; /* Judul diperbesar mengikuti skala gambar */
-    margin-bottom: 10px;
-    font-weight: 900;
-    text-transform: uppercase;
-    padding: 0 10px;
-}
-
-.achievement-card p { 
-    font-size: 1rem; 
-    color: var(--text-light);
-    line-height: 1.5;
-    padding: 0 15px 15px;
-}
-
-.achievement-card:hover {
-    background: rgba(197, 160, 89, 0.12);
-    transform: translateY(-5px);
-}
-
-.achievement-card h3 { 
-    color: var(--accent-gold); 
-    font-size: 1.2rem; 
-    margin-bottom: 12px;
-    font-weight: 900;
-}
-
-.achievement-card p { 
-    font-size: 0.9rem; 
-    color: var(--text-gray);
-    line-height: 1.5;
-}
-
-        /* GALLERY WITH CAPTION */
-        .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
-        .gallery-item { 
-            position: relative; height: clamp(200px, 35vw, 400px); 
-            border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); 
-        }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        
-        .gallery-caption {
-            position: absolute; bottom: 0; left: 0; width: 100%;
-            background: linear-gradient(transparent, rgba(0,0,0,0.9));
-            padding: 20px; color: white; transform: translateY(100%);
-            transition: 0.4s ease-in-out; text-align: left;
-        }
-        .gallery-item:hover .gallery-caption { transform: translateY(0); }
-        .gallery-item:hover img { transform: scale(1.1); filter: brightness(0.6); }
-        .gallery-caption h4 { color: var(--accent-gold); font-size: 0.9rem; margin-bottom: 5px; }
-        .gallery-caption p { font-size: 0.75rem; color: var(--text-gray); }
-
-        /* TOMBOL KEGIATAN SELENGKAPNYA */
-        .btn-more {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 12px 30px;
-            border: 2px solid var(--accent-gold);
+      footer {
+        padding: 60px 20px;
+        text-align: center;
+        border-top: 1px solid rgba(197, 160, 89, 0.2);
+        color: var(--text-gray);
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: 1.2s ease;
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- MODAL -->
+    <div class="modal-overlay" id="eventModal">
+      <div class="modal-content">
+        <span
+          class="close-modal"
+          id="closeBtn"
+          style="
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            cursor: pointer;
             color: var(--accent-gold);
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-radius: 50px;
-            transition: 0.3s;
-        }
-        .btn-more:hover {
+            font-size: 2.5rem;
+          "
+          >&times;</span
+        >
+        <p
+          style="
+            color: var(--accent-gold);
+            letter-spacing: 4px;
+            font-weight: 900;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+          "
+        >
+          ACARA MENDATANG
+        </p>
+        <img
+          src="COMING.png"
+          style="
+            width: 100%;
+            border-radius: 15px;
+            border: 2px solid var(--accent-gold);
+          "
+          alt="Event"
+        />
+        <h3
+          style="
+            margin: 25px 0;
+            font-weight: 900;
+            font-size: 1.8rem;
+            color: #fff;
+          "
+        >
+          NYABAR VOL.3 2026
+        </h3>
+        <a
+          href="event.html"
+          style="
+            display: block;
             background: var(--accent-gold);
             color: #000;
-        }
-
-        .reveal { opacity: 0; transform: translateY(30px); transition: 1s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
-        @media (min-width: 769px) { .gallery { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); } }
-        
-       @media (max-width: 768px) {
-    .highlight-permanen { 
-        flex-direction: column; 
-        text-align: center; 
-        width: 95%; 
-        padding: 30px 20px;
-    }
-    .pamflet-box { 
-        width: 200px; /* Ukuran pamflet di HP diperbesar */
-        margin-bottom: 15px;
-    }
-    .highlight-info h3 {
-        font-size: 1.6rem !important; /* Judul di HP diperbesar */
-    }
-}
-
-        footer { padding: 40px; text-align: center; font-size: 0.7rem; color: var(--text-gray); border-top: 1px solid #1a1a1a; }
-    </style>
-</head>
-<body>
-
-    <div class="modal-overlay" id="eventModal">
-        <div class="modal-content">
-            <span class="close-modal" id="closeBtn">&times;</span>
-            <p style="color:var(--accent-gold); font-size: 0.7rem; letter-spacing: 3px; font-weight: 700; margin-bottom: 10px;">ACARA MENDATANG !</p>
-            <img src="COMING.png" style="width: 100%; border-radius: 10px; border: 1px solid var(--accent-gold);" alt="Event">
-            <h3 style="font-size: 1.5rem; margin: 15px 0; font-weight: 900;">NYABAR VOL.3 2026</h3>
-            <a href="event.html" style="display: block; padding: 12px; background: var(--accent-gold); color: #000; text-decoration: none; font-weight: 900; border-radius: 8px; text-transform: uppercase;">Dapatkan Info Lengkap</a>
-        </div>
+            padding: 18px;
+            border-radius: 12px;
+            font-weight: 900;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+          "
+          >DAPATKAN INFO LENGKAP</a
+        >
+      </div>
     </div>
 
+    <!-- NAVIGASI -->
     <nav>
-        <a href="#" class="nav-brand">
-            <img src="logdf.png" alt="Logo" class="logo-img">
-            <span class="logo-nav">DOLANAN FILM</span>
+      <div class="nav-container">
+        <a href="#home" class="nav-brand">
+          <img src="logdf.png" alt="Logo" class="logo-img" />
+          <span class="logo-nav">DOLANAN FILM</span>
         </a>
-        <ul>
-            <li><a href="#home">Beranda</a></li>
-            <li><a href="#profil">Profil</a></li>
-            <li><a href="#program">Program</a></li>
-            <li><a href="#prestasi">Prestasi</a></li>
-            <li><a href="#kegiatan">Kegiatan</a></li>
-            <li><a href="#kontak">Kontak</a></li>
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#home" onclick="toggleMenu()">Beranda</a></li>
+          <li><a href="#profil" onclick="toggleMenu()">Profil</a></li>
+          <li><a href="#program" onclick="toggleMenu()">Program</a></li>
+          <li><a href="#prestasi" onclick="toggleMenu()">Prestasi</a></li>
+          <li><a href="#kegiatan" onclick="toggleMenu()">Kegiatan</a></li>
+          <li><a href="#kontak" onclick="toggleMenu()">Kontak</a></li>
         </ul>
+        <div class="hamburger" onclick="toggleMenu()">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
     </nav>
 
+    <!-- HERO SECTION -->
     <header id="home">
+      <div class="video-container-hero">
         <video autoplay muted loop playsinline class="video-bg">
-            <source src="DJI_0008.mp4" type="video/mp4">
+          <source src="DJI_0008.mp4" type="video/mp4" />
         </video>
-        <div class="hero-title reveal active">
-            <h1>DOLANAN FILM</h1>
-        </div>
-        <div class="jargon-wrapper reveal active">
-            <p id="jargon-text">A Production house from Cirebon</p>
-        </div>
+        <div class="video-overlay"></div>
+      </div>
 
-       <div class="reveal active highlight-permanen">
-    <div class="pamflet-box">
-        <img src="WhatsApp Image 2026-05-04 at 12.28.16 (1).jpeg" class="pamflet-img">
-        <div class="countdown-strip">
-            <div class="time-item"><span id="days">00</span><p>Hari</p></div>
-            <div class="time-item"><span id="hours">00</span><p>Jam</p></div>
-            <div class="time-item"><span id="mins">00</span><p>Min</p></div>
-            <div class="time-item"><span id="secs">00</span><p>Det</p></div>
-        </div>
-    </div>
+      <div class="hero-title reveal active">
+        <h1>DOLANAN FILM</h1>
+      </div>
 
-    <div class="highlight-info" style="text-align: left; flex: 1;">
-        <p style="color:var(--accent-gold); font-size: 0.75rem; letter-spacing: 3px; font-weight: 700;">ACARA MENDATANG !</p>
-        <h3 style="font-size: clamp(1.8rem, 4vw, 2.5rem); margin: 10px 0; font-weight: 900; line-height: 1.2;">NYABAR VOL.3 2026</h3>
-        <p style="color: var(--text-gray); font-size: 1rem; max-width: 480px; margin-bottom: 20px;">Saksikan karya - karya terbaik dan juga pemutaran film tahunan rutin yang paling dinantikan di Cirebon.</p>
-        <a href="event.html" style="display: inline-block; padding: 12px 25px; border: 2px solid var(--accent-gold); color: var(--accent-gold); text-decoration: none; font-size: 0.8rem; font-weight: bold; border-radius: 5px; text-transform: uppercase; transition: 0.3s;">Lihat Selengkapnya</a>
-    </div>
-</div>
-        </div>
+      <div class="jargon-wrapper">
+        <p id="jargon-text">A Production house from Cirebon</p>
+      </div>
 
-        <!-- HASIL KARYA PREVIEW -->
-<div class="reveal active karya-preview-container" id="karyaSlider">
-    <div class="karya-card" onclick="location.href='hasil_karya.html'">
-        <div class="video-preview-box">
-            <!-- GANTI 'preview_karya.mp4' DENGAN VIDEO SINGKAT PORTOFOLIO ANDA -->
-            <video autoplay muted loop playsinline>
-                <source src="kumpul.mp4" type="video/mp4">
-            </video>
-            <div class="karya-title-overlay">
-                <p style="color:var(--accent-gold); font-size: 0.6rem; font-weight: 700;">HASIL KARYA</p>
-                <h2 style="font-size: 1.5rem; font-weight: 900;">LIHAT SEMUA VIDEO</h2>
+      <!-- PAMFLET ACARA (ID: countdownSection)[cite: 1] -->
+      <div class="reveal active highlight-permanen" id="countdownSection">
+        <div class="pamflet-box">
+          <img
+            src="WhatsApp Image 2026-05-04 at 12.28.16 (1).jpeg"
+            class="pamflet-img"
+          />
+          <div class="countdown-strip">
+            <div class="time-item">
+              <span id="days">00</span>
+              <p>Hari</p>
             </div>
+            <div class="time-item">
+              <span id="hours">00</span>
+              <p>Jam</p>
+            </div>
+            <div class="time-item">
+              <span id="mins">00</span>
+              <p>Min</p>
+            </div>
+            <div class="time-item">
+              <span id="secs">00</span>
+              <p>Det</p>
+            </div>
+          </div>
         </div>
-        <p class="instruction-swipe">Geser untuk lihat semua Video ➔</p>
-    </div>
-</div>
+        <div style="flex: 1; text-align: left; min-width: 300px">
+          <p
+            style="
+              color: var(--accent-gold);
+              font-size: 1rem;
+              font-weight: 900;
+              letter-spacing: 3px;
+            "
+          >
+            ACARA MENDATANG !
+          </p>
+          <h2
+            style="
+              font-size: clamp(2rem, 5vw, 3rem);
+              margin: 15px 0;
+              font-weight: 900;
+              line-height: 1.1;
+            "
+          >
+            NYABAR VOL.3 2026
+          </h2>
+          <p
+            style="
+              color: var(--text-gray);
+              margin-bottom: 30px;
+              font-size: 1.1rem;
+              line-height: 1.6;
+            "
+          >
+            Saksikan karya - karya terbaik dan juga pemutaran film tahunan rutin
+            yang paling dinantikan di Cirebon.
+          </p>
+          <a
+            href="event.html"
+            style="
+              display: inline-block;
+              padding: 15px 35px;
+              border: 3px solid var(--accent-gold);
+              color: var(--accent-gold);
+              text-decoration: none;
+              font-weight: 900;
+              border-radius: 50px;
+              font-size: 0.9rem;
+              text-transform: uppercase;
+              letter-spacing: 2px;
+            "
+            >Lihat Selengkapnya</a
+          >
+        </div>
+      </div>
+
+      <div class="karya-container reveal active">
+        <div class="karya-card" onclick="location.href = 'hasil_karya.html'">
+          <div class="video-wrapper">
+            <video autoplay muted loop playsinline>
+              <source src="kumpul.mp4" type="video/mp4" />
+            </video>
+            <div
+              style="
+                position: absolute;
+                bottom: 30px;
+                left: 30px;
+                text-align: left;
+                z-index: 10;
+              "
+            >
+              <p
+                style="
+                  color: var(--accent-gold);
+                  font-size: 0.9rem;
+                  font-weight: 900;
+                  letter-spacing: 2px;
+                "
+              >
+                LIHAT
+              </p>
+              <h2 style="font-size: 2.2rem; font-weight: 900; color: #fff">
+                KARYA DOLANAN FILM
+              </h2>
+            </div>
+          </div>
+        </div>
+        <p class="swipe-instruction">
+          ➔ Geser atau Klik untuk lihat semua hasil karya
+        </p>
+      </div>
     </header>
 
+    <!-- PROFIL -->
     <section id="profil" class="reveal">
-        <h2 class="section-title">Profil</h2>
-        <div class="profile-container">
-            <img src="BLU.png" alt="Profil Dolanan Film" class="profile-img">
-            <div class="profile-text">
-                <p style="font-size: 1.1rem; color: var(--accent-gold); font-weight: bold; margin-bottom: 10px;">Kula Nuun,</p>
-                <p>Dolanan Film merupakan rumah produksi film lokal yang berdiri pada 10 Oktober 2022 dan berlokasi di Karangsari, Cirebon, Jawa Barat, Indonesia. Hadir sebagai wadah kreatif bagi generasi muda, Dolanan Film berfokus pada produksi film pendek yang mengangkat berbagai isu sosial, budaya, dan kehidupan sehari-hari.
-
-Selain kegiatan produksi, Dolanan Film juga aktif menyelenggarakan program nonton bareng (screening) sebagai upaya mendekatkan film kepada masyarakat sekaligus membangun ruang apresiasi dan diskusi. Keterlibatan dalam berbagai kegiatan kepemudaan menjadikan Dolanan Film tidak hanya sebagai rumah produksi, tetapi juga sebagai komunitas yang mendorong kolaborasi, kreativitas, dan pengembangan potensi generasi muda.</p>
-            </div>
+      <h2 class="section-title">Profil</h2>
+      <div
+        style="
+          background: var(--secondary-dark);
+          padding: 50px;
+          border-radius: 25px;
+          border: 1px solid rgba(197, 160, 89, 0.3);
+          display: flex;
+          align-items: center;
+          gap: 50px;
+          flex-wrap: wrap;
+        "
+      >
+        <img
+          src="BLU.png"
+          style="
+            width: 350px;
+            border-radius: 20px;
+            border: 2px solid var(--accent-gold);
+          "
+          alt="Profil"
+        />
+        <div style="flex: 1; min-width: 300px">
+          <p
+            style="
+              color: var(--accent-gold);
+              font-weight: 900;
+              margin-bottom: 20px;
+              font-size: 1.5rem;
+            "
+          >
+            Kula Nuun,
+          </p>
+          <p style="font-size: 1.1rem; line-height: 1.8">
+            Dolanan Film merupakan rumah produksi film lokal yang berdiri pada
+            10 Oktober 2022 dan berlokasi di Karangsari, Cirebon, Jawa Barat,
+            Indonesia. Hadir sebagai wadah kreatif bagi generasi muda, Dolanan
+            Film berfokus pada produksi film pendek yang mengangkat berbagai isu
+            sosial, budaya, dan kehidupan sehari-hari. Selain kegiatan produksi,
+            Dolanan Film juga aktif menyelenggarakan program nonton bareng
+            (screening) sebagai upaya mendekatkan film kepada masyarakat
+            sekaligus membangun ruang apresiasi dan diskusi. Keterlibatan dalam
+            berbagai kegiatan kepemudaan menjadikan Dolanan Film tidak hanya
+            sebagai rumah produksi, tetapi juga sebagai komunitas yang mendorong
+            kolaborasi, kreativitas, dan pengembangan potensi generasi muda.
+          </p>
         </div>
+      </div>
     </section>
 
+    <!-- PROGRAM -->
     <section id="program" class="reveal">
-        <h2 class="section-title">Program</h2>
-        <div class="card-box">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; text-align: left;">
-                <div style="padding: 15px; border-left: 3px solid var(--accent-gold); background: rgba(255,255,255,0.02);">
-                    <h4>COMING SOON</h4>
-                    <p style="font-size: 0.75rem;"> .</p>
-                </div>
-                <div style="padding: 15px; border-left: 3px solid var(--accent-gold); background: rgba(255,255,255,0.02);">
-                    <h4>COMING SOON</h4>
-                    <p style="font-size: 0.75rem;"> .</p>
-                </div>
-            </div>
+      <h2 class="section-title">Program</h2>
+      <div class="grid-flex">
+        <div
+          style="
+            background: var(--secondary-dark);
+            padding: 45px;
+            border-radius: 25px;
+            border-left: 8px solid var(--accent-gold);
+          "
+        >
+          <h3
+            style="
+              color: var(--accent-gold);
+              font-size: 1.5rem;
+              margin-bottom: 20px;
+            "
+          >
+            BELUM TERSEDIA
+          </h3>
+          <p style="font-size: 1.1rem">.</p>
         </div>
+        <div
+          style="
+            background: var(--secondary-dark);
+            padding: 45px;
+            border-radius: 25px;
+            border-left: 8px solid var(--accent-gold);
+          "
+        >
+          <h3
+            style="
+              color: var(--accent-gold);
+              font-size: 1.5rem;
+              margin-bottom: 20px;
+            "
+          >
+            BELUM TERSEDIA
+          </h3>
+          <p style="font-size: 1.1rem">.</p>
+        </div>
+      </div>
     </section>
 
-    <!-- BAGIAN PRESTASI DENGAN GAMBAR -->
+    <!-- PRESTASI -->
     <section id="prestasi" class="reveal">
-    <h2 class="section-title">Prestasi</h2>
-    <div class="achievement-grid">
+      <h2 class="section-title">Prestasi</h2>
+      <div class="grid-flex">
         <div class="achievement-card">
-            <!-- Gunakan logo asli Anda (juara.png, dll) -->
-            <img src="juara1.png" alt="Juara 1">
-            <h3>Juara 1 Lomba Video</h3>
-            <p>Juara pertama dalam kompetisi video pendek tingkat Kabupaten Cirebon tahun 2024.</p>
+          <img src="juara1.png" alt="Juara 1" />
+          <div style="padding: 25px">
+            <h3
+              style="
+                color: var(--accent-gold);
+                font-size: 1.3rem;
+                margin-bottom: 10px;
+              "
+            >
+              JUARA 1 VIDEO PENDEK
+            </h3>
+            <p>
+              Meraih peringkat pertama dalam kompetisi video pendek tingkat
+              Kabupaten Cirebon 2024.
+            </p>
+          </div>
         </div>
         <div class="achievement-card">
-            <img src="sertif.png" alt="Belum ada foto">
-            <h3> </h3>
-            <p> Admin masih bobo.</p>
+          <img src="sertif.png" alt="Belum Ada Foto" />
+          <div style="padding: 25px">
+            <h3
+              style="
+                color: var(--accent-gold);
+                font-size: 1.3rem;
+                margin-bottom: 10px;
+              "
+            >
+              .
+            </h3>
+            <p>
+             Admin masih bobo.
+            </p>
+          </div>
         </div>
         <div class="achievement-card">
-            <img src="mitra.png" alt="Belum ada foto">
-            <h3> </h3>
-            <p>Admin masih bobo.</p>
+          <img src="mitra.png" alt="Belum Ada Foto" />
+          <div style="padding: 25px">
+            <h3
+              style="
+                color: var(--accent-gold);
+                font-size: 1.3rem;
+                margin-bottom: 10px;
+              "
+            >
+              .
+            </h3>
+            <p>
+              Admin masih bobo.
+            </p>
+          </div>
         </div>
-    </div>
-    
-    <div style="text-align: center; margin-top: 40px;">
-        <a href="prestasi_lengkap.html" class="btn-more">Prestasi Lainnya</a>
-    </div>
-</section>
-    </section>
+      </div>
+      <div style="text-align: center; margin-top: 50px">
+        <a
+          href="prestasi_lengkap.html"
+          class="btn-more"
+          style="
+            display: inline-block;
+            border: 2px solid var(--accent-gold);
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: var(--accent-gold);
+            font-weight: 900;
+          "
+          >LIHAT PRESTASI LAINNYA</a
+        >
+      </div>
     </section>
 
+    <!-- KEGIATAN -->
     <section id="kegiatan" class="reveal">
-        <h2 class="section-title">Kegiatan</h2>
-        <div class="gallery">
-            <div class="gallery-item">
-                <img src="WhatsApp Image 2026-05-04 at 12.28.16 (1).jpeg">
-                <div class="gallery-caption">
-                    <h4>Pemutaran Film</h4>
-                    <p>Antusias warga menghadiri pemutaran film dari acara nyabar vol.2 2025.</p>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="WhatsApp Image 2026-05-04 at 12.28.16.jpeg">
-                <div class="gallery-caption">
-                    <h4>Hadiah & DoorPrize</h4>
-                    <p>Foto Anak-anak dan hadiah hasil sesi tanya jawab.</p>
-                </div>
-            </div>
-            
-            <div class="gallery-item">
-                <img src="WhatsApp Image 2026-05-04 at 12.28.17.jpeg">
-                <div class="gallery-caption">
-                    <h4>DOORPRIZE</h4>
-                    <p>Sesi tanya jawab penonton dan pemberian DoorPrize.</p>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="IMG-20240808-WA0042-01.jpeg">
-                <div class="gallery-caption">
-                    <h4>Kebersamaan Crew</h4>
-                    <p>Suka cita perayaan juara 1 Dolanan Film tingkat Kab.Cirebon 2024.</p>
-                </div>
-            </div>
-
+      <h2 class="section-title">Kegiatan</h2>
+      <div class="grid-flex">
+        <div class="gallery-item">
+          <img src="WhatsApp Image 2026-05-04 at 12.28.16 (1).jpeg" />
+          <div class="gallery-caption">
+            <h4>PEMUTARAN FILM</h4>
+            <p>Antusias warga di acara Nyabar Vol.2 2025.</p>
+          </div>
         </div>
-        
-        <!-- TOMBOL KEGIATAN SELENGKAPNYA -->
-        <div style="text-align: center;">
-            <a href="kegiatan_lengkap.html" class="btn-more">Kegiatan Selengkapnya</a>
+        <div class="gallery-item">
+          <img src="WhatsApp Image 2026-05-04 at 12.28.16.jpeg" />
+          <div class="gallery-caption">
+            <h4>SESI HADIAH</h4>
+            <p>Pemberian doorprize kepada penonton aktif.</p>
+          </div>
         </div>
+        <div class="gallery-item">
+          <img src="WhatsApp Image 2026-05-04 at 12.28.17.jpeg" />
+          <div class="gallery-caption">
+            <h4>DISKUSI FILM</h4>
+            <p>
+              Sesi tanya jawab interaktif antara crew dan penonton.
+            </p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="IMG-20240808-WA0042-01.jpeg" />
+          <div class="gallery-caption">
+            <h4>KEBERSAMAAN CREW</h4>
+            <p>
+              Kebersamaan tim setelah meraih juara 1 di Kabupaten Cirebon.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 50px">
+        <a
+          href="kegiatan_lengkap.html"
+          class="btn-more"
+          style="
+            display: inline-block;
+            border: 2px solid var(--accent-gold);
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: var(--accent-gold);
+            font-weight: 900;
+          "
+          >LIHAT KEGIATAN LAINNYA</a
+        >
+      </div>
     </section>
 
+    <!-- KONTAK -->
     <section id="kontak" class="reveal">
-        <h2 class="section-title">Kontak</h2>
-        <div class="card-box">
-            <a href="https://www.instagram.com/dolanan_film/" target="_blank" style="color: var(--accent-gold); text-decoration: none; font-weight: 900; font-size: clamp(1.2rem, 5vw, 1.8rem); letter-spacing: 2px;">@dolanan_film</a>
-        </div>
+      <h2 class="section-title">Kontak</h2>
+      <div
+        style="
+          background: var(--secondary-dark);
+          padding: 60px;
+          border-radius: 30px;
+          text-align: center;
+          border: 2px solid var(--accent-gold);
+        "
+      >
+        <p style="margin-bottom: 25px; font-size: 1.2rem">
+          Kunjungi dan Hubungi Kami di Instagram:
+        </p>
+        <a
+          href="https://www.instagram.com/dolanan_film/"
+          target="_blank"
+          style="
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: 900;
+            letter-spacing: 3px;
+          "
+          >@DOLANAN_FILM</a
+        >
+      </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 DOLANAN FILM • A Production house from Cirebon</p>
+      <p>
+        &copy; 2026 DOLANAN FILM • A Production house from
+        Cirebon.
+      </p>
     </footer>
 
     <script>
+      function toggleMenu() {
+        const menu = document.getElementById("navMenu");
+        if (window.innerWidth <= 768) menu.classList.toggle("active");
+      }
 
-// Logika Geser untuk Hasil Karya
-const slider = document.getElementById('karyaSlider');
-let isDown = false;
-let startX;
-let scrollLeft;
+      const jargons = [
+        "A Production house from Cirebon",
+        "Kreatif & inovatif",
+        "Muda Bertalenta",
+        "Karangsari Pride",
+      ];
+      let jargonIdx = 0;
+      const jargonEl = document.getElementById("jargon-text");
 
-slider.addEventListener('mousedown', (e) => {
-    isDown = true;
-    startX = e.pageX - slider.offsetLeft;
-});
-slider.addEventListener('mouseleave', () => { isDown = false; });
-slider.addEventListener('mouseup', () => {
-    isDown = false;
-    // Jika digeser cukup jauh, pindah halaman
-    window.location.href = 'hasil_karya.html';
-});
-slider.addEventListener('mousemove', (e) => {
-    if(!isDown) return;
-    e.preventDefault();
-});
-
-// Touch event untuk Mobile
-slider.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; });
-slider.addEventListener('touchend', (e) => {
-    let endX = e.changedTouches[0].clientX;
-    if(startX - endX > 50) { // Geser ke kiri
-        window.location.href = 'hasil_karya.html';
-    }
-});
-
-       // --- LOGIKA POP-UP (Hanya muncul sekali per sesi) ---
-const modal = document.getElementById("eventModal");
-const closeBtn = document.getElementById("closeBtn");
-
-window.onload = function() {
-    // Mengecek apakah kunci 'popupShown' sudah ada di sessionStorage
-    const popupShown = sessionStorage.getItem("popupShown");
-
-    if (!popupShown) {
-        // Jika belum pernah muncul, tampilkan pop-up setelah 2 detik
+      function switchJargon() {
+        jargonEl.classList.remove("show");
         setTimeout(() => {
+          jargonEl.innerText = jargons[jargonIdx];
+          jargonEl.classList.add("show");
+          jargonIdx = (jargonIdx + 1) % jargons.length;
+        }, 600);
+      }
+      setInterval(switchJargon, 3500);
+      switchJargon();
+
+      const modal = document.getElementById("eventModal");
+      const closeBtn = document.getElementById("closeBtn");
+      window.onload = function () {
+        if (!sessionStorage.getItem("popupShown")) {
+          setTimeout(() => {
             modal.style.display = "flex";
-            // Simpan status ke sessionStorage agar tidak muncul lagi
             sessionStorage.setItem("popupShown", "true");
-        }, 2000);
-    }
-}
-
-// Klik tombol close
-closeBtn.onclick = function() {
-    modal.style.display = "none";
-}
-
-// Klik di luar area modal untuk menutup
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-        const jargons = ["A Production house from Cirebon", "Kreatif & Inovatif", "Karangsari Pride"];
-        let idx = 0;
-        const jEl = document.getElementById("jargon-text");
-        function switchJargon() {
-            jEl.classList.remove("show");
-            setTimeout(() => {
-                jEl.innerText = jargons[idx];
-                jEl.classList.add("show");
-                idx = (idx + 1) % jargons.length;
-            }, 600);
+          }, 2000);
         }
-        setInterval(switchJargon, 3500);
-        switchJargon();
+      };
+      closeBtn.onclick = () => (modal.style.display = "none");
+      window.onclick = (e) => {
+        if (e.target == modal) modal.style.display = "none";
+      };
 
-        const target = new Date("July 12, 2026 19:00:00").getTime();
-        setInterval(() => {
-            const now = new Date().getTime();
-            const d = target - now;
-            if (d < 0) return;
-            document.getElementById("days").innerText = Math.floor(d / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-            document.getElementById("hours").innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-            document.getElementById("mins").innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-            document.getElementById("secs").innerText = Math.floor((d % (1000 * 60)) / 1000).toString().padStart(2, '0');
-        }, 1000);
+      /* LOGIKA COUNTDOWN & AUTO-HIDE[cite: 1] */
+      const target = new Date("July 12, 2026 19:00:00").getTime();
+      const countdownSection = document.getElementById("countdownSection");
 
-        function reveal() {
-            document.querySelectorAll(".reveal").forEach(r => {
-                if (r.getBoundingClientRect().top < window.innerHeight - 80) r.classList.add('active');
-            });
+      const timer = setInterval(() => {
+        const now = new Date().getTime();
+        const d = target - now;
+
+        if (d < 0) {
+          clearInterval(timer);
+          countdownSection.style.display = "none"; // Sembunyi otomatis saat habis[cite: 1]
+          return;
         }
-        window.addEventListener("scroll", reveal);
-        reveal();
+
+        document.getElementById("days").innerText = Math.floor(
+          d / (1000 * 60 * 60 * 24),
+        )
+          .toString()
+          .padStart(2, "0");
+        document.getElementById("hours").innerText = Math.floor(
+          (d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+        )
+          .toString()
+          .padStart(2, "0");
+        document.getElementById("mins").innerText = Math.floor(
+          (d % (1000 * 60 * 60)) / (1000 * 60),
+        )
+          .toString()
+          .padStart(2, "0");
+        document.getElementById("secs").innerText = Math.floor(
+          (d % (1000 * 60)) / 1000,
+        )
+          .toString()
+          .padStart(2, "0");
+      }, 1000);
+
+      window.addEventListener("scroll", () => {
+        document.querySelectorAll(".reveal").forEach((r) => {
+          if (r.getBoundingClientRect().top < window.innerHeight - 50)
+            r.classList.add("active");
+        });
+      });
     </script>
-</body>
+  </body>
 </html>
