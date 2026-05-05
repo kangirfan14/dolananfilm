@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Hasil Karya | DOLANAN FILM</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
@@ -13,24 +13,15 @@
             --text-light: #ffffff;
             --text-gray: #a0a0a0;
         }
-        /* --- NAVIGATION (SAMA DENGAN DASHBOARD) --- */
-nav {
-    display: flex; justify-content: space-between; align-items: center;
-    background-color: rgba(10, 10, 10, 0.98); height: 80px;
-    position: fixed; width: 100%; top: 0; z-index: 1000;
-    border-bottom: 1px solid rgba(197, 160, 89, 0.2);
-    padding: 0 5%;
-}
 
-/* Style Logo agar konsisten di semua halaman */
-.nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-.logo-img { width: 35px; height: 35px; object-fit: contain; border-radius: 5px; }
-.logo-nav { font-size: 1.1rem; font-weight: 700; color: var(--accent-gold); letter-spacing: 1px; }
-
-/* Tambahkan padding-top pada container agar konten tidak tertutup navigasi */
-.container { padding: 120px 8% 60px; }
-
+        /* RESET & BASE STYLES */
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            width: 100%;
+        }
 
         body {
             background: var(--primary-dark);
@@ -39,21 +30,31 @@ nav {
             line-height: 1.6;
         }
 
-        
-        
+        /* --- NAVIGATION --- */
         nav {
-            padding: 20px 5%;
-            display: flex;
-            justify-content: space-between;
+            display: flex; 
+            justify-content: space-between; 
             align-items: center;
-            background: rgba(10, 10, 10, 0.95);
+            background-color: rgba(10, 10, 10, 0.98); 
+            height: 80px;
+            position: fixed; 
+            width: 100%; 
+            top: 0; 
+            z-index: 1000;
             border-bottom: 1px solid rgba(197, 160, 89, 0.2);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            padding: 0 5%;
         }
 
-        .container { padding: 60px 8%; }
+        .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-img { width: 35px; height: 35px; object-fit: contain; }
+        .logo-nav { font-size: 1.1rem; font-weight: 700; color: var(--accent-gold); letter-spacing: 1px; }
+
+        /* --- CONTAINER UTAMA --- */
+        .container { 
+            padding: 120px 5% 60px; 
+            max-width: var(--container-width); 
+            margin: 0 auto; 
+        }
 
         .header-section {
             text-align: center;
@@ -66,60 +67,90 @@ nav {
             text-transform: uppercase;
             letter-spacing: 8px;
             font-weight: 900;
+            margin-bottom: 10px;
         }
 
+        /* --- GRID POSTER BIOSKOP (PRESISI) --- */
         .grid-karya {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
-
-        .video-item {
-            background: var(--secondary-dark);
-            border-radius: 15px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .video-item:hover {
-            border-color: var(--accent-gold);
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
-        }
-
-        /* Container Video YouTube (Agar Rasio 16:9 Tetap Terjaga) */
-        .youtube-container {
-            position: relative;
+            /* Menggunakan minmax agar poster tidak menyusut terlalu kecil di tablet */
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: clamp(20px, 4vw, 40px);
             width: 100%;
-            padding-bottom: 56.25%; /* Rasio 16:9 */
-            height: 0;
-            overflow: hidden;
         }
 
-        .youtube-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
+        /* BINGKAI POSTER BIOSKOP */
+        .poster-item {
+            background: #000;
+            border: 8px solid #1a1a1a; 
+            border-bottom-width: 35px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+            position: relative;
+            transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .poster-item:hover {
+            transform: translateY(-10px);
+            border-color: #222;
+            box-shadow: 0 20px 45px rgba(197, 160, 89, 0.2);
+        }
+
+        .poster-img-container {
+            width: 100%;
+            aspect-ratio: 2 / 3; /* Menjaga rasio poster standar */
+            overflow: hidden;
+            background: var(--secondary-dark);
+        }
+
+        .poster-img-container img {
             width: 100%;
             height: 100%;
-            border: 0;
+            object-fit: cover;
+            display: block;
         }
 
+        /* PLAT INFORMASI DI BAWAH POSTER */
         .v-desc {
-            padding: 25px;
+            padding: 15px 10px;
+            text-align: center;
+            background: #1a1a1a;
+            position: relative;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .year-tag {
+            background: var(--accent-gold);
+            color: #000;
+            font-size: 0.7rem;
+            font-weight: 900;
+            padding: 2px 10px;
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 3px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
         }
 
         .v-desc h3 {
             color: var(--accent-gold);
-            margin-bottom: 8px;
-            font-size: 1.2rem;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
             text-transform: uppercase;
+            font-weight: 900;
+            letter-spacing: 1px;
         }
 
         .v-desc p {
             color: var(--text-gray);
-            font-size: 0.85rem;
+            font-size: 0.75rem;
+            line-height: 1.4;
         }
 
         .btn-back {
@@ -141,8 +172,22 @@ nav {
             color: #000;
         }
 
-        @media (max-width: 600px) {
-            .grid-karya { grid-template-columns: 1fr; }
+        /* --- MOBILE ADJUSTMENTS --- */
+        @media (max-width: 768px) {
+            .container { padding: 100px 4% 40px; }
+            .grid-karya {
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .grid-karya {
+                grid-template-columns: 1fr; /* Satu kolom di HP agar detail terlihat jelas[cite: 4] */
+                max-width: 300px;
+                margin: 0 auto;
+            }
+            .header-section h1 { letter-spacing: 4px; }
         }
 
         footer {
@@ -150,89 +195,89 @@ nav {
             text-align: center;
             font-size: 0.7rem;
             color: var(--text-gray);
-            border-top: 1px solid #1a1a1a;
+            border-top: 1px solid rgba(197, 160, 89, 0.1);
             margin-top: 50px;
         }
     </style>
 </head>
 <body>
 
-   <!-- NAVIGATION (IDENTIK DENGAN DASHBOARD) -->
 <nav>
     <a href="index.html" class="nav-brand">
-        <!-- Logo Dolanan Film -->
         <img src="logdf.png" alt="Logo" class="logo-img">
         <span class="logo-nav">DOLANAN FILM</span>
     </a>
-    <a href="index.html#karyaSlider" style="color: var(--text-light); text-decoration: none; font-size: 0.7rem; text-transform: uppercase; font-weight: 700; border-bottom: 1px solid var(--accent-gold);">
+    <a href="index.html#karya-section" style="color: var(--text-light); text-decoration: none; font-size: 0.7rem; text-transform: uppercase; font-weight: 700; border-bottom: 1px solid var(--accent-gold);">
         Kembali ke Beranda
     </a>
 </nav>
 
-    <div class="container">
-        <div class="header-section">
-            <h1>KARYA KAMI</h1>
-            <p style="color: var(--text-gray); margin-top: 10px;">Kumpulan Video karya Dolanan Film.</p>
-        </div>
-        
-        <div class="grid-karya">
-            
-           <div class="video-item">
-    <div class="youtube-container">
-        <!-- Contoh ID video: dQw4w9WgXcQ (Ganti dengan milik Anda) -->
-        <iframe 
-            src="https://www.youtube.com/embed/-TQjawS3qoQ?rel=0&modestbranding=1" 
-            title="YouTube video player" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-            allowfullscreen>
-        </iframe>
+<div class="container">
+    <div class="header-section">
+        <h1>KARYA KAMI</h1>
+        <p style="color: var(--text-gray); margin-top: 10px;">Portofolio Poster Produksi Dolanan Film.</p>
     </div>
-    <div class="v-desc">
-        <h3>SEPERTI SEHARUSNYA - Film Pendek</h3>
-        <p>Anak harus di bimbing dengan baik tanpa tindak kekerasan maka jika masih ada kekerasan terhadap anak harus di cegah!!! </p>
+    
+    <div class="grid-karya">
+        
+        <!-- POSTER 1 -->
+        <div class="poster-item">
+            <div class="poster-img-container">
+                <img src="20221227_210623.jpg.jpeg" alt="LARAS">
+            </div>
+            <div class="v-desc">
+                <span class="year-tag">2022</span>
+                <h3>LARAS</h3>
+                <p>Film Pendek - Ketertarikan pada Tarian Topeng Kelana.</p>
+            </div>
+        </div>
+
+        <!-- POSTER 2 -->
+        <div class="poster-item">
+            <div class="poster-img-container">
+                <img src="LMK HAN.png" alt="LARAS">
+            </div>
+            <div class="v-desc">
+                <span class="year-tag">2023</span>
+                <h3>LARAS</h3>
+                <p>Film Pendek - Tentang bimbingan anak tanpa kekerasan.</p>
+            </div>
+        </div>
+
+        <!-- POSTER 3 -->
+        <div class="poster-item">
+            <div class="poster-img-container">
+                <img src="MTM.png" alt="MEMBULLY TANPA MENYADARI">
+            </div>
+            <div class="v-desc">
+                <span class="year-tag">2023</span>
+                <h3>MEMBULLY TANPA MENYADARI</h3>
+                <p>Produksi film oleh Dolanan Film.</p>
+            </div>
+        </div>
+
+        <!-- POSTER 4 -->
+        <div class="poster-item">
+            <div class="poster-img-container">
+                <img src="KRT.png" alt="KRAN TETANGGA">
+            </div>
+            <div class="v-desc">
+                <span class="year-tag">2024</span>
+                <h3>KRAN TETANGGA</h3>
+                <p>Produksi film oleh Dolanan Film.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div style="text-align: center;">
+        <a href="index.html#karyaSlider" class="btn-back">Kembali ke Beranda</a>
     </div>
 </div>
 
-            <div class="video-item">
-                <div class="youtube-container">
-                   <iframe 
-    src="https://www.youtube.com/embed/NqhYDYUJ1vs?rel=0&modestbranding=1" 
-    title="YouTube video player" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-    allowfullscreen>
-</iframe>
-                </div>
-                <div class="v-desc">
-                    <h3>LARAS - Film Pendek</h3>
-                    <p>Laras menceritakan tentang seorang perempuan yang tertarik pada salah satu kesenian daerah Cirebon dimana kesenian itu adalah Tarian topeng Kelana,dimana awal mula ia tertarik semenjak ia mengunjungi salah satu museum budaya di Cirebon.</p>
-                </div>
-            </div>
-
-            <div class="video-item">
-                <div class="youtube-container">
-                    <iframe 
-                        src="https://www.youtube.com/embed/NqhYDYUJ1vs&t" 
-                        title="YouTube video player" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                <div class="v-desc">
-                    <h3>BELUM TERSEDIA !</h3>
-                    <p>BELUM TERSEDIA !</p>
-                </div>
-            </div>
-
-        </div>
-
-        <div style="text-align: center;">
-            <a href="index.html#karyaSlider" class="btn-back">Kembali ke Beranda</a>
-        </div>
-    </div>
-
-    <footer>
-        <p>&copy; 2026 DOLANAN FILM • A Production house from Cirebon</p>
-    </footer>
+<footer>
+    <p>&copy; 2026 DOLANAN FILM • A Production house from Cirebon</p>
+</footer>
 
 </body>
 </html>
