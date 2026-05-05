@@ -45,12 +45,11 @@
 
       .nav-container {
         display: flex;
-        justify-content: center;
+        justify-content: space-between; /* DIPERBAIKI: Agar logo kiri, humberger kanan */
         align-items: center;
         width: 90%;
         max-width: var(--container-width);
         margin: 0 auto;
-        gap: 40px;
       }
 
       .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; z-index: 2100; }
@@ -88,33 +87,17 @@
       }
 
       .hero-title h1 {
-    font-size: clamp(2.5rem, 10vw, 6rem);
-    font-weight: 900;
-    letter-spacing: clamp(5px, 2vw, 15px);
-    
-    /* Warna dasar gradasi emas ke putih agar mengkilau */
-    background: linear-gradient(
-        to right, 
-        #c5a059 20%, 
-        #ffffff 50%, 
-        #c5a059 80%
-    );
-    background-size: 200% auto;
-    
-    /* Membuat gradasi muncul hanya di dalam teks */
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    
-    /* Menjalankan animasi kilau selama 4 detik */
-    animation: shine 8s linear infinite;
-}
+        font-size: clamp(2.5rem, 10vw, 6rem);
+        font-weight: 900;
+        letter-spacing: clamp(5px, 2vw, 15px);
+        background: linear-gradient(to right, #c5a059 20%, #ffffff 50%, #c5a059 80%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shine 8s linear infinite;
+      }
 
-/* Logika pergerakan cahaya kilau[cite: 6] */
-@keyframes shine {
-    to {
-        background-position: 200% center;
-    }
-}
+      @keyframes shine { to { background-position: 200% center; } }
 
       #jargon-text { font-size: clamp(0.9rem, 4vw, 1.5rem); font-weight: 900; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 5px; opacity: 0; transform: translateY(10px); transition: 0.6s ease; }
       #jargon-text.show { opacity: 1; transform: translateY(0); }
@@ -148,91 +131,77 @@
       .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); display: none; justify-content: center; align-items: center; z-index: 3000; }
       .modal-content { background: var(--secondary-dark); border: 2px solid var(--accent-gold); padding: 30px; border-radius: 20px; width: 90%; max-width: 400px; text-align: center; position: relative; }
 
-     @media (max-width: 768px) {
-    .nav-container {
-        display: flex;
-        justify-content: space-between; /* Logo di kiri, Hamburger di kanan */
-        align-items: center;
-        width: 100%;
-        padding: 0 5%;
-    }
-
-    /* Pastikan menu muncul dari kanan */
-    .nav-menu {
-        position: fixed;
-        right: -100%; /* Sembunyi di kanan luar */
-        top: 0;
-        width: 75%;
-        height: 100vh;
-        background: rgba(21, 21, 21, 0.98);
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        transition: 0.5s;
-        z-index: 3000;
-        border-left: 2px solid var(--accent-gold);
-    }
-
-    .nav-menu.active {
-        right: 0; /* Masuk saat diklik */
-    }
-}
- 
- 
+      @media (max-width: 768px) {
+        .hamburger { display: flex; } /* Tampilkan hamburger di mobile */
+        .nav-menu {
+          position: fixed;
+          right: -100%;
+          top: 0;
+          width: 75%;
+          height: 100vh;
+          background: rgba(21, 21, 21, 0.98);
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          transition: 0.5s;
+          z-index: 3000;
+          border-left: 2px solid var(--accent-gold);
+        }
+        .nav-menu.active { right: 0; }
+      }
 
       footer { padding: 60px 20px; text-align: center; border-top: 1px solid rgba(197, 160, 89, 0.2); }
 
-/* Denyutan pada Bingkai Pamflet[cite: 6] */
-.highlight-permanen {
-  animation: pulse-border 3s infinite ease-in-out;
+      /* Animasi Denyutan Bingkai */
+      .highlight-permanen { animation: pulse-border 3s infinite ease-in-out; }
+      @keyframes pulse-border {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.4); border-color: rgba(197, 160, 89, 0.4); }
+        50% { box-shadow: 0 0 20px 5px rgba(197, 160, 89, 0.2); border-color: rgba(197, 160, 89, 1); }
+      }
+
+      /* Animasi Denyutan Tombol */
+      .btn-pulse { animation: pulse-button 2s infinite; }
+      @keyframes pulse-button {
+        0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.7); }
+        70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(197, 160, 89, 0); }
+        100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); }
+      }
+
+      #kontak {
+    display: flex;
+    justify-content: center; /* Menengah secara horizontal */
+    align-items: center;     /* Menengah secara vertikal */
+    min-height: 400px;       /* Memberikan ruang yang cukup di desktop & mobile */
 }
 
-@keyframes pulse-border {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.4); border-color: rgba(197, 160, 89, 0.4); }
-  50% { box-shadow: 0 0 20px 5px rgba(197, 160, 89, 0.2); border-color: rgba(197, 160, 89, 1); }
-}
-
-/* Denyutan pada Tombol Lihat Selengkapnya[cite: 6] */
-.btn-pulse {
-  display: inline-block;
-  padding: 12px 30px;
-  border: 2px solid var(--accent-gold);
-  color: var(--accent-gold);
-  text-decoration: none;
-  font-weight: 900;
-  border-radius: 50px;
-  animation: pulse-button 2s infinite;
-}
-
-@keyframes pulse-button {
-  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.7); }
-  70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(197, 160, 89, 0); }
-  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); }
+#kontak .reveal {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 #kontak .reveal div {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Menengah secara vertikal[cite: 6] */
-    align-items: center;     /* Menengah secara horizontal[cite: 6] */
-    text-align: center;      /* Memastikan teks rata tengah[cite: 6] */
-    padding: 60px 20px;
+    justify-content: center; 
+    align-items: center;     
+    text-align: center;      
+    padding: clamp(40px, 8vw, 60px) 20px;
     background: var(--secondary-dark);
     border-radius: 30px;
     border: 2px solid var(--accent-gold);
-    min-height: 250px;       /* Bingkai tetap proporsional[cite: 6] */
+    width: 100%;
+    max-width: 800px; /* Batas lebar bingkai agar tetap elegan di desktop */
 }
 
 #kontak a {
     display: inline-block;
-    width: auto;             /* Agar link tidak melebar penuh[cite: 6] */
-    margin: 0 auto;          /* Penjaga posisi tengah[cite: 6] */
     color: var(--accent-gold);
     text-decoration: none;
     font-size: clamp(1.5rem, 5vw, 2.5rem);
     font-weight: 900;
+    margin-top: 10px;
 }
-
     </style>
   </head>
   <body>
@@ -286,7 +255,7 @@
           <p style="color: var(--accent-gold); font-size: 0.9rem; font-weight: 900; letter-spacing: 3px;">ACARA MENDATANG !</p>
           <h2 style="font-size: clamp(1.8rem, 4vw, 2.5rem); margin: 10px 0; font-weight: 900;">NYABAR VOL.3 2026</h2>
           <p style="color: var(--text-gray); margin-bottom: 25px;">Saksikan karya - karya terbaik dan pemutaran film tahunan rutin yang paling dinantikan di Cirebon.</p>
-          <a href="event.html" style="display: inline-block; padding: 12px 30px; border: 2px solid var(--accent-gold); color: var(--accent-gold); text-decoration: none; font-weight: 900; border-radius: 50px; font-size: 0.8rem; text-transform: uppercase;" class="btn-pulse">Lihat Selengkapnya</a>
+          <a href="event.html" class="btn-more btn-pulse">Lihat Selengkapnya</a>
         </div>
       </div>
 
@@ -316,7 +285,6 @@
       </div>
     </section>
 
-    <!-- PROGRAM[cite: 6] -->
     <section id="program" class="reveal">
       <h2 class="section-title">Program</h2>
       <div class="grid-flex">
@@ -329,7 +297,6 @@
       </div>
     </section>
 
-    <!-- PRESTASI[cite: 6] -->
     <section id="prestasi" class="reveal" style="text-align: center;">
       <h2 class="section-title">Prestasi</h2>
       <div class="grid-flex">
@@ -343,7 +310,6 @@
       <a href="prestasi_lengkap.html" class="btn-more">Lihat Prestasi Lainnya</a>
     </section>
 
-    <!-- KEGIATAN[cite: 6] -->
     <section id="kegiatan" class="reveal" style="text-align: center;">
       <h2 class="section-title">Kegiatan</h2>
       <div class="grid-flex">
@@ -355,15 +321,20 @@
       <a href="kegiatan_lengkap.html" class="btn-more">Lihat Kegiatan Selengkapnya</a>
     </section>
 
-    <section id="kontak" class="reveal">
-      <h2 class="section-title">Kontak</h2>
-      <div style="background: var(--secondary-dark); padding: 60px; border-radius: 30px; text-align: center; border: 2px solid var(--accent-gold);">
-        <a href="https://www.instagram.com/dolanan_film/" target="_blank" style="color: var(--accent-gold); text-decoration: none; font-size: 2.5rem; font-weight: 900;">@DOLANAN_FILM</a>
-      </div>
-    </section>
+    <section id="kontak">
+    <div class="reveal">
+        <div>
+            <p style="color: var(--text-gray); margin-bottom: 5px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem;">
+                Kunjungi Instagram Kami:
+            </p>
+            <a href="https://www.instagram.com/dolanan_film/" target="_blank">
+                @DOLANAN_FILM
+            </a>
+        </div>
+    </div>
+</section>
 
-    <footer><p>&copy; 2026 DOLANAN FILM • A Production house from
-        Cirebon.</p></footer>
+    <footer><p>&copy; 2026 DOLANAN FILM • A Production house from Cirebon.</p></footer>
 
     <script>
       function toggleMenu() { document.getElementById("navMenu").classList.toggle("active"); }
@@ -390,46 +361,30 @@
       }
       setInterval(switchJargon, 3500); switchJargon();
 
-      /* LOGIKA COUNTDOWN & OTOMATISASI HILANG */
-const target = new Date("July 12, 2026 19:00:00").getTime();
-const modal = document.getElementById("eventModal");
-const countdownSection = document.getElementById("countdownSection");
-
-const timer = setInterval(() => {
-  const now = new Date().getTime();
-  const d = target - now;
-
-  // Jika waktu habis, sembunyikan elemen secara otomatis
-  if (d <= 0) {
-    clearInterval(timer);
-    if(countdownSection) countdownSection.style.display = "none"; 
-    if(modal) modal.style.display = "none"; 
-    return;
-  }
-
-  // Update angka hitung mundur[cite: 6]
-  document.getElementById("days").innerText = Math.floor(d / (1000 * 60 * 60 * 24)).toString().padStart(2, "0");
-  document.getElementById("hours").innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, "0");
-  document.getElementById("mins").innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, "0");
-  document.getElementById("secs").innerText = Math.floor((d % (1000 * 60)) / 1000).toString().padStart(2, "0");
-}, 1000);
+      const target = new Date("July 12, 2026 19:00:00").getTime();
+      const timer = setInterval(() => {
+        const now = new Date().getTime();
+        const d = target - now;
+        if (d <= 0) {
+          clearInterval(timer);
+          if(document.getElementById("countdownSection")) document.getElementById("countdownSection").style.display = "none"; 
+          if(document.getElementById("eventModal")) document.getElementById("eventModal").style.display = "none"; 
+          return;
+        }
+        document.getElementById("days").innerText = Math.floor(d / (1000 * 60 * 60 * 24)).toString().padStart(2, "0");
+        document.getElementById("hours").innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, "0");
+        document.getElementById("mins").innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, "0");
+        document.getElementById("secs").innerText = Math.floor((d % (1000 * 60)) / 1000).toString().padStart(2, "0");
+      }, 1000);
 
       window.onload = function() {
         if (target - new Date().getTime() > 0 && !sessionStorage.getItem("modalShown")) {
           setTimeout(() => { 
-            document.getElementById("eventModal").style.display = "flex"; 
+            if(document.getElementById("eventModal")) document.getElementById("eventModal").style.display = "flex"; 
             sessionStorage.setItem("modalShown", "true");
           }, 2000);
         }
       }
-function toggleMenu() {
-    // Mencari menu berdasarkan ID dan menambahkan class 'active'[cite: 6]
-    const menu = document.getElementById("navMenu");
-    menu.classList.toggle("active");
-}
-
     </script>
-
-
   </body>
 </html>
