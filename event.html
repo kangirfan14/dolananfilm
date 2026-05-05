@@ -4,113 +4,190 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Event | DOLANAN FILM</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
-.btn-back {
-            display: inline-block;
-            margin-top: 50px;
-            padding: 12px 35px;
-            border: 2px solid var(--accent-gold);
-            color: var(--accent-gold);
-            text-decoration: none;
-            text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 2px;
-            border-radius: 50px;
-            transition: 0.3s;
-        }
-
-        .btn-back:hover {
-            background: var(--accent-gold);
-            color: #000;
-        }
-
         :root {
             --primary-dark: #0a0a0a;
+            --secondary-dark: #151515;
             --accent-gold: #c5a059;
             --text-light: #ffffff;
             --text-gray: #a0a0a0;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
             background-color: var(--primary-dark);
             color: var(--text-light);
             font-family: 'Montserrat', sans-serif;
-            padding: 80px 10%;
+            padding: clamp(40px, 8vw, 80px) 5%;
+            overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        .back-link {
-            color: var(--accent-gold);
-            text-decoration: none;
-            font-size: 0.75rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            display: inline-block;
-            margin-bottom: 50px;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .event-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: clamp(30px, 5vw, 60px);
             align-items: start;
         }
 
-        h1 { font-size: 3rem; letter-spacing: 6px; margin-bottom: 30px; }
-        h3 { color: var(--accent-gold); margin: 30px 0 10px; text-transform: uppercase; letter-spacing: 2px; }
-        p { color: var(--text-gray); line-height: 1.8; margin-bottom: 20px; }
+        /* --- STYLING SEKAT INFORMASI[cite: 5] --- */
+        .info-box {
+            background: var(--secondary-dark);
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 4px; /* Sudut tegas untuk kesan profesional */
+            transition: 0.3s;
+        }
 
-        /* --- STYLING PAMFLET 1080x1350 --- */
-        .registration-area { text-align: center; }
+        .info-box:hover {
+            border-color: var(--accent-gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .label {
+            color: var(--accent-gold);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        h1 { 
+            font-size: clamp(1.8rem, 4vw, 3rem); 
+            font-weight: 900; 
+            letter-spacing: 4px; 
+            text-transform: uppercase;
+            line-height: 1.1;
+        }
+
+        h3 { 
+            color: var(--text-light); 
+            margin-bottom: 15px; 
+            text-transform: uppercase; 
+            letter-spacing: 2px;
+            font-size: 1.1rem;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        /* Teks Rata Kanan Kiri[cite: 5] */
+        .text-justify {
+            color: var(--text-gray);
+            text-align: justify;
+            hyphens: auto;
+        }
+
+        /* --- WAKTU & LOKASI STYLING --- */
+        .time-loc-content {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        /* --- PAMFLET AREA --- */
+        .registration-area { text-align: center; position: sticky; top: 40px; }
+        
         .pamflet-register-img {
             width: 100%;
-            max-width: 432px; /* Skala tampilan agar proporsional di layar */
-            aspect-ratio: 1080 / 1350; /* Rasio 4:5 Pakem */
+            max-width: 450px;
+            aspect-ratio: 1080 / 1350;
             object-fit: cover;
-            border: 1px solid var(--accent-gold);
-            border-radius: 8px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-            transition: 0.4s;
+            border: 2px solid var(--accent-gold);
+            border-radius: 4px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
         }
-        .pamflet-register-img:hover { transform: scale(1.02); border-color: white; }
+        
+        .pamflet-register-img:hover { transform: scale(1.02); box-shadow: 0 40px 80px rgba(197, 160, 89, 0.2); }
 
+        /* --- TOMBOL KEMBALI --- */
+        .btn-back {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 15px 40px;
+            border: 2px solid var(--accent-gold);
+            color: var(--accent-gold);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 3px;
+            border-radius: 50px;
+            transition: 0.3s;
+            font-size: 0.8rem;
+        }
+
+        .btn-back:hover {
+            background: var(--accent-gold);
+            color: #000;
+            box-shadow: 0 10px 20px rgba(197, 160, 89, 0.3);
+        }
+
+        /* --- MOBILE RESPONSIVE --- */
         @media (max-width: 900px) {
             .event-grid { grid-template-columns: 1fr; }
+            .registration-area { order: -1; margin-bottom: 40px; position: static; }
+            .info-box { padding: 20px; }
             h1 { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
     
-    
-    <div class="event-grid">
-        <div class="info-column">
-            <p style="color: var(--accent-gold); letter-spacing: 4px;">Nama Acara</p>
-            <h1>Nyabar Vol.3 2026</h1>
-            
-            <h3>Tema Acara</h3>
-            <p>"COMING SOON.</p>
-            
-            <h3>Waktu & Lokasi</h3>
-            <p>COMING SOON</p>
+    <div class="container">
+        <div class="event-grid">
+            <!-- KOLOM INFORMASI DENGAN SEKAT[cite: 5] -->
+            <div class="info-column">
+                <div class="info-box">
+                    <span class="label">Nama Acara</span>
+                    <h1>Nyabar Vol.3 2026</h1>
+                </div>
+                
+                <div class="info-box">
+                    <h3>Tema Acara</h3>
+                    <p class="text-justify">"Kegelapan Tidak Pernah Sendiri."</p>
+                </div>
+                
+                <div class="info-box">
+                    <h3>Waktu & Lokasi</h3>
+                    <div class="time-loc-content">
+                        <p><strong>Waktu:</strong> 12 Juli 2026</p>
+                        <p><strong>Lokasi:</strong> COMING SOON</p>
+                    </div>
+                </div>
 
-            <h3>Informasi</h3>
-            <p>COMING SOON.</p>
-        </div>
+                <div class="info-box">
+                    <h3>Informasi</h3>
+                    <p class="text-justify">Nyabar adalah kegiatan menonton bersama di layar lebar yang menghadirkan pengalaman sinematik di tengah masyarakat. Kegiatan ini diinisiasi oleh Komunitas Dolanan Film sebagai ruang alternatif untuk menikmati film secara kolektif, sekaligus menjadi sarana hiburan yang dekat dan merakyat. Lebih dari sekadar tontonan, Nyabar juga bertujuan memperkenalkan dan mengapresiasi karya film pendek kepada masyarakat luas, membuka wawasan tentang dunia perfilman, serta membangun ruang diskusi dan interaksi antar penonton.</p>
+                </div>
 
-        <div class="registration-area">
-            <a href="https://www.instagram.com/dolanan_film/" target="_blank">
-                <!-- Ganti src dengan file pamflet 1080x1350 asli Anda -->
-                <img src="WhatsApp Image 2026-05-04 at 12.28.16 (1).jpeg" alt="Pamflet Pendaftaran" class="pamflet-register-img">
-            </a>
-            <p style="margin-top: 20px; font-size: 0.8rem; color: var(--accent-gold); letter-spacing: 2px;">KLIK GAMBAR UNTUK INFO SELENGKAPNYA</p>
-        </div>
- <div style="text-align: center;">
-            <a href="index.html" class="btn-back">Kembali ke Beranda</a>
-        </div>
+                <div style="text-align: left;">
+                    <a href="index.html" class="btn-back">Kembali ke Beranda</a>
+                </div>
+            </div>
 
+            <!-- AREA PAMFLET -->
+            <div class="registration-area">
+                <a href="https://www.instagram.com/dolanan_film/" target="_blank">
+                    <img src="WhatsApp Image 2026-05-04 at 12.28.16 (1).jpeg" alt="Pamflet Nyabar Vol.3" class="pamflet-register-img">
+                </a>
+                <p style="margin-top: 25px; font-size: 0.75rem; color: var(--accent-gold); letter-spacing: 3px; font-weight: 700;">KLIK GAMBAR UNTUK INFO PENDAFTARAN</p>
+            </div>
+        </div>
     </div>
+
 </body>
 </html>
