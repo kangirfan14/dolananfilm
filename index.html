@@ -300,71 +300,69 @@
     letter-spacing: 5px;
 }
 
-/* --- LAYOUT PREVIEW CREW HORIZONTAL --- */
+/* --- PERBAIKAN CREW PREVIEW PRESISI --- */
 .crew-flex-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 40px;
-    flex-wrap: wrap; /* Adaptasi otomatis untuk mobile */
     max-width: var(--container-width);
     margin: 0 auto;
-    padding: 20px 0;
+    padding: 60px 5%;
 }
 
 .crew-text-side {
     flex: 1;
     min-width: 300px;
-    text-align: left;
+    text-align: left; /* Default kiri untuk desktop */
 }
 
 .crew-title-main {
-    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-size: clamp(2rem, 5vw, 4rem);
     font-weight: 900;
     color: var(--accent-gold);
-    line-height: 1;
-    margin-bottom: 30px;
-    letter-spacing: 5px;
+    line-height: 1.1;
+    margin-bottom: 25px;
+    letter-spacing: 3px;
 }
 
-/* BINGKAI SLIDER (CLIPPING) */
+/* BINGKAI PREVIEW CLIPPING */
 .crew-slider-side {
-    flex: 1.5;
+    flex: 1;
     display: flex;
     justify-content: center;
-    min-width: 320px;
+    width: 100%;
 }
 
 .preview-frame {
     width: 100%;
-    max-width: 550px;
+    max-width: 500px;
     height: 350px;
     border: 2px solid var(--accent-gold);
     border-radius: 20px;
     padding: 10px;
     background: var(--secondary-dark);
     position: relative;
-    overflow: hidden; /* CLIPPING: Gambar yang keluar bingkai akan terpotong */
+    overflow: hidden; /* Mengunci gambar agar tidak keluar bingkai */
 }
 
 .screen-slider {
     width: 100%;
     height: 100%;
     border-radius: 12px;
-    overflow: hidden; /* Memastikan clipping di sudut melengkung */
-    position: relative;
+    overflow: hidden;
 }
 
 .crew-track {
     display: flex;
-    width: max-content; /* Paksa berjajar ke samping, bukan ke bawah */
+    width: max-content;
     animation: slideCrewHorizontal 15s linear infinite;
 }
 
 .crew-slide {
-    width: 530px; /* Lebar satu slide (sedikit lebih kecil dari bingkai) */
+    width: 480px; /* Lebar slide disesuaikan agar pas di bingkai */
     height: 330px;
-    flex-shrink: 0; /* Cegah gambar mengecil */
+    flex-shrink: 0;
     padding: 0 5px;
 }
 
@@ -375,20 +373,35 @@
     border-radius: 10px;
 }
 
-/* Animasi Slide ke Kanan Satu per Satu */
 @keyframes slideCrewHorizontal {
     0% { transform: translateX(0); }
-    100% { transform: translateX(calc(-530px * 4)); } /* Geser sesuai jumlah foto asli */
+    100% { transform: translateX(calc(-480px * 4)); }
 }
 
-/* RESPONSIVE MOBILE */
+/* --- KHUSUS MOBILE (AGAR PRESISI) --- */
 @media (max-width: 768px) {
-    .crew-flex-container { flex-direction: column; text-align: center; }
-    .crew-text-side { text-align: center; margin-bottom: 30px; }
-    .preview-frame { height: 250px; max-width: 100%; }
-    .crew-slide { width: 280px; height: 230px; }
+    .crew-flex-container {
+        flex-direction: column; /* Teks pindah ke atas, Slider di bawah */
+        text-align: center;
+        gap: 30px;
+    }
+
+    .crew-text-side {
+        text-align: center; /* Teks jadi tengah di mobile */
+        min-width: 100%;
+    }
+
+    .preview-frame {
+        height: 250px; /* Ukuran bingkai lebih kecil di HP */
+    }
+
+    .crew-slide {
+        width: 300px; /* Lebar gambar di HP */
+        height: 230px;
+    }
+
     @keyframes slideCrewHorizontal {
-        100% { transform: translateX(calc(-280px * 4)); }
+        100% { transform: translateX(calc(-300px * 4)); }
     }
 }
 
@@ -524,26 +537,24 @@
       <a href="kegiatan_lengkap.html" class="btn-more">Lihat Kegiatan Selengkapnya</a>
     </section>
 
-    <!-- SECTION PREVIEW CREW: POSISI DI BAWAH KEGIATAN & DI ATAS KONTAK -->
-<section id="crew-preview" class="reveal">
+    <section id="crew-preview" class="reveal">
     <div class="crew-flex-container">
-        <!-- SISI KIRI: TEKS -->
+        <!-- TEKS DI KIRI (ATAS SAAT MOBILE) -->
         <div class="crew-text-side">
             <h2 class="crew-title-main">CREW<br>DOLANAN<br>FILM</h2>
             <a href="Crewdf.html" class="btn-more">Lihat Crew DF</a>
         </div>
 
-        <!-- SISI KANAN: SLIDER HORIZONTAL CLIPPING -->
+        <!-- SLIDER DI KANAN (BAWAH SAAT MOBILE) -->
         <div class="crew-slider-side">
             <div class="preview-frame">
                 <div class="screen-slider">
                     <div class="crew-track">
-                        <!-- Gambar Preview Crew (Pastikan file ada) -->
                         <div class="crew-slide"><img src="IMG_9364.JPG"></div>
                         <div class="crew-slide"><img src="IMG_9367 - Salin.JPG"></div>
                         <div class="crew-slide"><img src="IMG_9514.JPG"></div>
-                        <div class="crew-slide"><img src="IMG_9364.JPG"></div>
-                        <!-- Duplikat untuk Looping Mulus -->
+                        <div class="crew-slide"><img src="IMG_9367 - Salin.JPG"></div>
+                        <!-- Duplikat agar looping tidak patah -->
                         <div class="crew-slide"><img src="IMG_9364.JPG"></div>
                         <div class="crew-slide"><img src="IMG_9367 - Salin.JPG"></div>
                     </div>
