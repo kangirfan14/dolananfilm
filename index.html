@@ -202,6 +202,196 @@
     font-weight: 900;
     margin-top: 10px;
 }
+/* Styling Dropdown Navigasi */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--secondary-dark);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.5);
+    z-index: 3000;
+    border: 1px solid var(--accent-gold);
+    border-radius: 8px;
+}
+
+.dropdown-content a {
+    color: var(--text-light) !important;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    font-size: 0.8rem !important;
+}
+
+.dropdown-content a:hover {
+    background-color: rgba(197, 160, 89, 0.1);
+    color: var(--accent-gold) !important;
+}
+
+/* Munculkan Dropdown saat Hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Penyesuaian Mobile */
+@media (max-width: 768px) {
+    .dropdown-content {
+        position: static;
+        width: 100%;
+        border: none;
+        background: transparent;
+        box-shadow: none;
+        text-align: center;
+    }
+}
+
+/* --- LAYOUT CREW HORIZONTAL --- */
+.crew-flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 40px;
+    flex-wrap: wrap; /* Agar otomatis susun ke bawah jika layar sangat kecil */
+}
+
+.crew-text-side {
+    flex: 1;
+    min-width: 300px;
+    text-align: left;
+}
+
+.crew-title-main {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
+    color: var(--accent-gold);
+    line-height: 1.1;
+    margin-bottom: 30px;
+    letter-spacing: 5px;
+}
+
+/* --- LAYOUT PREVIEW HORIZONTAL --- */
+.crew-flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    flex-wrap: wrap; /* Adaptasi otomatis untuk mobile */
+    max-width: var(--container-width);
+    margin: 0 auto;
+}
+
+.crew-text-side {
+    flex: 1;
+    min-width: 300px;
+    text-align: left;
+}
+
+.crew-title-main {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
+    color: var(--accent-gold);
+    line-height: 1;
+    margin-bottom: 30px;
+    letter-spacing: 5px;
+}
+
+/* --- LAYOUT PREVIEW CREW HORIZONTAL --- */
+.crew-flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap; /* Adaptasi otomatis untuk mobile */
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.crew-text-side {
+    flex: 1;
+    min-width: 300px;
+    text-align: left;
+}
+
+.crew-title-main {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 900;
+    color: var(--accent-gold);
+    line-height: 1;
+    margin-bottom: 30px;
+    letter-spacing: 5px;
+}
+
+/* BINGKAI SLIDER (CLIPPING) */
+.crew-slider-side {
+    flex: 1.5;
+    display: flex;
+    justify-content: center;
+    min-width: 320px;
+}
+
+.preview-frame {
+    width: 100%;
+    max-width: 550px;
+    height: 350px;
+    border: 2px solid var(--accent-gold);
+    border-radius: 20px;
+    padding: 10px;
+    background: var(--secondary-dark);
+    position: relative;
+    overflow: hidden; /* CLIPPING: Gambar yang keluar bingkai akan terpotong */
+}
+
+.screen-slider {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    overflow: hidden; /* Memastikan clipping di sudut melengkung */
+    position: relative;
+}
+
+.crew-track {
+    display: flex;
+    width: max-content; /* Paksa berjajar ke samping, bukan ke bawah */
+    animation: slideCrewHorizontal 15s linear infinite;
+}
+
+.crew-slide {
+    width: 530px; /* Lebar satu slide (sedikit lebih kecil dari bingkai) */
+    height: 330px;
+    flex-shrink: 0; /* Cegah gambar mengecil */
+    padding: 0 5px;
+}
+
+.crew-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Animasi Slide ke Kanan Satu per Satu */
+@keyframes slideCrewHorizontal {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-530px * 4)); } /* Geser sesuai jumlah foto asli */
+}
+
+/* RESPONSIVE MOBILE */
+@media (max-width: 768px) {
+    .crew-flex-container { flex-direction: column; text-align: center; }
+    .crew-text-side { text-align: center; margin-bottom: 30px; }
+    .preview-frame { height: 250px; max-width: 100%; }
+    .crew-slide { width: 280px; height: 230px; }
+    @keyframes slideCrewHorizontal {
+        100% { transform: translateX(calc(-280px * 4)); }
+    }
+}
+
     </style>
   </head>
   <body>
@@ -222,13 +412,26 @@
           <span class="logo-nav">DOLANAN FILM</span>
         </a>
         <ul class="nav-menu" id="navMenu">
-          <li><a href="#home" onclick="toggleMenu()">Beranda</a></li>
-          <li><a href="#profil" onclick="toggleMenu()">Profil</a></li>
-          <li><a href="#program" onclick="toggleMenu()">Program</a></li>
-          <li><a href="#prestasi" onclick="toggleMenu()">Prestasi</a></li>
-          <li><a href="#kegiatan" onclick="toggleMenu()">Kegiatan</a></li>
-          <li><a href="#kontak" onclick="toggleMenu()">Kontak</a></li>
-        </ul>
+  <li><a href="#home" onclick="toggleMenu()">Beranda</a></li>
+  
+  <!-- Menu Profil dengan Dropdown Berfungsi Scroll -->
+  <li class="dropdown">
+    <a href="javascript:void(0)" class="dropbtn">Profil ▾</a>
+    <div class="dropdown-content">
+      <!-- Scroll ke bagian profil di beranda -->
+      <a href="#profil" onclick="toggleMenu()">Tentang DF</a>
+      <!-- Scroll ke bagian preview crew di beranda -->
+      <a href="#crew-preview" onclick="toggleMenu()">Crew DF</a>
+      <!-- Link tetap ke file eksternal -->
+      <a href="Hasil_karya.html">Lihat Karya</a>
+    </div>
+  </li>
+
+  <li><a href="#program" onclick="toggleMenu()">Program</a></li>
+  <li><a href="#prestasi" onclick="toggleMenu()">Prestasi</a></li>
+  <li><a href="#kegiatan" onclick="toggleMenu()">Kegiatan</a></li>
+  <li><a href="#kontak" onclick="toggleMenu()">Kontak</a></li>
+</ul>
         <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
       </div>
     </nav>
@@ -321,6 +524,35 @@
       <a href="kegiatan_lengkap.html" class="btn-more">Lihat Kegiatan Selengkapnya</a>
     </section>
 
+    <!-- SECTION PREVIEW CREW: POSISI DI BAWAH KEGIATAN & DI ATAS KONTAK -->
+<section id="crew-preview" class="reveal">
+    <div class="crew-flex-container">
+        <!-- SISI KIRI: TEKS -->
+        <div class="crew-text-side">
+            <h2 class="crew-title-main">CREW<br>DOLANAN<br>FILM</h2>
+            <a href="Crewdf.html" class="btn-more">Lihat Crew DF</a>
+        </div>
+
+        <!-- SISI KANAN: SLIDER HORIZONTAL CLIPPING -->
+        <div class="crew-slider-side">
+            <div class="preview-frame">
+                <div class="screen-slider">
+                    <div class="crew-track">
+                        <!-- Gambar Preview Crew (Pastikan file ada) -->
+                        <div class="crew-slide"><img src="IMG_9364.JPG"></div>
+                        <div class="crew-slide"><img src="IMG_9367 - Salin.JPG"></div>
+                        <div class="crew-slide"><img src="IMG_9514.JPG"></div>
+                        <div class="crew-slide"><img src="IMG_9364.JPG"></div>
+                        <!-- Duplikat untuk Looping Mulus -->
+                        <div class="crew-slide"><img src="IMG_9364.JPG"></div>
+                        <div class="crew-slide"><img src="IMG_9367 - Salin.JPG"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
     <section id="kontak">
     <div class="reveal">
         <div>
@@ -332,6 +564,9 @@
             </a>
         </div>
     </div>
+    </div>
+</section>
+
 </section>
 
     <footer><p>&copy; 2026 DOLANAN FILM • A Production house from Cirebon.</p></footer>
