@@ -149,12 +149,12 @@
       .modal-content { background: var(--secondary-dark); border: 2px solid var(--accent-gold); padding: 30px; border-radius: 20px; width: 90%; max-width: 400px; text-align: center; position: relative; }
 
       @media (max-width: 768px) {
-        .nav-menu { position: fixed; right: -100%; top: 0; width: 80%; max-width: 300px; height: 100vh; background: rgba(21, 21, 21, 0.95); flex-direction: column; justify-content: center; align-items: center; transition: 0.5s; border-left: 2px solid var(--accent-gold); }
-        .nav-menu.active { right: 0; }
-        .hamburger { display: flex; }
-        .highlight-permanen { flex-direction: column; text-align: center; }
-        .pamflet-box { width: 220px; }
-      }
+    .nav-container {
+        justify-content: space-between; /* Memisahkan logo ke kiri dan hamburger ke kanan */
+        width: 100%;
+        padding: 0 5%; /* Memberikan jarak aman dari pinggir layar */
+    }
+}
 
       footer { padding: 60px 20px; text-align: center; border-top: 1px solid rgba(197, 160, 89, 0.2); }
 
@@ -184,6 +184,22 @@
   0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.7); }
   70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(197, 160, 89, 0); }
   100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); }
+}
+
+/* Cari bagian styling kontak Anda atau tambahkan ini */
+#kontak .reveal div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertikal center[cite: 6] */
+    align-items: center;     /* Horizontal center[cite: 6] */
+    min-height: 200px;       /* Menjaga ruang bingkai tetap konsisten[cite: 6] */
+    text-align: center;
+}
+
+#kontak a {
+    display: block;
+    width: 100%;
+    line-height: 1.2;
 }
 
     </style>
