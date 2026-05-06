@@ -681,6 +681,156 @@ nav.scrolled .hamburger span {
     box-shadow: 0px 0px 0px #000;
 }
 
+/* --- PERBAIKAN VIDEO PREVIEW (ANTI-ZOOM) --- */
+.video-wrapper video {
+    width: 100%;
+    height: 100%;
+    /* Menggunakan 'contain' agar video utuh/full tanpa terpotong */
+    object-fit: contain; 
+    background: #000; /* Latar hitam jika rasio video berbeda */
+    display: block;
+}
+
+/* --- ANIMASI AMAN: TIDAK KELUAR BINGKAI --- */
+@keyframes attention-btn {
+    0%, 100% { 
+        transform: translateY(0); 
+        box-shadow: 4px 4px 0px #000;
+    }
+    50% { 
+        transform: translateY(-5px); /* Bergerak naik sedikit saja */
+        box-shadow: 8px 8px 0px var(--accent-gold); /* Bayangan memanjang, bukan membesar */
+    }
+}
+
+.karya-card .btn-karya-label {
+    margin: 15px auto 5px auto; /* Margin diatur agar simetris */
+    padding: 12px 25px;
+    background: #fff;
+    border: 3px solid #000;
+    border-radius: 50px;
+    width: fit-content; /* Ukuran mengikuti teks, tidak maksa lebar */
+    max-width: 90% ; /* Biar gak mentok di HP */
+    display: block;
+    
+    /* Memicu animasi naik-turun halus */
+    animation: attention-btn 2s infinite ease-in-out;
+    transition: all 0.3s ease;
+}
+
+.karya-card:hover .btn-karya-label {
+    background: #000;
+    color: #fff;
+    animation: none; /* Berhenti saat di-hover */
+    transform: translateY(-2px);
+    box-shadow: 5px 5px 0px var(--accent-gold);
+}
+
+/* --- LABEL TEKS DI ATAS VIDEO --- */
+.video-label {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(139, 0, 0, 0.8); /* Merah Darah Transparan */
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    z-index: 10;
+    border: 1px solid #fff;
+    pointer-events: none; /* Agar tidak mengganggu klik pada video */
+}
+
+/* Pastikan wrapper video bersifat relative agar label menempel di sana */
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 2px solid #000;
+}
+
+/* Tetap pastikan video FIT/FULL */
+.video-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    background: #000;
+    display: block;
+}
+
+
+/* --- RESPONSIVE ADJUSTMENT --- */
+@media (max-width: 768px) {
+    .karya-container {
+        width: 95%; /* Lebih lebar di mobile agar rapi */
+        margin: 40px auto;
+    }
+    .karya-card {
+        padding: 10px; /* Lebih hemat ruang di mobile */
+    }
+    .karya-card h3 {
+        font-size: 1rem; /* Ukuran teks lebih pas di HP */
+    }
+}
+
+.btn-all-works {
+    display: inline-block;
+    background: #8b0000;
+    color: #fff;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-weight: 900;
+    text-decoration: none;
+    border: 3px solid #000;
+    box-shadow: 5px 5px 0px #000;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    
+    /* Memicu animasi agar seolah memanggil untuk diklik */
+    animation: attention-button 2s infinite ease-in-out;
+    transition: all 0.2s ease;
+}
+
+.btn-all-works:hover {
+    background: #000;
+    transform: translate(-3px, -3px);
+    box-shadow: 8px 8px 0px #8b0000;
+    animation: none; /* Berhenti bergetar saat disentuh kursor */
+}
+
+.btn-all-works:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0px 0px 0px #000;
+}
+
+/* --- 3. RESPONSIVE LAYOUT (PRESISI) --- */
+.works-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .works-grid {
+        grid-template-columns: 1fr; /* Satu kolom saja di HP agar tidak sempit */
+        padding: 10px;
+    }
+    
+    .btn-all-works {
+        width: 90%; /* Tombol melebar di HP agar mudah ditekan jempol */
+        text-align: center;
+        font-size: 0.9rem;
+    }
+}
+
 
     </style>
   </head>
@@ -789,21 +939,31 @@ nav.scrolled .hamburger span {
     </div>
   </div>
 </div>
-
-        <!-- KEDUA: PREVIEW HASIL KARYA (DENGAN EFEK CAHAYA) -->
-        <div class="karya-container reveal">
-            <div class="karya-card" onclick="location.href='hasil_karya.html'">
-                <div class="video-wrapper">
-                    <video autoplay muted loop playsinline><source src="kumpul.mp4" type="video/mp4" /></video>
-                </div>
-                <div style="padding: 20px; text-align: center;">
-                    <h3 style="font-weight: 900; letter-spacing: 2px;">LIHAT SEMUA KARYA →</h3>
-                </div>
-            </div>
+<!-- KEDUA: PREVIEW HASIL KARYA (DENGAN EFEK CAHAYA) -->
+<div class="karya-container reveal">
+    <div class="karya-card" onclick="location.href='Hasil_karya.html'">
+        <div class="video-wrapper">
+            <!-- TULISAN DI ATAS VIDEO -->
+            <div class="video-label">Lihat Karya Dolanan Film</div>
+            
+            <video autoplay muted loop playsinline>
+                <source src="kumpul.mp4" type="video/mp4" />
+            </video>
         </div>
+        
+        <div class="btn-karya-label">
+            <h3 style="font-weight: 900; letter-spacing: 1px; margin: 0; font-size: 0.9rem;">
+                LIHAT SEMUA KARYA →
+            </h3>
+        </div>
+    </div>
+</div>
     </div>
 </header>
       
+
+
+
 
    <section id="profil" class="reveal">
   <h2 class="section-title">Profil</h2>
@@ -862,7 +1022,7 @@ nav.scrolled .hamburger span {
 
     <section id="crew-preview" class="reveal">
       <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 40px;">
-        <div style="flex: 1; text-align: left;"><h2 style="font-size: 3rem; font-weight: 900;">CREW DF</h2><a href="crewdf.html" class="btn-more">LIHAT SEMUA CREW</a></div>
+        <div style="flex: 1; text-align: left;"><h2 style="font-size: 3rem; font-weight: 900;">CREW DF</h2><a href="Crewdf.html" class="btn-more">LIHAT SEMUA CREW</a></div>
         <div style="flex: 1; min-width: 320px;"><div style="border:4px solid #000; border-radius:20px; overflow:hidden; background:#fff; padding:10px;"><div style="display:flex; animation: slideH 8s infinite linear; height:350px"><img src="IMG_9364.JPG" style="min-width:100%; object-fit:cover;"><img src="IMG_9514.JPG" style="min-width:100%; object-fit:cover;"></div></div></div>
       </div>
     </section>
