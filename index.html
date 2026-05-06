@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="id">
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta charset="UTF-8" />
     <title>DOLANAN FILM | A Production house from Cirebon</title>
     
@@ -928,6 +929,50 @@ nav.scrolled .hamburger span {
     transform: translateX(5px); /* Geser dikit agar interaktif */
 }
 }
+/* --- TAMPILAN DESKTOP (Layar Lebar) --- */
+@media (min-width: 769px) {
+    .nav-menu {
+        display: flex !important; /* Menu berderet ke samping */
+        position: static;
+        background: none;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+    }
+    .hamburger {
+        display: none; /* Sembunyikan tombol menu di desktop */
+    }
+}
+
+/* --- TAMPILAN MOBILE (Layar HP) --- */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none; /* Sembunyikan menu bawaan yang berderet */
+        position: fixed;
+        right: -100%; /* Geser ke luar layar */
+        top: 0;
+        width: 80%;
+        height: 100vh;
+        background: #fff;
+        flex-direction: column; /* Menu berderet ke bawah */
+        padding: 100px 20px;
+        border-left: 5px solid #000;
+        transition: 0.5s;
+        z-index: 4000;
+    }
+
+    /* Munculkan menu saat tombol hamburger diklik */
+    .nav-menu.active {
+        display: flex;
+        right: 0;
+    }
+
+    .hamburger {
+        display: block !important; /* Munculkan tombol garis tiga */
+        cursor: pointer;
+    }
+}
+
     </style>
   </head>
   <body>
@@ -961,6 +1006,12 @@ nav.scrolled .hamburger span {
       <div class="nav-container">
         <a href="javascript:void(0)" class="nav-brand" style="cursor: default;"> 
           <img src="df merah darah.png" class="logo-img" /><span class="logo-nav">DOLANAN FILM</span></a>
+
+<div class="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+    </div>
+
+
         <ul class="nav-menu" id="navMenu">
           <li><a href="#home" onclick="toggleMenu()">Beranda</a></li>
           <li class="dropdown" id="profileDropdown">
