@@ -828,30 +828,42 @@ nav.scrolled .hamburger span {
 }
 
 @media (max-width: 768px) {
-    /* Mencegah dropdown tersembunyi di mobile */
+    /* 1. Sembunyikan isi dropdown secara total saat awal */
     .dropdown-content {
-        position: static !important;
-        display: none; /* Awalnya tertutup */
+        display: none; /* Default tertutup */
+        position: static !important; /* Agar mendorong menu di bawahnya turun */
         width: 100% !important;
-        background: #f9f9f9 !important;
-        box-shadow: none !important;
-        border: none !important;
-        border-radius: 0 !important;
-        padding-left: 20px !important;
+        background: #f0f0f0 !important;
+        border: 3px solid #000 !important;
+        border-radius: 20px !important;
+        box-shadow: 6px 6px 0px #000 !important;
+        margin: 10px 0 !important;
+        padding: 10px !important;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: all 0.4s ease; /* Efek transisi halus */
     }
 
-    /* Class baru untuk menampilkan dropdown saat diklik */
+    /* 2. Logika ketika Profil Aktif (Dropdown Terbuka) */
     .dropdown.active .dropdown-content {
-        display: block !important;
+        display: flex !important; /* Munculkan kembali */
+        flex-direction: column;
+        gap: 10px;
+        opacity: 1;
+        transform: translateY(0);
     }
-    
-    /* Animasi panah agar berubah saat dibuka */
-    .dropdown > a::after {
-        content: ' ▾';
-        transition: 0.3s;
-    }
-    .dropdown.active > a::after {
-        content: ' ▴';
+
+    /* 3. Gaya tombol di dalam dropdown */
+    .dropdown-content a {
+        background: #fff !important;
+        border: 2px solid #000 !important;
+        border-radius: 50px !important;
+        padding: 12px !important;
+        font-size: 0.85rem !important;
+        font-weight: 800 !important;
+        text-align: center !important;
+        color: #000 !important;
+        box-shadow: 3px 3px 0px #000 !important;
     }
 }
 
@@ -939,6 +951,7 @@ nav.scrolled .hamburger span {
           <li class="dropdown" id="profileDropdown">
     <!-- Hilangkan toggleMenu() dari link utama agar tidak langsung menutup navbar -->
     <a href="javascript:void(0)" onclick="toggleDropdown(event)">Profil ▾</a>
+    
     <div class="dropdown-content">
     <a href="#profil" onclick="toggleMenu()">Tentang DF</a>
     <a href="#crew-preview" onclick="toggleMenu()">Crew DF</a>
@@ -1240,14 +1253,7 @@ window.addEventListener("scroll", function triggerOnce() {
     }
 }, { passive: true });
 
-function toggleDropdown(e) {
-    if (window.innerWidth <= 768) {
-        e.preventDefault();
-        // Mencari elemen parent 'li' dari link yang diklik
-        const dropdown = e.target.closest('.dropdown');
-        dropdown.classList.toggle("active");
-    }
-}
+
 
 // Pastikan fungsi toggleMenu yang lama tetap ada untuk menutup navbar secara keseluruhan
 function toggleMenu() {
@@ -1279,12 +1285,20 @@ function scrollToKarya() {
 }
 
 function toggleDropdown(e) {
+    // Jalankan hanya di layar mobile
     if (window.innerWidth <= 768) {
-        e.preventDefault();
-        // Mencari elemen pembungkus Profil (LI)
-        const dropdown = e.target.closest('.dropdown');
-        // Toggle class 'active' untuk buka/tutup
-        dropdown.classList.toggle("active");
+        e.preventDefault(); // Mencegah loncatan halaman
+        
+        // Cari elemen LI yang memiliki class dropdown
+        const dropdownParent = e.target.closest('.dropdown');
+        
+        if (dropdownParent) {
+            // Toggle class 'active'
+            dropdownParent.classList.toggle("active");
+            
+            // Logika tambahan: Tutup dropdown lain jika ada yang terbuka
+            console.log("Dropdown toggled!"); // Untuk debugging kamu di console
+        }
     }
 }
 </script>
