@@ -857,40 +857,47 @@ nav.scrolled .hamburger span {
 
 
 @media (max-width: 768px) {
-    /* Menu Utama Navigasi Mobile */
+    /* Menu navigasi mobile agar rapi */
     .nav-menu {
+        padding: 100px 20px !important;
         display: flex;
         flex-direction: column;
-        overflow-y: auto; /* Agar bisa di-scroll jika menu banyak */
+        gap: 15px; /* Jarak antar tombol menu utama */
     }
 
-    /* Wadah Dropdown agar masuk ke dalam aliran menu */
-    .dropdown {
-        width: 100%;
-        text-align: center;
-    }
-
+    /* Kontainer isi dropdown */
     .dropdown-content {
-        position: static !important; /* Menghilangkan posisi melayang */
+        position: static !important;
         display: none; /* Sembunyi secara default */
-        background: #f0f0f0 !important; /* Warna beda dikit agar terlihat sub-menu */
-        border: none !important;
-        box-shadow: none !important;
-        width: 100% !important;
-        margin-top: 5px;
-        border-radius: 10px !important;
+        width: 90% !important;
+        margin: 10px auto !important;
+        background: #f0f0f0 !important; /* Latar abu halus agar beda dengan menu utama */
+        border: 3px solid #000 !important; /* Bingkai hitam tegas */
+        border-radius: 20px !important;
+        box-shadow: 6px 6px 0px #000 !important; /* Shadow khas DF */
+        padding: 10px !important;
+        z-index: 100;
     }
 
-    /* Saat Dropdown Aktif */
+    /* Saat profil diklik (aktif) */
     .dropdown.active .dropdown-content {
-        display: block !important;
-        padding: 10px 0;
+        display: flex !important;
+        flex-direction: column;
+        gap: 10px;
     }
 
+    /* Link di dalam dropdown agar bentuknya seperti tombol kecil */
     .dropdown-content a {
-        border-bottom: 1px solid #ddd !important;
-        padding: 15px !important;
-        font-size: 0.9rem !important;
+        background: #fff !important;
+        border: 2px solid #000 !important;
+        border-radius: 50px !important;
+        padding: 12px !important;
+        font-size: 0.8rem !important;
+        font-weight: 800 !important;
+        text-align: center !important;
+        color: #000 !important;
+        text-decoration: none !important;
+        box-shadow: 3px 3px 0px #000 !important;
     }
 }
 
@@ -1268,6 +1275,16 @@ function scrollToKarya() {
             top: offsetPosition,
             behavior: "smooth"
         });
+    }
+}
+
+function toggleDropdown(e) {
+    if (window.innerWidth <= 768) {
+        e.preventDefault();
+        // Mencari elemen pembungkus Profil (LI)
+        const dropdown = e.target.closest('.dropdown');
+        // Toggle class 'active' untuk buka/tutup
+        dropdown.classList.toggle("active");
     }
 }
 </script>
