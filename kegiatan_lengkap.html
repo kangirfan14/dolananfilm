@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Galeri Kegiatan | DOLANAN FILM</title>
-    <!-- Favicon agar logo muncul di tab browser -->
     <link rel="icon" type="image/png" href="logdf.png" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
@@ -17,10 +16,16 @@
             --accent-red: #8b0000;
         }
 
+        /* RESET & LOCK HORIZONTAL SCROLL */
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        html, body {
+            overflow-x: hidden; /* Mencegah web bergeser ke kanan-kiri */
+            width: 100%;
+            position: relative;
+        }
+
         body {
-            /* Pattern Modern: Zig-Zag Diagonal (Berbeda dari sebelumnya) */
             background-color: #fdfaf5;
             background-image:  
                 linear-gradient(135deg, #000 10%, transparent 10%), 
@@ -30,15 +35,14 @@
             color: #000;
             font-family: 'Montserrat', sans-serif;
             line-height: 1.6;
-            overflow-x: hidden;
         }
 
-        /* --- NAVIGATION (Identik dengan Index & Sesuai Permintaan) --- */
+        /* --- NAVIGATION --- */
         nav {
             display: flex; 
             justify-content: space-between; 
             align-items: center;
-            background: #fff; /* Solid saat di atas */
+            background: #fff; 
             height: 80px;
             position: fixed; 
             width: 100%; 
@@ -49,7 +53,6 @@
             transition: all 0.4s ease;
         }
 
-        /* Logika Transparan saat Scroll */
         nav.scrolled {
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(10px);
@@ -57,93 +60,85 @@
             border-bottom: 2px solid rgba(0,0,0,0.1);
         }
 
-        /* Nav Brand Tanpa Aksi Klik[cite: 6] */
         .nav-brand { 
             display: flex; 
             align-items: center; 
             gap: 12px; 
-            pointer-events: none; /* Mematikan klik secara total[cite: 6] */
+            pointer-events: none; 
             cursor: default;
         }
         .logo-img { width: 35px; height: 35px; object-fit: contain; }
-        .logo-nav { font-size: 1.1rem; font-weight: 900; color: #000; letter-spacing: 1px; }
+        .logo-nav { font-size: 1rem; font-weight: 900; color: #000; letter-spacing: 1px; }
 
-        /* Tombol Beranda Estetik[cite: 6] */
         .btn-nav-home {
             background: #fff;
             border: 3px solid #000;
             color: #000;
-            padding: 8px 20px;
+            padding: 8px 15px;
             border-radius: 50px;
             font-weight: 900;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             text-decoration: none;
             text-transform: uppercase;
             box-shadow: 4px 4px 0px #000;
             transition: 0.2s;
         }
 
-        .btn-nav-home:hover {
-            background: #000;
-            color: #fff;
-            box-shadow: 4px 4px 0px var(--accent-red);
-            transform: translate(-2px, -2px);
+        /* --- CONTAINER --- */
+        .container { 
+            padding: 130px 5% 60px; /* Padding samping dikecilkan agar aman di HP */
+            max-width: 1200px; 
+            margin: 0 auto; 
+            text-align: center;
+            width: 100%;
         }
-
-        /* --- CONTAINER UTAMA --- */
-        .container { padding: 150px 5% 60px; max-width: 1200px; margin: 0 auto; text-align: center; }
         
         .header-page { 
-            margin-bottom: 60px; 
+            margin-bottom: 50px; 
             background: var(--p-green);
             border: 4px solid #000;
             padding: 40px 20px;
             border-radius: 30px;
             box-shadow: 10px 10px 0px #000;
+            width: 100%;
         }
-        .header-page h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; color: #000; text-transform: uppercase; letter-spacing: 3px; }
+        .header-page h1 { font-size: clamp(1.5rem, 5vw, 3.5rem); font-weight: 900; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* --- GALLERY GRID BRUTALISM[cite: 6] --- */
+        /* --- GALLERY GRID --- */
         .full-gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
+            width: 100%;
         }
 
         .gallery-item {
-    position: relative; 
-    /* Mengunci rasio 16:9 agar sinematik */
-    aspect-ratio: 16 / 9; 
-    height: auto; 
-    background: #fff;
-    border: 4px solid #000;
-    border-radius: 25px; 
-    overflow: hidden;
-    box-shadow: 8px 8px 0px #000;
-    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
+            position: relative; 
+            aspect-ratio: 16 / 9; 
+            background: #fff;
+            border: 4px solid #000;
+            border-radius: 25px; 
+            overflow: hidden;
+            box-shadow: 8px 8px 0px #000;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 100%;
+        }
 
-/* Grid disesuaikan agar gambar landscape terlihat lebar */
-.full-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 30px;
-}
-
-.gallery-item img { 
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; 
-}
+        .gallery-item img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            display: block;
+        }
 
         .gallery-caption {
             position: absolute; 
-            bottom: 20px; 
-            left: 20px; 
-            right: 20px;
+            bottom: 15px; 
+            left: 15px; 
+            right: 15px;
             background: #fff;
             border: 3px solid #000;
-            padding: 15px; 
+            padding: 12px; 
             text-align: left; 
             transform: translateY(150%);
             transition: 0.4s ease-in-out;
@@ -152,64 +147,43 @@
         }
 
         .gallery-item:hover .gallery-caption { transform: translateY(0); }
-        .gallery-item:hover img { filter: brightness(0.8) grayscale(0%); scale: 1.1; }
+        .gallery-caption h4 { font-weight: 900; text-transform: uppercase; font-size: 0.9rem; }
+        .gallery-caption p { font-size: 0.75rem; font-weight: 600; }
 
-        .gallery-caption h4 { font-weight: 900; text-transform: uppercase; font-size: 1rem; color: #000; margin-bottom: 5px; }
-        .gallery-caption p { font-size: 0.8rem; font-weight: 600; color: #333; }
-
-        /* Tombol Kembali Bawah[cite: 6] */
         .btn-back-large {
             display: inline-block; 
-            margin-top: 60px;
-            padding: 18px 45px; 
+            margin-top: 50px;
+            padding: 15px 35px; 
             background: #fff;
             border: 4px solid #000;
             color: #000; 
             text-decoration: none; 
             font-weight: 900;
             text-transform: uppercase; 
-            letter-spacing: 2px;
             border-radius: 50px;
             box-shadow: 8px 8px 0px #000;
-            transition: 0.2s;
+            font-size: 0.85rem;
         }
 
-        .btn-back-large:hover {
-            background: #000;
-            color: #fff;
-            box-shadow: 8px 8px 0px var(--p-blue);
-            transform: translate(-3px, -3px);
-        }
+        footer { padding: 40px 20px; text-align: center; font-size: 0.75rem; font-weight: 700; border-top: 3px solid #000; background: #fff; margin-top: 60px; width: 100%; }
 
-        /* --- FOOTER[cite: 6] --- */
-        footer { padding: 50px 20px; text-align: center; font-size: 0.75rem; font-weight: 700; border-top: 3px solid #000; background: #fff; margin-top: 80px; text-transform: uppercase; }
-
+        /* --- MOBILE REFINEMENT --- */
         @media (max-width: 768px) {
-            .container { padding: 120px 5% 40px; }
-            .header-page { border-radius: 20px; padding: 30px 15px; }
-            .full-gallery { grid-template-columns: 1fr; }
-            .gallery-item { height: 350px; }
-            .logo-nav { font-size: 0.9rem; }
+            .container { padding: 110px 4% 40px; }
+            .header-page { padding: 25px 15px; border-radius: 20px; box-shadow: 6px 6px 0px #000; }
+            .header-page h1 { font-size: 1.4rem; letter-spacing: 1px; }
+            .full-gallery { 
+                grid-template-columns: 1fr; /* Memastikan hanya 1 kolom agar tidak meluber */
+                gap: 25px; 
+            }
+            .gallery-item { aspect-ratio: 16 / 9; border-width: 3px; box-shadow: 6px 6px 0px #000; }
+            .logo-nav { font-size: 0.85rem; }
+            .gallery-caption { transform: translateY(0); position: relative; margin: 10px; bottom: 0; left: 0; right: 0; width: auto; } /* Caption muncul otomatis di HP[cite: 8] */
         }
-
-        @media (max-width: 768px) {
-    .full-gallery { 
-        grid-template-columns: 1fr; /* Satu kolom agar gambar tetap jelas di HP */
-        gap: 20px; 
-    }
-    .gallery-item { 
-        border-radius: 20px; 
-        border-width: 3px;
-    }
-    .header-page h1 {
-        font-size: 1.8rem;
-    }
-}
     </style>
 </head>
 <body>
 
-<!-- NAVIGATION[cite: 6] -->
 <nav id="navbar">
     <div class="nav-brand">
         <img src="df merah darah.png" alt="Logo" class="logo-img">
@@ -221,60 +195,38 @@
 <div class="container">
     <div class="header-page">
         <h1>Arsip Kegiatan</h1>
-        <p style="font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-top: 10px;">Dokumentasi Lengkap Dolanan Film</p>
+        <p style="font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; font-size: 0.75rem;">Dokumentasi Lengkap Dolanan Film</p>
     </div>
 
     <div class="full-gallery">
+        <!-- ITEM 1 -->
         <div class="gallery-item">
-            <img src="IMG-20240808-WA0042-01.jpeg">
+            <img src="IMG-20240808-WA0042-01.jpeg" alt="Crew">
             <div class="gallery-caption">
                 <h4>Kebersamaan Crew</h4>
                 <p>Suka cita perayaan juara 1 Dolanan Film tingkat Kab.Cirebon 2024.</p>
             </div>
         </div>
 
+        <!-- ITEM 2 -->
         <div class="gallery-item">
-            <img src="WhatsApp Image 2026-05-04 at 12.28.16 (1).jpeg">
+            <img src="WhatsApp Image 2026-05-04 at 12.28.16 (1).jpeg" alt="Nyabar">
             <div class="gallery-caption">
                 <h4>Nyabar Vol.2</h4>
                 <p>Dokumentasi acara pemutaran film tahun 2025.</p>
             </div>
         </div>
        
+        <!-- ITEM 3 -->
         <div class="gallery-item">
-            <img src="WhatsApp Image 2026-05-04 at 12.28.17 (1).jpeg">
+            <img src="WhatsApp Image 2026-05-04 at 12.28.17 (1).jpeg" alt="Event">
             <div class="gallery-caption">
                 <h4>Kebersamaan</h4>
                 <p>Momentum berbagi kebahagiaan melalui doorprize.</p>
             </div>
         </div>
-
-         <div class="gallery-item">
-            <img src=" . ">
-            <div class="gallery-caption">
-                <h4>SEGERA HADIR</h4>
-                <p> .</p>
-            </div>
-        </div>
-
-        <div class="gallery-item">
-            <img src=" . ">
-            <div class="gallery-caption">
-                <h4>SEGERA HADIR</h4>
-                <p> .</p>
-            </div>
-        </div>
-
-        <div class="gallery-item">
-            <img src=" . ">
-            <div class="gallery-caption">
-                <h4>SEGERA HADIR</h4>
-                <p> .</p>
-            </div>
-        </div>
     </div>
 
-    <!-- Tombol ke Beranda spesifik ke bagian kegiatan[cite: 6] -->
     <a href="index.html#kegiatan" class="btn-back-large">← Kembali ke Beranda</a>
 </div>
 
@@ -283,7 +235,6 @@
 </footer>
 
 <script>
-    // LOGIKA NAVBAR: SOLID DI ATAS, TRANSPARAN SAAT SCROLL (Identik Index)[cite: 6]
     window.onscroll = function() {
         const nav = document.getElementById('navbar');
         if (window.pageYOffset > 50) {
