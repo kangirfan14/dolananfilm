@@ -831,6 +831,34 @@ nav.scrolled .hamburger span {
     }
 }
 
+@media (max-width: 768px) {
+    /* Mencegah dropdown tersembunyi di mobile */
+    .dropdown-content {
+        position: static !important;
+        display: none; /* Awalnya tertutup */
+        width: 100% !important;
+        background: #f9f9f9 !important;
+        box-shadow: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        padding-left: 20px !important;
+    }
+
+    /* Class baru untuk menampilkan dropdown saat diklik */
+    .dropdown.active .dropdown-content {
+        display: block !important;
+    }
+    
+    /* Animasi panah agar berubah saat dibuka */
+    .dropdown > a::after {
+        content: ' ▾';
+        transition: 0.3s;
+    }
+    .dropdown.active > a::after {
+        content: ' ▴';
+    }
+}
+
 
     </style>
   </head>
@@ -865,15 +893,16 @@ nav.scrolled .hamburger span {
       <div class="nav-container">
         <a href="#home" class="nav-brand"><img src="logdf.png" class="logo-img" /><span class="logo-nav">DOLANAN FILM</span></a>
         <ul class="nav-menu" id="navMenu">
-          <li><a href="#home" onclick="toggleMenu()">Home</a></li>
-          <li class="dropdown">
-            <a href="javascript:void(0)">Profil ▾</a>
-            <div class="dropdown-content">
-              <a href="#profil" onclick="toggleMenu()">Tentang DF</a>
-              <a href="#crew-preview" onclick="toggleMenu()">Crew DF</a>
-              <a href="Hasil_karya.html">Lihat Karya</a>
-            </div>
-          </li>
+          <li><a href="#home" onclick="toggleMenu()">Beranda</a></li>
+          <li class="dropdown" id="profileDropdown">
+    <!-- Hilangkan toggleMenu() dari link utama agar tidak langsung menutup navbar -->
+    <a href="javascript:void(0)" onclick="toggleDropdown(event)">Profil ▾</a>
+    <div class="dropdown-content">
+        <a href="#profil" onclick="toggleMenu()">Tentang DF</a>
+        <a href="#crew-preview" onclick="toggleMenu()">Crew DF</a>
+        <a href="Hasil_karya.html">Lihat Karya</a>
+    </div>
+</li>
           <li><a href="#program" onclick="toggleMenu()">Program</a></li>
           <li><a href="#prestasi" onclick="toggleMenu()">Prestasi</a></li>
           <li><a href="#kegiatan" onclick="toggleMenu()">Kegiatan</a></li>
@@ -1166,6 +1195,22 @@ window.addEventListener("scroll", function triggerOnce() {
         window.removeEventListener("scroll", triggerOnce);
     }
 }, { passive: true });
+
+function toggleDropdown(e) {
+    // Hanya jalankan logika klik ini jika di tampilan mobile (layar < 768px)
+    if (window.innerWidth <= 768) {
+        e.preventDefault();
+        const dropdown = document.getElementById("profileDropdown");
+        dropdown.classList.toggle("active");
+    }
+}
+
+// Pastikan fungsi toggleMenu yang lama tetap ada untuk menutup navbar secara keseluruhan
+function toggleMenu() {
+    document.getElementById("navMenu").classList.toggle("active");
+    // Opsional: Tutup semua dropdown saat navbar ditutup
+    document.getElementById("profileDropdown").classList.remove("active");
+}
 
 </script>
     <style> @keyframes slideH { 0% { transform: translateX(0); } 100% { transform: translateX(-200%); } } </style>
