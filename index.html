@@ -778,20 +778,24 @@ nav.scrolled .hamburger span {
     }
 }
 
+/* --- TOMBOL UTAMA DENGAN BINGKAI TEGAS --- */
 .btn-all-works {
     display: inline-block;
-    background: #8b0000;
+    background: #8b0000; /* Merah Darah */
     color: #fff;
-    padding: 15px 40px;
+    padding: 15px 35px;
     border-radius: 50px;
     font-weight: 900;
     text-decoration: none;
-    border: 3px solid #000;
-    box-shadow: 5px 5px 0px #000;
     text-transform: uppercase;
     letter-spacing: 2px;
+    font-size: 0.85rem;
     
-    /* Memicu animasi agar seolah memanggil untuk diklik */
+    /* BINGKAI & SHADOW KHAS DF */
+    border: 3px solid #000; 
+    box-shadow: 6px 6px 0px #000; 
+    
+    /* ANIMASI MEMANGGIL (PULSE) */
     animation: attention-button 2s infinite ease-in-out;
     transition: all 0.2s ease;
 }
@@ -799,8 +803,8 @@ nav.scrolled .hamburger span {
 .btn-all-works:hover {
     background: #000;
     transform: translate(-3px, -3px);
-    box-shadow: 8px 8px 0px #8b0000;
-    animation: none; /* Berhenti bergetar saat disentuh kursor */
+    box-shadow: 10px 10px 0px #8b0000;
+    animation: none; /* Berhenti saat disentuh */
 }
 
 .btn-all-works:active {
@@ -808,26 +812,18 @@ nav.scrolled .hamburger span {
     box-shadow: 0px 0px 0px #000;
 }
 
-/* --- 3. RESPONSIVE LAYOUT (PRESISI) --- */
-.works-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+/* --- ANIMASI DENYUT --- */
+@keyframes attention-button {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
 }
 
+/* RESPONSIVE MOBILE */
 @media (max-width: 768px) {
-    .works-grid {
-        grid-template-columns: 1fr; /* Satu kolom saja di HP agar tidak sempit */
-        padding: 10px;
-    }
-    
     .btn-all-works {
-        width: 90%; /* Tombol melebar di HP agar mudah ditekan jempol */
-        text-align: center;
-        font-size: 0.9rem;
+        width: 85%; /* Agar lebar dan mudah diklik di HP */
+        font-size: 0.75rem;
+        padding: 12px 20px;
     }
 }
 
@@ -860,6 +856,44 @@ nav.scrolled .hamburger span {
 }
 
 
+@media (max-width: 768px) {
+    /* Menu Utama Navigasi Mobile */
+    .nav-menu {
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto; /* Agar bisa di-scroll jika menu banyak */
+    }
+
+    /* Wadah Dropdown agar masuk ke dalam aliran menu */
+    .dropdown {
+        width: 100%;
+        text-align: center;
+    }
+
+    .dropdown-content {
+        position: static !important; /* Menghilangkan posisi melayang */
+        display: none; /* Sembunyi secara default */
+        background: #f0f0f0 !important; /* Warna beda dikit agar terlihat sub-menu */
+        border: none !important;
+        box-shadow: none !important;
+        width: 100% !important;
+        margin-top: 5px;
+        border-radius: 10px !important;
+    }
+
+    /* Saat Dropdown Aktif */
+    .dropdown.active .dropdown-content {
+        display: block !important;
+        padding: 10px 0;
+    }
+
+    .dropdown-content a {
+        border-bottom: 1px solid #ddd !important;
+        padding: 15px !important;
+        font-size: 0.9rem !important;
+    }
+}
+
     </style>
   </head>
   <body>
@@ -891,17 +925,19 @@ nav.scrolled .hamburger span {
 
     <nav>
       <div class="nav-container">
-        <a href="#home" class="nav-brand"><img src="logdf.png" class="logo-img" /><span class="logo-nav">DOLANAN FILM</span></a>
+        <a href="javascript:void(0)" class="nav-brand" style="cursor: default;"> 
+          <img src="logdf.png" class="logo-img" /><span class="logo-nav">DOLANAN FILM</span></a>
         <ul class="nav-menu" id="navMenu">
           <li><a href="#home" onclick="toggleMenu()">Beranda</a></li>
           <li class="dropdown" id="profileDropdown">
     <!-- Hilangkan toggleMenu() dari link utama agar tidak langsung menutup navbar -->
     <a href="javascript:void(0)" onclick="toggleDropdown(event)">Profil ▾</a>
     <div class="dropdown-content">
-        <a href="#profil" onclick="toggleMenu()">Tentang DF</a>
-        <a href="#crew-preview" onclick="toggleMenu()">Crew DF</a>
-        <a href="Hasil_karya.html">Lihat Karya</a>
-    </div>
+    <a href="#profil" onclick="toggleMenu()">Tentang DF</a>
+    <a href="#crew-preview" onclick="toggleMenu()">Crew DF</a>
+    <!-- Link diubah agar memicu fungsi scroll ke container karya -->
+    <a href="javascript:void(0)" onclick="scrollToKarya()">Lihat Karya</a>
+</div>
 </li>
           <li><a href="#program" onclick="toggleMenu()">Program</a></li>
           <li><a href="#prestasi" onclick="toggleMenu()">Prestasi</a></li>
@@ -968,24 +1004,25 @@ nav.scrolled .hamburger span {
     </div>
   </div>
 </div>
-<!-- KEDUA: PREVIEW HASIL KARYA (DENGAN EFEK CAHAYA) -->
+<!-- SEBELUMNYA -->
 <div class="karya-container reveal">
+<!-- KEDUA: PREVIEW HASIL KARYA (DENGAN EFEK CAHAYA) -->
+<div id="section-karya" class="karya-container reveal">
+    <!-- Bingkai Video -->
     <div class="karya-card" onclick="location.href='hasil_karya.html'">
         <div class="video-wrapper">
-            <!-- TULISAN DI ATAS VIDEO -->
-            <div class="video-label">Lihat Karya Dolanan Film</div>
-            
+            <div class="video-label">Karya Dolanan Film</div>
             <video autoplay muted loop playsinline>
                 <source src="kumpul.mp4" type="video/mp4" />
             </video>
         </div>
-        
-        <div class="btn-karya-label">
-            <h3 style="font-weight: 900; letter-spacing: 1px; margin: 0; font-size: 0.9rem;">
-                LIHAT SEMUA KARYA →
-            </h3>
-        </div>
     </div>
+
+    <!-- Tombol Mandiri dengan Bingkai (Diletakkan di Luar Card) -->
+    <div style="text-align: center; margin-top: 30px;">
+        <a href="Hasil_karya.html" class="btn-all-works">LIHAT SEMUA KARYA</a>
+    </div>
+</div>
 </div>
     </div>
 </header>
@@ -1036,7 +1073,7 @@ nav.scrolled .hamburger span {
         <div class="card-genz"><img src="sertif.png" /><div style="padding:20px;"><h3>. </h3><p>BELUM TERSEDIA</p></div></div>
         <div class="card-genz"><img src="mitra.png" /><div style="padding:20px;"><h3>. </h3><p>BELUM TERSEDIA</p></div></div>
       </div>
-      <a href="prestasi_lengkap.html" class="btn-more">Semua Prestasi</a>
+      <a href="prestasi_lengkap.html" class="btn-more">Lihat Semua Prestasi</a>
     </section>
 
     <section id="kegiatan" class="reveal"> 
@@ -1046,7 +1083,7 @@ nav.scrolled .hamburger span {
         <div class="card-genz"><img src="WhatsApp Image 2026-05-04 at 12.28.17.jpeg" /><div style="padding:15px;"><h3>DISKUSI FILM</h3><p>Tanya jawab dengan penonton.</p></div></div>
         <div class="card-genz"><img src="IMG-20240808-WA0042-01.jpeg" /><div style="padding:15px;"><h3>KEBERSAMAAN CREW</h3><p>Kemenangan di Kabupaten Cirebon.</p></div></div>
       </div>
-      <a href="kegiatan_lengkap.html" class="btn-more">Semua Kegiatan</a>
+      <a href="kegiatan_lengkap.html" class="btn-more">Lihat Semua Kegiatan</a>
     </section>
 
     <section id="crew-preview" class="reveal">
@@ -1197,10 +1234,10 @@ window.addEventListener("scroll", function triggerOnce() {
 }, { passive: true });
 
 function toggleDropdown(e) {
-    // Hanya jalankan logika klik ini jika di tampilan mobile (layar < 768px)
     if (window.innerWidth <= 768) {
         e.preventDefault();
-        const dropdown = document.getElementById("profileDropdown");
+        // Mencari elemen parent 'li' dari link yang diklik
+        const dropdown = e.target.closest('.dropdown');
         dropdown.classList.toggle("active");
     }
 }
@@ -1212,6 +1249,27 @@ function toggleMenu() {
     document.getElementById("profileDropdown").classList.remove("active");
 }
 
+function scrollToKarya() {
+    // 1. Cari elemen kontainer karya
+    const karyaSection = document.querySelector(".karya-container");
+    
+    if (karyaSection) {
+        // 2. Tutup menu navigasi (terutama untuk tampilan mobile)
+        toggleMenu(); 
+        
+        // 3. Lakukan scroll halus ke posisi kontainer karya
+        const offset = 100; // Jarak aman agar tidak tertutup navbar
+        const bodyRect = document.body.getBoundingClientRect().top;
+        const elementRect = karyaSection.getBoundingClientRect().top;
+        const elementPosition = elementRect - bodyRect;
+        const offsetPosition = elementPosition - offset;
+
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+        });
+    }
+}
 </script>
     <style> @keyframes slideH { 0% { transform: translateX(0); } 100% { transform: translateX(-200%); } } </style>
   </body>
