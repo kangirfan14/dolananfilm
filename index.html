@@ -875,39 +875,40 @@ nav.scrolled .hamburger span {
 
 
 @media (max-width: 768px) {
-    /* 1. Hilangkan jarak antar menu utama agar bisa menempel presisi */
+    /* 1. Sembunyikan salah satu hamburger jika masih muncul dua */
+    .hamburger:nth-child(3) { display: none !important; } 
+
     .nav-menu {
-        display: flex;
-        flex-direction: column;
-        gap: 0 !important; /* Hapus semua gap default */
-        padding: 100px 20px !important;
+        gap: 0 !important; /* Hapus semua celah antar menu utama */
+        padding: 80px 20px !important;
     }
 
-    /* 2. Berikan jarak antar tombol lewat margin bawah saja */
     .nav-menu li {
-        margin-bottom: 15px; /* Jarak standar antar tombol */
+        margin-bottom: 12px; /* Jarak antar tombol yang seragam */
         width: 100%;
     }
 
-    /* --- DROP_DOWN DESKTOP PRESISI --- */
-.dropdown-content {
-    display: none;
-    position: absolute; /* Kembali melayang di desktop */
-    background: #fff;
-    border: 3px solid #000;
-    border-radius: 20px;
-    min-width: 200px; /* Ukuran lebih slim, tidak selebar layar */
-    top: 100%;
-    left: 0;
-    box-shadow: 6px 6px 0 #000;
-    z-index: 5100;
-    padding: 10px;
-    overflow: hidden;
-}
+    /* 2. Logika Naik-Turun: Harus pakai display: none agar menu bawah bisa naik */
+    .dropdown-content {
+        display: none; /* Saat tertutup, elemen benar-benar hilang dari layout */
+        position: static !important;
+        width: 90% !important;
+        margin: 0 auto !important; 
+        background: #f0f0f0 !important;
+        border: 3px solid #000 !important;
+        border-radius: 20px !important;
+        padding: 10px !important;
+        box-shadow: 6px 6px 0px #000 !important;
+    }
 
-/* Muncul saat kursor nempel (Hover Desktop) */
-.dropdown:hover .dropdown-content {
-    display: block;
+    /* 3. Saat Profil diklik (Aktif), sub-menu turun keluar */
+    .dropdown.active .dropdown-content {
+        display: flex !important; /* Menu di bawah otomatis terdorong turun */
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 10px !important;
+        margin-bottom: 15px !important;
+    }
 }
 
 /* --- EFEK WARNA SAAT KURSOR NEMPEL (HOVER) --- */
@@ -928,7 +929,7 @@ nav.scrolled .hamburger span {
     border-color: #000;
     transform: translateX(5px); /* Geser dikit agar interaktif */
 }
-}
+
 /* --- TAMPILAN DESKTOP (Layar Lebar) --- */
 @media (min-width: 769px) {
     .nav-menu {
@@ -1007,9 +1008,6 @@ nav.scrolled .hamburger span {
         <a href="javascript:void(0)" class="nav-brand" style="cursor: default;"> 
           <img src="df merah darah.png" class="logo-img" /><span class="logo-nav">DOLANAN FILM</span></a>
 
-<div class="hamburger" onclick="toggleMenu()">
-        <span></span><span></span><span></span>
-    </div>
 
 
         <ul class="nav-menu" id="navMenu">
@@ -1355,14 +1353,12 @@ function toggleDropdown(e) {
         e.preventDefault();
         const dropdownParent = e.target.closest('.dropdown');
         if (dropdownParent) {
-            // Toggle class active untuk memicu CSS di atas
+            // Menambah/menghapus class active secara instan
             dropdownParent.classList.toggle("active");
-            
-            // Log untuk memastikan fungsi jalan
-            console.log("Status Dropdown: " + dropdownParent.classList.contains("active"));
         }
     }
 }
+
 </script>
     <style> @keyframes slideH { 0% { transform: translateX(0); } 100% { transform: translateX(-200%); } } </style>
   </body>
