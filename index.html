@@ -2,10 +2,15 @@
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>DOLANAN FILM | A Production house from Cirebon</title>
+    
+    <!-- BARIS KODE UNTUK MENGGANTI LOGO DI TAB BROWSER -->
+    <link rel="icon" type="image/png" href="logdf.png" />
+      
+      DOLANAN FILM | A Production house from Cirebon</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet" />
     <style>
+      
       :root {
         --accent-gold: #c5a059;
         --text-dark: #1a1a1a;
@@ -869,50 +874,60 @@ nav.scrolled .hamburger span {
 
 
 @media (max-width: 768px) {
-    /* Menu navigasi mobile agar rapi */
+    /* 1. Hilangkan jarak antar menu utama agar bisa menempel presisi */
     .nav-menu {
-        padding: 100px 20px !important;
         display: flex;
         flex-direction: column;
-        gap: 15px; /* Jarak antar tombol menu utama */
+        gap: 0 !important; /* Hapus semua gap default */
+        padding: 100px 20px !important;
     }
 
-    /* Kontainer isi dropdown */
-    .dropdown-content {
-        position: static !important;
-        display: none; /* Sembunyi secara default */
-        width: 90% !important;
-        margin: 10px auto !important;
-        background: #f0f0f0 !important; /* Latar abu halus agar beda dengan menu utama */
-        border: 3px solid #000 !important; /* Bingkai hitam tegas */
-        border-radius: 20px !important;
-        box-shadow: 6px 6px 0px #000 !important; /* Shadow khas DF */
-        padding: 10px !important;
-        z-index: 100;
+    /* 2. Berikan jarak antar tombol lewat margin bawah saja */
+    .nav-menu li {
+        margin-bottom: 15px; /* Jarak standar antar tombol */
+        width: 100%;
     }
 
-    /* Saat profil diklik (aktif) */
-    .dropdown.active .dropdown-content {
-        display: flex !important;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    /* Link di dalam dropdown agar bentuknya seperti tombol kecil */
-    .dropdown-content a {
-        background: #fff !important;
-        border: 2px solid #000 !important;
-        border-radius: 50px !important;
-        padding: 12px !important;
-        font-size: 0.8rem !important;
-        font-weight: 800 !important;
-        text-align: center !important;
-        color: #000 !important;
-        text-decoration: none !important;
-        box-shadow: 3px 3px 0px #000 !important;
-    }
+    /* --- DROP_DOWN DESKTOP PRESISI --- */
+.dropdown-content {
+    display: none;
+    position: absolute; /* Kembali melayang di desktop */
+    background: #fff;
+    border: 3px solid #000;
+    border-radius: 20px;
+    min-width: 200px; /* Ukuran lebih slim, tidak selebar layar */
+    top: 100%;
+    left: 0;
+    box-shadow: 6px 6px 0 #000;
+    z-index: 5100;
+    padding: 10px;
+    overflow: hidden;
 }
 
+/* Muncul saat kursor nempel (Hover Desktop) */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* --- EFEK WARNA SAAT KURSOR NEMPEL (HOVER) --- */
+.dropdown-content a {
+    color: #000 !important;
+    display: block;
+    padding: 12px 20px;
+    border-radius: 15px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 0.8rem;
+    transition: 0.2s;
+    border: 2px solid transparent; /* Agar tidak goyang saat hover */
+}
+
+.dropdown-content a:hover {
+    background: var(--p-pink); /* Warna pink estetik saat kursor nempel */
+    border-color: #000;
+    transform: translateX(5px); /* Geser dikit agar interaktif */
+}
+}
     </style>
   </head>
   <body>
@@ -945,13 +960,13 @@ nav.scrolled .hamburger span {
     <nav>
       <div class="nav-container">
         <a href="javascript:void(0)" class="nav-brand" style="cursor: default;"> 
-          <img src="logdf.png" class="logo-img" /><span class="logo-nav">DOLANAN FILM</span></a>
+          <img src="df merah darah.png" class="logo-img" /><span class="logo-nav">DOLANAN FILM</span></a>
         <ul class="nav-menu" id="navMenu">
           <li><a href="#home" onclick="toggleMenu()">Beranda</a></li>
           <li class="dropdown" id="profileDropdown">
     <!-- Hilangkan toggleMenu() dari link utama agar tidak langsung menutup navbar -->
     <a href="javascript:void(0)" onclick="toggleDropdown(event)">Profil ▾</a>
-    
+
     <div class="dropdown-content">
     <a href="#profil" onclick="toggleMenu()">Tentang DF</a>
     <a href="#crew-preview" onclick="toggleMenu()">Crew DF</a>
@@ -1285,19 +1300,15 @@ function scrollToKarya() {
 }
 
 function toggleDropdown(e) {
-    // Jalankan hanya di layar mobile
     if (window.innerWidth <= 768) {
-        e.preventDefault(); // Mencegah loncatan halaman
-        
-        // Cari elemen LI yang memiliki class dropdown
+        e.preventDefault();
         const dropdownParent = e.target.closest('.dropdown');
-        
         if (dropdownParent) {
-            // Toggle class 'active'
+            // Toggle class active untuk memicu CSS di atas
             dropdownParent.classList.toggle("active");
             
-            // Logika tambahan: Tutup dropdown lain jika ada yang terbuka
-            console.log("Dropdown toggled!"); // Untuk debugging kamu di console
+            // Log untuk memastikan fungsi jalan
+            console.log("Status Dropdown: " + dropdownParent.classList.contains("active"));
         }
     }
 }
