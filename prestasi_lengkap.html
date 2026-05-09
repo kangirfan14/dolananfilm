@@ -169,6 +169,13 @@
         }
 
         footer { padding: 50px 20px; text-align: center; font-size: 0.75rem; font-weight: 700; border-top: 3px solid #000; background: #fff; margin-top: 80px; text-transform: uppercase; }
+    .article-image {
+    width: 100%;
+    height: clamp(250px, 40vw, 450px); /* Ketinggian otomatis yang responsif */
+    object-fit: cover; /* Memastikan foto tidak gepeng/penyet */
+    border-bottom: 4px solid #000; /* Garis pembatas tebal antara foto dan teks */
+    display: block;
+}
     </style>
 </head>
 <body>
@@ -200,14 +207,13 @@
 
     <!-- ARTIKEL PRESTASI 2 -->
     <article class="achievement-article">
-        <div style="background: var(--p-purple); height: 300px; display: flex; align-items: center; justify-content: center; border-bottom: 4px solid #000;">
-             <span style="font-weight: 900; letter-spacing: 2px;">SEGERA TERSEDIA</span>
-        </div>
-        <div class="article-content">
-            <h2>BELUM ADA INFO</h2>
-            <p>.</p>
-        </div>
-    </article>
+    <img src="juaras.jpg" alt="Deskripsi Prestasi" class="article-image">
+    
+    <div class="article-content">
+        <h2>Juara 1 Video Pendek Kab. Cirebon 2023</h2>
+        <p>Menunggu Verivikasi.</p>
+    </div>
+</article>
 
     <article class="achievement-article">
         <div style="background: var(--p-purple); height: 300px; display: flex; align-items: center; justify-content: center; border-bottom: 4px solid #000;">
