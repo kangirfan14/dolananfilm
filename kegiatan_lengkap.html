@@ -1,346 +1,418 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <title>Galeri Kegiatan | DOLANAN FILM</title>
     <link rel="icon" type="image/png" href="logdf.png" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        :root {
-            --p-pink: #ffdae9; 
-            --p-blue: #d4f1f9; 
-            --p-yellow: #fff4d1; 
-            --p-purple: #e8dff5; 
-            --p-green: #e1f7d5;
-            --accent-red: #8b0000;
+      :root {
+        --p-pink: #ffdae9;
+        --p-blue: #d4f1f9;
+        --p-yellow: #fff4d1;
+        --p-purple: #e8dff5;
+        --p-green: #e1f7d5;
+        --accent-red: #8b0000;
+      }
+
+      /* --- RESET & LAYOUT FIX --- */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        overflow-x: hidden; /* Mencegah web geser-geser di mobile */
+        width: 100%;
+        position: relative;
+        background-color: #fdfaf5;
+      }
+
+      body {
+        /* Pattern Modern: Zig-Zag Diagonal */
+        background-image:
+          linear-gradient(135deg, #000 10%, transparent 10%),
+          linear-gradient(225deg, #000 10%, transparent 10%);
+        background-size: 50px 50px;
+        background-attachment: fixed;
+        color: #000;
+        font-family: "Montserrat", sans-serif;
+        line-height: 1.6;
+      }
+
+      /* --- NAVIGATION (LOGIKA INDEX.HTML) --- */
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #fff; /* Solid saat di atas[cite: 8] */
+        height: 80px;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 2000;
+        padding: 0 5%;
+        border-bottom: 3px solid #000;
+        transition: all 0.4s ease;
+      }
+
+      nav.scrolled {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        height: 70px;
+        border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        pointer-events: none; /* Logo tidak bisa diklik[cite: 8] */
+        cursor: default;
+      }
+      .logo-img {
+        width: 35px;
+        height: 35px;
+        object-fit: contain;
+      }
+      .logo-nav {
+        font-size: 1rem;
+        font-weight: 900;
+        color: #000;
+        letter-spacing: 1px;
+      }
+
+      .btn-nav-home {
+        background: #fff;
+        border: 3px solid #000;
+        color: #000;
+        padding: 8px 15px;
+        border-radius: 50px;
+        font-weight: 900;
+        font-size: 0.65rem;
+        text-decoration: none;
+        text-transform: uppercase;
+        box-shadow: 4px 4px 0px #000;
+        transition: 0.2s;
+      }
+
+      .btn-nav-home:hover {
+        background: #000;
+        color: #fff;
+        box-shadow: 4px 4px 0px var(--accent-red);
+        transform: translate(-2px, -2px);
+      }
+
+      /* --- CONTAINER UTAMA --- */
+      .container {
+        padding: 130px 5% 60px;
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+        width: 100%;
+      }
+
+      .header-page {
+        margin-bottom: 50px;
+        background: var(--p-green);
+        border: 4px solid #000;
+        padding: 40px 20px;
+        border-radius: 30px;
+        box-shadow: 10px 10px 0px #000;
+        width: 100%;
+      }
+      .header-page h1 {
+        font-size: clamp(1.5rem, 5vw, 3.5rem);
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      /* --- GALLERY GRID SINEMATIK --- */
+      .full-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 30px;
+        width: 100%;
+      }
+
+      .gallery-item {
+        position: relative;
+        aspect-ratio: 16 / 9; /* Rasio Sinematik[cite: 8] */
+        background: #fff;
+        border: 4px solid #000;
+        border-radius: 25px;
+        overflow: hidden;
+        box-shadow: 8px 8px 0px #000;
+        transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        width: 100%;
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .gallery-caption {
+        position: absolute;
+        bottom: 15px;
+        left: 15px;
+        right: 15px;
+        background: #fff;
+        border: 3px solid #000;
+        padding: 12px;
+        text-align: left;
+        transform: translateY(150%);
+        transition: 0.4s ease-in-out;
+        border-radius: 15px;
+        box-shadow: 4px 4px 0px #000;
+      }
+
+      .gallery-item:hover .gallery-caption {
+        transform: translateY(0);
+      }
+      .gallery-caption h4 {
+        font-weight: 900;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+      }
+      .gallery-caption p {
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+
+      .btn-back-large {
+        display: inline-block;
+        margin-top: 50px;
+        padding: 15px 35px;
+        background: #fff;
+        border: 4px solid #000;
+        color: #000;
+        text-decoration: none;
+        font-weight: 900;
+        text-transform: uppercase;
+        border-radius: 50px;
+        box-shadow: 8px 8px 0px #000;
+        font-size: 0.85rem;
+        transition: 0.2s;
+      }
+
+      .btn-back-large:hover {
+        background: #000;
+        color: #fff;
+        box-shadow: 8px 8px 0px var(--p-blue);
+        transform: translate(-3px, -3px);
+      }
+
+      /* --- FOOTER COPYRIGHT DI PALING BAWAH[cite: 8] --- */
+      footer {
+        padding: 40px 20px;
+        text-align: center;
+        font-size: 0.75rem;
+        font-weight: 700;
+        border-top: 3px solid #000;
+        background: #fff;
+        margin-top: 80px;
+        width: 100%;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      /* --- MOBILE REFINEMENT (FIX GESER-GESER)[cite: 8] --- */
+      @media (max-width: 768px) {
+        .container {
+          padding: 110px 4% 40px;
+        }
+        .header-page {
+          padding: 25px 15px;
+          border-radius: 20px;
+          box-shadow: 6px 6px 0px #000;
+        }
+        .header-page h1 {
+          font-size: 1.4rem;
         }
 
-        /* --- RESET & LAYOUT FIX --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        html, body {
-            overflow-x: hidden; /* Mencegah web geser-geser di mobile */
-            width: 100%;
-            position: relative;
-            background-color: #fdfaf5;
-        }
-
-        body {
-            /* Pattern Modern: Zig-Zag Diagonal */
-            background-image:  
-                linear-gradient(135deg, #000 10%, transparent 10%), 
-                linear-gradient(225deg, #000 10%, transparent 10%);
-            background-size: 50px 50px;
-            background-attachment: fixed;
-            color: #000;
-            font-family: 'Montserrat', sans-serif;
-            line-height: 1.6;
-        }
-
-        /* --- NAVIGATION (LOGIKA INDEX.HTML) --- */
-        nav {
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
-            background: #fff; /* Solid saat di atas[cite: 8] */
-            height: 80px;
-            position: fixed; 
-            width: 100%; 
-            top: 0; 
-            z-index: 2000;
-            padding: 0 5%;
-            border-bottom: 3px solid #000;
-            transition: all 0.4s ease;
-        }
-
-        nav.scrolled {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            height: 70px;
-            border-bottom: 2px solid rgba(0,0,0,0.1);
-        }
-
-        .nav-brand { 
-            display: flex; 
-            align-items: center; 
-            gap: 12px; 
-            pointer-events: none; /* Logo tidak bisa diklik[cite: 8] */
-            cursor: default;
-        }
-        .logo-img { width: 35px; height: 35px; object-fit: contain; }
-        .logo-nav { font-size: 1rem; font-weight: 900; color: #000; letter-spacing: 1px; }
-
-        .btn-nav-home {
-            background: #fff;
-            border: 3px solid #000;
-            color: #000;
-            padding: 8px 15px;
-            border-radius: 50px;
-            font-weight: 900;
-            font-size: 0.65rem;
-            text-decoration: none;
-            text-transform: uppercase;
-            box-shadow: 4px 4px 0px #000;
-            transition: 0.2s;
-        }
-
-        .btn-nav-home:hover {
-            background: #000;
-            color: #fff;
-            box-shadow: 4px 4px 0px var(--accent-red);
-            transform: translate(-2px, -2px);
-        }
-
-        /* --- CONTAINER UTAMA --- */
-        .container { 
-            padding: 130px 5% 60px; 
-            max-width: 1200px; 
-            margin: 0 auto; 
-            text-align: center;
-            width: 100%;
-        }
-        
-        .header-page { 
-            margin-bottom: 50px; 
-            background: var(--p-green);
-            border: 4px solid #000;
-            padding: 40px 20px;
-            border-radius: 30px;
-            box-shadow: 10px 10px 0px #000;
-            width: 100%;
-        }
-        .header-page h1 { font-size: clamp(1.5rem, 5vw, 3.5rem); font-weight: 900; text-transform: uppercase; letter-spacing: 2px; }
-
-        /* --- GALLERY GRID SINEMATIK --- */
         .full-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            width: 100%;
+          grid-template-columns: 1fr; /* 1 Kolom agar tidak meluber[cite: 8] */
+          gap: 25px;
         }
 
         .gallery-item {
-            position: relative; 
-            aspect-ratio: 16 / 9; /* Rasio Sinematik[cite: 8] */
-            background: #fff;
-            border: 4px solid #000;
-            border-radius: 25px; 
-            overflow: hidden;
-            box-shadow: 8px 8px 0px #000;
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            width: 100%;
+          height: auto;
+          aspect-ratio: auto; /* Agar teks keterangan tidak tertutup di mobile[cite: 8] */
+          display: flex;
+          flex-direction: column;
+          border-width: 3px;
+          box-shadow: 6px 6px 0px #000;
         }
 
-        .gallery-item img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            display: block;
+        .gallery-item img {
+          aspect-ratio: 16 / 9;
+          border-bottom: 3px solid #000;
         }
 
         .gallery-caption {
-            position: absolute; 
-            bottom: 15px; 
-            left: 15px; 
-            right: 15px;
-            background: #fff;
-            border: 3px solid #000;
-            padding: 12px; 
-            text-align: left; 
-            transform: translateY(150%);
-            transition: 0.4s ease-in-out;
-            border-radius: 15px;
-            box-shadow: 4px 4px 0px #000;
+          position: relative !important; /* Teks tampil permanen di bawah foto[cite: 8] */
+          transform: translateY(0) !important;
+          margin: 10px;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          width: auto;
+          box-shadow: none;
+          border: none;
+          padding: 10px 5px;
         }
 
-        .gallery-item:hover .gallery-caption { transform: translateY(0); }
-        .gallery-caption h4 { font-weight: 900; text-transform: uppercase; font-size: 0.9rem; }
-        .gallery-caption p { font-size: 0.75rem; font-weight: 600; }
-
-        .btn-back-large {
-            display: inline-block; 
-            margin-top: 50px;
-            padding: 15px 35px; 
-            background: #fff;
-            border: 4px solid #000;
-            color: #000; 
-            text-decoration: none; 
-            font-weight: 900;
-            text-transform: uppercase; 
-            border-radius: 50px;
-            box-shadow: 8px 8px 0px #000;
-            font-size: 0.85rem;
-            transition: 0.2s;
+        .logo-nav {
+          font-size: 0.85rem;
         }
+      }
+    </style>
+  </head>
+  <body>
+    <nav id="navbar">
+      <div class="nav-brand">
+        <img src="df merah darah.png" alt="Logo" class="logo-img" />
+        <span class="logo-nav">DOLANAN FILM</span>
+      </div>
+      <a href="index.html#kegiatan" class="btn-nav-home">Kembali Ke Beranda</a>
+    </nav>
 
-        .btn-back-large:hover {
-            background: #000;
-            color: #fff;
-            box-shadow: 8px 8px 0px var(--p-blue);
-            transform: translate(-3px, -3px);
-        }
-
-        /* --- FOOTER COPYRIGHT DI PALING BAWAH[cite: 8] --- */
-        footer { 
-            padding: 40px 20px; 
-            text-align: center; 
-            font-size: 0.75rem; 
-            font-weight: 700; 
-            border-top: 3px solid #000; 
-            background: #fff; 
-            margin-top: 80px; 
-            width: 100%; 
+    <div class="container">
+      <div class="header-page">
+        <h1>Arsip Kegiatan</h1>
+        <p
+          style="
+            font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1px;
-        }
+            margin-top: 8px;
+            font-size: 0.75rem;
+          "
+        >
+          Dokumentasi Lengkap Dolanan Film
+        </p>
+      </div>
 
-        /* --- MOBILE REFINEMENT (FIX GESER-GESER)[cite: 8] --- */
-        @media (max-width: 768px) {
-            .container { padding: 110px 4% 40px; }
-            .header-page { padding: 25px 15px; border-radius: 20px; box-shadow: 6px 6px 0px #000; }
-            .header-page h1 { font-size: 1.4rem; }
-            
-            .full-gallery { 
-                grid-template-columns: 1fr; /* 1 Kolom agar tidak meluber[cite: 8] */
-                gap: 25px; 
-            }
-
-            .gallery-item { 
-                height: auto; 
-                aspect-ratio: auto; /* Agar teks keterangan tidak tertutup di mobile[cite: 8] */
-                display: flex;
-                flex-direction: column;
-                border-width: 3px; 
-                box-shadow: 6px 6px 0px #000; 
-            }
-
-            .gallery-item img {
-                aspect-ratio: 16 / 9;
-                border-bottom: 3px solid #000;
-            }
-
-            .gallery-caption { 
-                position: relative !important; /* Teks tampil permanen di bawah foto[cite: 8] */
-                transform: translateY(0) !important; 
-                margin: 10px; 
-                bottom: 0; 
-                left: 0; 
-                right: 0; 
-                width: auto; 
-                box-shadow: none;
-                border: none;
-                padding: 10px 5px;
-            }
-
-            .logo-nav { font-size: 0.85rem; }
-        }
-    </style>
-</head>
-<body>
-
-<nav id="navbar">
-    <div class="nav-brand">
-        <img src="df merah darah.png" alt="Logo" class="logo-img">
-        <span class="logo-nav">DOLANAN FILM</span>
-    </div>
-    <a href="index.html#kegiatan" class="btn-nav-home">Kembali Ke Beranda</a>
-</nav>
-
-<div class="container">
-    <div class="header-page">
-        <h1>Arsip Kegiatan</h1>
-        <p style="font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; font-size: 0.75rem;">Dokumentasi Lengkap Dolanan Film</p>
-    </div>
-
-    <div class="full-gallery">
+      <div class="full-gallery">
         <!-- FOTO 1 -->
         <div class="gallery-item">
-            <img src="IMG-20240808-WA0042-01.jpeg" alt="Crew Juara">
-            <div class="gallery-caption">
-                <h4>Kebersamaan Crew</h4>
-                <p>Suka cita perayaan juara 1 Dolanan Film tingkat Kab.Cirebon 2024.</p>
-            </div>
+          <img src="IMG-20240808-WA0042-01.jpeg" alt="Crew Juara" />
+          <div class="gallery-caption">
+            <h4>Kebersamaan Crew</h4>
+            <p>
+              Suka cita perayaan juara 1 Dolanan Film tingkat Kab.Cirebon 2024.
+            </p>
+          </div>
         </div>
 
         <!-- FOTO 2 -->
         <div class="gallery-item">
-            <img src="WhatsApp Image 2026-05-04 at 12.28.16 (1).jpeg" alt="Nyabar">
-            <div class="gallery-caption">
-                <h4>Nyabar Vol.2</h4>
-                <p>Dokumentasi acara pemutaran film tahun 2025.</p>
-            </div>
+          <img
+            src="WhatsApp Image 2026-05-04 at 12.28.16 (1).jpeg"
+            alt="Nyabar"
+          />
+          <div class="gallery-caption">
+            <h4>Nyabar Vol.2</h4>
+            <p>Dokumentasi acara pemutaran film tahun 2025.</p>
+          </div>
         </div>
-       
+
         <!-- FOTO 3 -->
         <div class="gallery-item">
-            <img src="WhatsApp Image 2026-05-04 at 12.28.17 (1).jpeg" alt="Momentum">
-            <div class="gallery-caption">
-                <h4>Kebersamaan</h4>
-                <p>Momentum berbagi kebahagiaan melalui doorprize.</p>
-            </div>
+          <img
+            src="WhatsApp Image 2026-05-04 at 12.28.17 (1).jpeg"
+            alt="Momentum"
+          />
+          <div class="gallery-caption">
+            <h4>Kebersamaan</h4>
+            <p>Momentum berbagi kebahagiaan melalui doorprize.</p>
+          </div>
         </div>
-          <div class="gallery-item">
-            <img src="arakan.JPG" alt="TIDAK ADA FOTO">
-            <div class="gallery-caption">
-                <h4>DIVISI PDD DI ACARA</h4>
-                <p>Ikut andil dalam setiap kegiatan atau acara untuk bidang pengabadian momen.</p>
-            </div>
-        </div>
-
-         <div class="gallery-item">
-            <img src="SaveGram.App_656212189_18095956424100800_7439843472277978064_n.jpg" alt="TIDAK ADA FOTO">
-            <div class="gallery-caption">
-                <h4>PANITIA NYABAR VOL.1 2024</h4>
-                <p>Foto bersama panitia nyabar pertama kali (Nyabar Vol.1 2024).</p>
-            </div>
-        </div>
-
-         <div class="gallery-item">
-            <img src="SaveGram.App_656631861_18110184829696195_7432660537608525880_n.jpg" alt="TIDAK ADA FOTO">
-            <div class="gallery-caption">
-                <h4>PEMUTARAN FILM DI NYABAR VOL.1 2024</h4>
-                <p>Dokumentasi acara pemutaran film tahun 2024.</p>
-            </div>
-        </div>
-
-
-         <div class="gallery-item">
-            <img src="kegiatann132.jpg" alt="TIDAK ADA FOTO">
-            <div class="gallery-caption">
-                <h4>BREAFING UNTUK SYUTING</h4>
-                <p>Memastikan semua crew syuting siap.</p>
-            </div>
-        </div>
-        
         <div class="gallery-item">
-            <img src="kegii.jpg" alt="TIDAK ADA FOTO">
-            <div class="gallery-caption">
-                <h4>PROSES SYUTING VIDEO PENDEK</h4>
-                <p>Mengambil video dengan angle yang pas untuk produksi video pendek.</p>
-            </div>
+          <img src="arakan.JPG" alt="TIDAK ADA FOTO" />
+          <div class="gallery-caption">
+            <h4>DIVISI PDD DI ACARA</h4>
+            <p>
+              Ikut andil dalam setiap kegiatan atau acara untuk bidang
+              pengabadian momen.
+            </p>
+          </div>
         </div>
+
+        <div class="gallery-item">
+          <img
+            src="SaveGram.App_656212189_18095956424100800_7439843472277978064_n.jpg"
+            alt="TIDAK ADA FOTO"
+          />
+          <div class="gallery-caption">
+            <h4>PANITIA NYABAR VOL.1 2023</h4>
+            <p>Foto bersama panitia nyabar pertama kali (Nyabar Vol.1 2023).</p>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img
+            src="SaveGram.App_656631861_18110184829696195_7432660537608525880_n.jpg"
+            alt="TIDAK ADA FOTO"
+          />
+          <div class="gallery-caption">
+            <h4>PEMUTARAN FILM DI NYABAR VOL.1 2023</h4>
+            <p>Dokumentasi acara pemutaran film tahun 2023.</p>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="kegiatann132.jpg" alt="TIDAK ADA FOTO" />
+          <div class="gallery-caption">
+            <h4>BREAFING UNTUK SYUTING</h4>
+            <p>Memastikan semua crew syuting siap.</p>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="kegii.jpg" alt="TIDAK ADA FOTO" />
+          <div class="gallery-caption">
+            <h4>PROSES SYUTING VIDEO PENDEK</h4>
+            <p>
+              Mengambil video dengan angle yang pas untuk produksi video pendek.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <a href="index.html#kegiatan" class="btn-back-large"
+        >← Kembali ke Beranda</a
+      >
     </div>
 
-    <a href="index.html#kegiatan" class="btn-back-large">← Kembali ke Beranda</a>
-</div>
+    <!-- COPYRIGHT DI PALING BAWAH[cite: 8] -->
+    <footer>
+      <p>&copy; 2026 DOLANAN FILM • A Production house from Cirebon.</p>
+    </footer>
 
-<!-- COPYRIGHT DI PALING BAWAH[cite: 8] -->
-<footer>
-    <p>&copy; 2026 DOLANAN FILM • A Production house from Cirebon.</p>
-</footer>
-
-<script>
-    // LOGIKA SCROLL NAVBAR[cite: 8]
-    window.onscroll = function() {
-        const nav = document.getElementById('navbar');
+    <script>
+      // LOGIKA SCROLL NAVBAR[cite: 8]
+      window.onscroll = function () {
+        const nav = document.getElementById("navbar");
         if (window.pageYOffset > 50) {
-            nav.classList.add('scrolled');
+          nav.classList.add("scrolled");
         } else {
-            nav.classList.remove('scrolled');
+          nav.classList.remove("scrolled");
         }
-    };
-</script>
-
-</body>
+      };
+    </script>
+  </body>
 </html>
