@@ -5,1364 +5,867 @@
     <meta charset="UTF-8" />
     <title>DOLANAN FILM | A Production house from Cirebon</title>
     
-    <!-- BARIS KODE UNTUK MENGGANTI LOGO DI TAB BROWSER -->
+    <!-- FAVICON -->
     <link rel="icon" type="image/png" href="logdf.png" />
       
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet" />
+    
     <style>
-      
       :root {
         --accent-gold: #c5a059;
         --text-dark: #1a1a1a;
         --nav-height: 85px;
         --container-width: 1200px;
-        --p-pink: #ffdae9; --p-blue: #d4f1f9; --p-yellow: #fff4d1; --p-purple: #e8dff5; --p-green: #e1f7d5;
+        --p-pink: #ffdae9; 
+        --p-blue: #d4f1f9; 
+        --p-yellow: #fff4d1; 
+        --p-purple: #e8dff5; 
+        --p-green: #e1f7d5;
+        --p-orange: #ffe5d9;
       }
 
       * { margin: 0; padding: 0; box-sizing: border-box; }
-      html, body { scroll-behavior: smooth; overflow-x: hidden; width: 100%; font-family: 'Montserrat', sans-serif; background: #fdfaf5; }
+      html, body { 
+        scroll-behavior: smooth; 
+        overflow-x: hidden; 
+        width: 100%; 
+        font-family: 'Montserrat', sans-serif; 
+        background: #fdfaf5; 
+      }
 
-      /* --- NAVIGASI ESTETIK --- */
-      /* --- NAVIGASI: PUTIH KE TRANSPARAN --- */
-nav {
-    background: #fff; /* Standar awal putih solid */
-    height: var(--nav-height);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 5000;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    display: flex;
-    align-items: center;
-    border-bottom: 3px solid #000; /* Bingkai tegas di atas */
-}
+      /* --- NAVIGASI --- */
+      nav {
+        background: #fff;
+        height: var(--nav-height);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 5000;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        align-items: center;
+        border-bottom: 3px solid #000;
+      }
 
-/* Saat discroll, background dan border menghilang */
-nav.scrolled {
-    background: rgba(255, 255, 255, 0.1); /* Menjadi sangat transparan */
-    backdrop-filter: blur(5px); /* Efek blur halus agar tetap estetik */
-    border-bottom: 1px solid transparent; 
-    height: 70px; /* Sedikit mengecil agar lebih slim saat scroll */
-}
+      nav.scrolled {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(8px);
+        border-bottom: 2px solid #000; 
+        height: 70px;
+      }
 
-/* Warna teks navigasi */
-.logo-nav, .nav-menu li a {
-    color: #000; /* Hitam saat di atas (bg putih) */
-    transition: 0.3s;
-}
-
-/* Warna teks saat navbar transparan (scroll ke bawah) */
-nav.scrolled .logo-nav, 
-nav.scrolled .nav-menu li a {
-    color: #fff; /* Berubah jadi putih agar kontras dengan video/konten */
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-}
-      .nav-container { display: flex; justify-content: space-between; align-items: center; width: 92%; max-width: var(--container-width); margin: 0 auto; }
+      .nav-container { 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+        width: 92%; 
+        max-width: var(--container-width); 
+        margin: 0 auto; 
+      }
       
+      /* BRAND / LOGO KIRI ATAS - DISAMAKAN DENGAN ACARA.HTML */
       .nav-brand {
-    display: flex;
-    align-items: center; /* Menjaga teks dan logo sejajar vertikal di tengah */
-    gap: 15px; /* Jarak antara logo dan teks */
-    text-decoration: none;
-    flex-shrink: 0; /* Mencegah logo tertekan oleh menu navigasi */
-}
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        color: #8b0000;
+        font-weight: 900;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+      }
 
-.logo-img {
-    width: 45px; /* Sesuaikan ukuran lebar */
-    height: 45px; /* Samakan dengan lebar agar tidak gepeng */
-    object-fit: contain; /* Memastikan gambar tidak terdistorsi di dalam bingkai */
-    flex-shrink: 0; /* Kunci ukuran agar tidak mengecil saat layar menyempit */
-}
+      .logo-img {
+        width: 35px;
+        height: auto;
+        object-fit: contain;
+        flex-shrink: 0;
+      }
 
-/* --- KONDISI AWAL: BINGKAI PUTIH (DI ATAS) --- */
-
-/* Teks Logo: Merah Darah saat di atas */
-
-.logo-nav {
-    color: #8b0000 !important; 
-    font-weight: 900;
-    transition: all 0.5s ease-in-out;
-
-}
-
-/* Bar Menu: Hitam saat di atas */
-.nav-menu li a {
-    color: #000 !important;
-    font-weight: 900;
-    transition: all 0.5s ease-in-out;
-    text-shadow: none;
-}
-
-/* --- KONDISI SCROLL: BINGKAI TRANSPARAN --- */
-
-/* Teks Logo: Berubah jadi Hitam saat transparan */
-nav.scrolled .logo-nav {
-    color: #000 !important;
-    /* Shadow putih halus agar teks hitam tetap terbaca di video gelap */
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8); 
-}
-
-/* Bar Menu: Tetap Hitam (Jelas Terlihat) saat transparan */
-nav.scrolled .nav-menu li a {
-    color: #000 !important;
-    /* Memberikan shadow putih agar huruf hitam "pop out" di atas video */
-    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.9);
-}
-
-/* Hamburger Mobile: Selalu Hitam sesuai tema baru */
-.hamburger span,
-nav.scrolled .hamburger span {
-    background: #000 !important;
-}
-nav.scrolled .nav-menu li a {
-    color: #fff;
-}
-      .nav-menu { display: flex; list-style: none; gap: 10px; align-items: center; }
-      .nav-menu li a { color: #000; text-decoration: none; font-weight: 900; font-size: 0.75rem; text-transform: uppercase; padding: 10px 15px; border: 2px solid transparent; border-radius: 50px; transition: 0.3s; }
+      .nav-menu { display: flex; list-style: none; gap: 8px; align-items: center; }
+      
+      .nav-menu li a {
+        color: #000 !important;
+        font-weight: 900;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        padding: 10px 14px;
+        border: 2px solid transparent;
+        border-radius: 50px;
+        transition: all 0.3s ease-in-out;
+        text-decoration: none;
+      }
       .nav-menu li a:hover { background: var(--p-pink); border-color: #000; }
+
+      .hamburger {
+        display: none;
+        cursor: pointer;
+        z-index: 5001;
+      }
+
+      .hamburger span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background: #000;
+        margin: 5px 0;
+        transition: 0.3s;
+      }
 
       .dropdown { position: relative; }
       .dropdown-content {
-        display: none; position: absolute; background: #fff; border: 3px solid #000;
-        border-radius: 15px; min-width: 200px; top: 110%; box-shadow: 6px 6px 0 #000; z-index: 5100;
+        display: none; 
+        position: absolute; 
+        background: #fff; 
+        border: 3px solid #000;
+        border-radius: 15px; 
+        min-width: 180px; 
+        top: 110%; 
+        box-shadow: 5px 5px 0 #000; 
+        z-index: 5100;
       }
-      .dropdown-content a { color: #000 !important; display: block; padding: 12px 20px; border-bottom: 2px solid #f0f0f0; text-align: left; font-size: 0.8rem !important; }
-      .dropdown:hover .dropdown-content { display: block; }
-
-      /* --- HERO --- */
-      header { position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: var(--p-blue); padding: 120px 20px 60px; overflow: hidden; }
-      .video-bg-hero { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; z-index: 0; }
-      .hero-content { z-index: 1; width: 100%; max-width: 1000px; }
-      .hero-title h1 { font-size: clamp(2.5rem, 9vw, 5.5rem); font-weight: 900; margin-bottom: 15px; text-shadow: 4px 4px 0 #fff; color: #000; }
-      #jargon-static { font-size: 1rem; font-weight: 900; letter-spacing: 5px; text-transform: uppercase; color: #000; margin-top: 10px; }
-
-      /* CONTAINER UTAMA */
-.highlight-permanen {
-    background: #fff;
-    border: 3px solid #000;
-    border-radius: 20px;
-    padding: 20px;
-    margin: 40px auto;
-    max-width: 900px; /* Maksimal lebar di desktop */
-    width: 90%; /* Lebar di mobile */
-    overflow: hidden;
-}
-
-.pamflet-wrapper {
-    display: flex;
-    flex-wrap: wrap; /* Agar otomatis turun saat di mobile */
-    gap: 25px;
-    align-items: center;
-}
-
-.pamflet-img {
-    width: 100%;
-    max-width: 350px; /* Ukuran gambar di desktop */
-    border-radius: 12px;
-    border: 2px solid #000;
-    flex: 1;
-}
-
-.pamflet-info {
-    flex: 1.5;
-    min-width: 280px;
-    text-align: left;
-}
-
-.event-desc {
-    font-size: 0.9rem;
-    color: #444;
-    margin-bottom: 20px;
-    line-height: 1.5;
-}
-
-/* TIMER DENGAN SEKAT */
-.timer-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 20px 0;
-    background: #f9f9f9;
-    padding: 15px;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-}
-
-.time-box { text-align: center; flex: 1; }
-.time-box span { font-weight: 900; font-size: 1.5rem; display: block; color: #8b0000; }
-.time-box p { font-size: 0.7rem; margin: 0; text-transform: uppercase; opacity: 0.6; }
-.timer-divider { font-size: 1.5rem; font-weight: 300; color: #ccc; }
-
-/* ANIMASI DENYUT (PULSE) */
-@keyframes pulse-effect {
-    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(139, 0, 0, 0.4); }
-    70% { transform: scale(1.02); box-shadow: 0 0 0 15px rgba(139, 0, 0, 0); }
-    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(139, 0, 0, 0); }
-}
-
-.pulse-anim {
-    animation: pulse-effect 2s infinite ease-in-out;
-}
-
-/* RESPONSIVE MOBILE */
-@media (max-width: 768px) {
-    .pamflet-wrapper { flex-direction: column; text-align: center; }
-    .pamflet-info { text-align: center; }
-    .timer-container { justify-content: center; }
-
-    @media (max-width: 768px) {
-    .pamflet-info {
-        text-align: center; /* Teks rata tengah di mobile agar seimbang */
-        margin-top: 15px;
-    }
-    
-    .event-title {
-        font-size: 1.4rem; /* Sedikit mengecil di mobile agar tidak penuh */
-    }
-}
-}
-
-      /* --- POP UP --- */
-      .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); display: none; justify-content: center; align-items: center; z-index: 9000; padding: 20px; }
-      .modal-content { background: #fff; border: 4px solid #000; border-radius: 30px; padding: 30px; width: 100%; max-width: 450px; text-align: center; position: relative; box-shadow: 15px 15px 0 var(--p-pink); }
-
-      /* --- SECTIONS --- */
-      section { padding: 100px 5%; width: 100%; max-width: var(--container-width); margin: 0 auto; border-radius: 50px; border: 3px solid #000; margin-bottom: 30px; position: relative; overflow: hidden; }
-      .section-title { font-size: clamp(2rem, 6vw, 3.2rem); font-weight: 900; margin-bottom: 70px; text-transform: uppercase; text-align: center; }
-
-      /* --- PROFIL PRESISI UNTUK TEKS BANYAK --- */
-#profil { 
-    background: var(--p-yellow); 
-    background-image: radial-gradient(#000 1.5px, transparent 0); 
-    background-size: 40px 40px;
-    height: auto; /* Memastikan bingkai mengikuti isi */
-    min-height: 500px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.profile-container { 
-    display: flex; 
-    flex-wrap: wrap; 
-    align-items: flex-start; /* Teks mulai dari atas sejajar foto */
-    gap: 40px; 
-    justify-content: center; 
-    max-width: 1100px; 
-    margin: 0 auto; 
-    padding: 20px 0;
-}
-
-.profile-text { 
-    flex: 1.5; 
-    min-width: 320px; 
-    text-align: justify; 
-    background: #fff; 
-    padding: clamp(20px, 5vw, 40px); 
-    border: 3px solid #000; 
-    border-radius: 30px; 
-    box-shadow: 10px 10px 0 #000; 
-    height: fit-content; /* Kotak mengikuti panjang paragraf */
-}
-
-.profile-text p { 
-    font-size: 1.05rem; 
-    line-height: 1.8; 
-    font-weight: 500; 
-    color: #111; 
-    margin-bottom: 15px; /* Jarak antar paragraf jika teks banyak */
-}
-
-/* Responsif Mobile */
-@media (max-width: 768px) {
-    .profile-container { gap: 20px; }
-    .profile-text { padding: 25px; min-width: 100%; }
-    .nav-container {
-        justify-content: space-between;
-    }
-    
-    .logo-img {
-        width: 35px; /* Sedikit lebih kecil di HP tapi tetap proporsional */
-        height: 35px;
-    }
-}
-
-      #program { background: var(--p-purple); background-image: linear-gradient(45deg, rgba(255,255,255,0.2) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.2) 75%, transparent 75%, transparent); background-size: 40px 40px; }
-      #prestasi { background: var(--p-green); background-image: radial-gradient(circle, #fff 10%, transparent 10%); background-size: 15px 15px; }
-      #kegiatan { background: var(--p-pink); background-image: repeating-linear-gradient(-45deg, transparent, transparent 20px, rgba(255,255,255,0.5) 20px, rgba(255,255,255,0.5) 40px); }
-      #crew-preview { background: var(--p-blue); }
-
-      /* --- GRID & CARDS --- */
-      .grid-flex { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-      .card-genz { background: #fff; border: 4px solid #000; border-radius: 25px; overflow: hidden; box-shadow: 8px 8px 0 #000; transition: 0.3s; height: 100%; }
-      .card-genz img { width: 100%; height: 250px; object-fit: cover; border-bottom: 4px solid #000; }
-
-      .btn-more {
-        display: inline-block; background: #fff; color: #000; padding: 16px 45px;
-        border: 4px solid #000; border-radius: 50px; text-decoration: none; font-weight: 900;
-        margin-top: 40px; text-transform: uppercase; font-size: 0.85rem; box-shadow: 6px 6px 0 #000; transition: 0.2s;
+      .dropdown-content a { 
+        color: #000 !important; 
+        display: block; 
+        padding: 10px 18px; 
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 0.8rem !important; 
+        text-align: left;
+        transition: 0.2s;
+        border: 2px solid transparent;
       }
-      .btn-more:hover { background: #000; color: #fff; box-shadow: 9px 9px 0 var(--accent-gold); }
+      .dropdown-content a:hover {
+        background: var(--p-pink);
+        border-color: #000;
+        transform: translateX(4px);
+      }
+      
+      @media (min-width: 769px) {
+        .dropdown:hover .dropdown-content { display: block; }
+      }
 
-     /* --- KONTAK MINIMALIS & ELEGAN --- */
-#kontak { 
-    background: #000; 
-    color: #fff; 
-    border-radius: 80px 80px 0 0; /* Lengkungan lebih halus */
-    padding: 60px 5% 40px; /* Padding dikurangi agar tidak terlalu besar */
-    text-align: center; 
-    border: none;
-    margin-top: 50px;
-}
-
-#kontak h2 {
-    font-size: 1rem;
-    font-weight: 400;
-    letter-spacing: 5px;
-    margin-bottom: 20px;
-    opacity: 0.8;
-}
-
-/* --- KONTAK DENGAN PATTERN MODERN --- */
-#kontak { 
-    /* Menggunakan Charcoal Grey dengan Pattern Dot yang halus */
-    background-color: #1a1a1a; 
-    background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
-    background-size: 20px 20px; /* Jarak antar titik pattern */
-    
-    color: #fff; 
-    border-radius: 60px 60px 0 0; 
-    padding: 50px 5% 30px; 
-    text-align: center; 
-    border: 3px solid #000; /* Border luar tetap ada tapi tipis */
-    border-bottom: none;
-    margin-top: 60px;
-}
-
-#kontak h2 {
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 4px;
-    margin-bottom: 15px;
-    color: var(--accent-gold); /* Menggunakan aksen emas untuk judul kecil */
-    text-transform: uppercase;
-}
-
-#kontak a { 
-    color: #fff; 
-    font-size: clamp(1rem, 4vw, 2.2rem); 
-    text-decoration: none; 
-    font-weight: 900; 
-    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    display: inline-block;
-}
-
-#kontak a:hover { 
-    transform: scale(1.05); /* Efek membesar sedikit saat hover */
-    color: var(--accent-gold);
-}
-
-/* --- COPYRIGHT SLIM & MINIMALIS --- */
-.copyright { 
-    background: #1a1a1a; 
-    color: rgba(255, 255, 255, 0.3); 
-    padding: 15px; 
-    text-align: center; 
-    border-top: 1px solid rgba(255, 255, 255, 0.05); 
-    font-size: 0.6rem; 
-    letter-spacing: 2px; 
-    font-weight: 400;
-}
-
-      /* --- MOBILE ADJUST --- */
+      /* --- RESPONSIVE MOBILE MENU --- */
       @media (max-width: 768px) {
-        .nav-menu { position: fixed; right: -100%; top: 0; width: 85%; height: 100vh; background: #fff; flex-direction: column; padding: 120px 30px; border-left: 6px solid #000; transition: 0.5s; }
+        .hamburger { display: block !important; }
+
+        /* Animasi Hamburger ke Silang (X) */
+        .hamburger.active span:nth-child(1) {
+          transform: rotate(45deg) translate(5px, 6px);
+        }
+        .hamburger.active span:nth-child(2) {
+          opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+          transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        .nav-menu { 
+          position: fixed; 
+          right: -100%; 
+          top: 0; 
+          width: 80%; 
+          max-width: 300px;
+          height: 100vh; 
+          background: #fff; 
+          flex-direction: column; 
+          padding: 100px 20px 40px; 
+          border-left: 4px solid #000; 
+          transition: right 0.4s ease-in-out; 
+          z-index: 4000;
+          overflow-y: auto;
+          display: flex !important;
+        }
+
         .nav-menu.active { right: 0; }
-        .nav-menu li a { font-size: 1rem; border: 3px solid #000; box-shadow: 6px 6px 0 #000; margin-bottom: 15px; width: 100%; text-align: center; display: block; }
-        .dropdown-content { position: static; display: block !important; border: none; box-shadow: none; }
-        .hamburger span { background: #000; width: 35px; height: 5px; margin: 7px; display: block; border-radius: 10px; }
+        .nav-menu li { margin-bottom: 12px; width: 100%; }
+
+        .nav-menu li a { 
+          font-size: 0.85rem; 
+          border: 3px solid #000; 
+          box-shadow: 4px 4px 0 #000; 
+          width: 100%; 
+          text-align: center; 
+          display: block; 
+        }
+
+        /* Dropdown khusus Mobile */
+        .dropdown-content {
+          position: static !important;
+          display: none;
+          width: 100%;
+          box-shadow: none !important;
+          border: 2px solid #000 !important;
+          margin-top: 8px;
+          background: #fdfaf5 !important;
+        }
+
+        .dropdown.active .dropdown-content {
+          display: block !important;
+        }
+
+        .dropdown-content a {
+          text-align: center !important;
+          border-bottom: 1px solid #ccc !important;
+          border-radius: 0 !important;
+        }
+        .dropdown-content a:last-child {
+          border-bottom: none !important;
+        }
+
+        .acara-card-active { text-align: center; justify-content: center; padding: 20px; }
+        .acara-info { text-align: center; }
       }
-/* --- ANIMASI JARGON BERGANTIAN --- */
-.jargon-wrapper {
-    height: 30px; /* Menjaga posisi agar tidak goyang saat teks ganti */
-    margin-top: 10px;
-    overflow: hidden;
-}
 
-.jargon-anim {
-    font-size: clamp(0.8rem, 3vw, 1rem);
-    font-weight: 900;
-    letter-spacing: 5px;
-    color: #000;
-    text-transform: uppercase;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
+      /* --- HERO HEADER --- */
+      header { 
+        position: relative; 
+        min-height: 85vh; 
+        display: flex; 
+        flex-direction: column; 
+        justify-content: center; 
+        align-items: center; 
+        text-align: center; 
+        background: var(--p-blue); 
+        padding: 120px 20px 60px; 
+        overflow: hidden; 
+      }
 
-.jargon-anim.show {
-    opacity: 1;
-    transform: translateY(0);
-}
+      .video-bg-hero { 
+        position: absolute; 
+        top: 0; 
+        left: 0; 
+        width: 100%; 
+        height: 100%; 
+        object-fit: cover; 
+        opacity: 0.35; 
+        z-index: 0; 
+      }
+      
+      .hero-content { 
+        position: relative;
+        z-index: 2; 
+        width: 100%; 
+        max-width: 1000px; 
+        margin: 0 auto;
+      }
 
+      .hero-title h1 {
+        display: inline-block;
+        font-weight: 900;
+        text-transform: uppercase;
+        text-align: center;
+        line-height: 1.1;
+        font-size: clamp(2.5rem, 7vw, 4.8rem); 
+        width: 100%;
+        margin-bottom: 10px;
+        color: #8b0000;
+      }
 
-/* --- ANIMASI SCROLL REVEAL --- */
-.reveal {
-    opacity: 0;
-    transform: translateY(40px); /* Elemen muncul dari bawah */
-    transition: all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Transisi halus dengan efek bouncy */
-}
+      .jargon-wrapper {
+        min-height: 30px;
+        margin-top: 5px;
+        margin-bottom: 40px;
+      }
 
-/* Class 'active' akan ditambahkan melalui JavaScript saat discroll */
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Variasi Animasi: Muncul dari Kiri */
-.reveal-left {
-    opacity: 0;
-    transform: translateX(-50px);
-    transition: all 1.2s ease-out;
-}
-
-.reveal-left.active {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-/* Variasi Animasi: Zoom In */
-.reveal-zoom {
-    opacity: 0;
-    transform: scale(0.9);
-    transition: all 1s ease-out;
-}
-
-.reveal-zoom.active {
-    opacity: 1;
-    transform: scale(1);
-}
-
-/* --- 1. ANIMASI GANTI WARNA (MERAH KE HITAM) --- */
-@keyframes colorMorphHero {
-    0%, 100% { color: #8b0000; } 
-    50% { color: #000000; }
-}
-
-/* --- 2. ANIMASI OMBAK (NAIK TURUN) --- */
-@keyframes waveHero {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
-}
-
-/* --- 3. ANIMASI MENGKILAP (TANPA MERUSAK WARNA) --- */
-@keyframes shineHero {
-    0% { text-shadow: -100px 0 30px rgba(255,255,255,0); }
-    50% { text-shadow: 0 0 20px rgba(255,255,255,0.8); }
-    100% { text-shadow: 100px 0 30px rgba(255,255,255,0); }
-}
-.hero-title h1 {
-    display: inline-block;
-    font-weight: 900;
-    text-transform: uppercase;
-    text-align: center;
-    line-height: 1.1;
-
-    
-    /* UKURAN PRESISI: Desktop Besar, Mobile Menyesuaikan */
-    font-size: clamp(2.5rem, 8vw, 5rem); 
-    width: 100%;
-    margin-bottom: 10px;
-
-    /* GABUNGKAN 3 ANIMASI SEKALIGUS */
-    animation: 
-        colorMorphHero 10s infinite ease-in-out, 
-        waveHero 3s infinite ease-in-out, 
-        shineHero 4s infinite linear;
-    
-    /* Reset properti yang sering bikin error */
-    background: none !important;
-    -webkit-background-clip: initial !important;
-    background-clip: initial !important;
-    -webkit-text-fill-color: initial !important;
-}
-
-/* --- CSS AGAR RAPI DI MOBILE (RESPONSIVE) --- */
-@media (max-width: 768px) {
-    .hero-title {
-        letter-spacing: 1px;
-        padding: 0 10px;
-    }
-}
-/* Gerakan naik turun pelan agar estetik */
-@keyframes wave-animation {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-}
-
-/* --- PERBAIKAN JARAK & EFEK CAHAYA KARYA --- */
-.karya-container {
-    width: 100%;
-    max-width: 900px;
-    margin: 80px auto; /* Memberikan ruang agar tidak nabrak Profil */
-    position: relative;
-    z-index: 1;
-}
-
-.karya-card {
-    background: #fff;
-    border: 4px solid #000;
-    border-radius: 30px;
-    padding: 15px;
-    position: relative;
-    overflow: visible; /* Penting agar cahaya di belakang terlihat */
-    box-shadow: 10px 10px 0px #000;
-    transition: 0.3s;
-}
-
-/* EFEK CAHAYA NYALA MATI (GLOW AURA) */
-.karya-card::before {
-    content: '';
-    position: absolute;
-    top: -15px; left: -15px; right: -15px; bottom: -15px;
-    background: var(--accent-gold);
-    border-radius: 40px;
-    z-index: -1;
-    filter: blur(30px); /* Efek cahaya halus */
-    opacity: 0.6;
-    animation: glow-pulse 3s infinite ease-in-out; /* Animasi nyala mati */
-}
-
-@keyframes glow-pulse {
-    0%, 100% { opacity: 0.3; filter: blur(20px); }
-    50% { opacity: 0.8; filter: blur(40px); }
-}
-
-.video-wrapper {
-    width: 100%;
-    aspect-ratio: 16/9;
-    border-radius: 20px;
-    overflow: hidden;
-    border: 2px solid #000;
-}
-
-/* --- GRADIENT HALUS DI BAWAH VIDEO --- */
-header::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 150px; /* Ketebalan gradasi halus */
-    background: linear-gradient(to bottom, transparent, #fdfaf5); /* Sesuaikan warna akhir dengan bg body */
-    z-index: 1;
-    pointer-events: none;
-}
-
-/* Pastikan video tetap di belakang overlay */
-.video-bg-hero {
-    z-index: 0;
-}
-
-/* Pastikan konten (judul, pamflet) tetap di atas overlay */
-.hero-content {
-    position: relative;
-    z-index: 2;
-}
-
-.hamburger span {
-    background: #000; /* Hitam saat di atas */
-    transition: 0.3s;
-}
-
-nav.scrolled .hamburger span {
-    background: #fff; /* Putih saat navbar sudah transparan di bawah */
-}
-
-/* --- TOMBOL SILANG LINGKARAN MERAH --- */
-.close-btn {
-    position: absolute;
-    top: -15px;
-    right: -15px;
-    width: 35px;
-    height: 35px;
-    background: #8b0000; /* Merah Darah */
-    color: #fff;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    font-size: 1.2rem;
-    font-weight: bold;
-    border: 2px solid #fff;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    z-index: 10001;
-    transition: 0.3s;
-}
-
-.close-btn:hover {
-    transform: scale(1.1);
-    background: #ff0000;
-}
-
-/* ANIMASI GETAR UNTUK DESKTOP */
-@keyframes shake-desktop {
-    0% { transform: translate(0, 0); }
-    10% { transform: translate(-10px, 0); }
-    20% { transform: translate(10px, 0); }
-    30% { transform: translate(-10px, 0); }
-    40% { transform: translate(10px, 0); }
-    50% { transform: translate(-10px, 0); }
-    60% { transform: translate(10px, 0); }
-    70% { transform: translate(-10px, 0); }
-    80% { transform: translate(10px, 0); }
-    90% { transform: translate(-10px, 0); }
-    100% { transform: translate(0, 0); }
-}
-
-.modal-content.shake {
-    /* Menjalankan animasi selama 0.6 detik dengan kekuatan penuh */
-    animation: shake-desktop 0.6s cubic-bezier(.36,.07,.19,.97) both;
-    box-shadow: 0 0 50px rgba(139, 0, 0, 0.5); /* Tambah glow merah saat getar */
-}
-
-.btn-more-popup {
-    display: block;
-    background: #8b0000; /* Merah Darah */
-    color: #fff;
-    text-decoration: none;
-    font-weight: 900;
-    padding: 15px;
-    border-radius: 50px;
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-    transition: 0.3s;
-    border: 2px solid #000;
-    box-shadow: 4px 4px 0 #000;
-}
-
-.btn-more-popup:hover {
-    background: #000;
-    transform: translateY(-3px);
-    box-shadow: 6px 6px 0 #8b0000;
-}
-
-/* Memastikan teks di dalam modal rapi */
-#modalContent h2 {
-    color: #000;
-    margin-top: 0;
-}
-
-.btn-event-link {
-    display: inline-block;
-    background: #8b0000; /* Merah Darah */
-    color: #fff;
-    text-decoration: none;
-    font-weight: 900;
-    padding: 12px 30px;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    letter-spacing: 2px;
-    transition: all 0.3s ease;
-    
-    /* PENAMBAHAN BINGKAI & SHADOW */
-    border: 3px solid #000; /* Bingkai Hitam Tegas */
-    box-shadow: 4px 4px 0px #000; /* Efek Bayangan Kaku (Brutalism Style) */
-    
-    margin-top: 15px;
-    text-transform: uppercase;
-}
-
-.btn-event-link:hover {
-    background: #000;
-    color: #fff;
-    transform: translate(-2px, -2px);
-    box-shadow: 7px 7px 0px #8b0000; /* Shadow berubah warna saat dihover */
-}
-
-.btn-event-link:active {
-    transform: translate(2px, 2px);
-    box-shadow: 0px 0px 0px #000;
-}
-
-/* --- PERBAIKAN VIDEO PREVIEW (ANTI-ZOOM) --- */
-.video-wrapper video {
-    width: 100%;
-    height: 100%;
-    /* Menggunakan 'contain' agar video utuh/full tanpa terpotong */
-    object-fit: contain; 
-    background: #000; /* Latar hitam jika rasio video berbeda */
-    display: block;
-}
-
-/* --- ANIMASI AMAN: TIDAK KELUAR BINGKAI --- */
-@keyframes attention-btn {
-    0%, 100% { 
-        transform: translateY(0); 
-        box-shadow: 4px 4px 0px #000;
-    }
-    50% { 
-        transform: translateY(-5px); /* Bergerak naik sedikit saja */
-        box-shadow: 8px 8px 0px var(--accent-gold); /* Bayangan memanjang, bukan membesar */
-    }
-}
-
-.karya-card .btn-karya-label {
-    margin: 15px auto 5px auto; /* Margin diatur agar simetris */
-    padding: 12px 25px;
-    background: #fff;
-    border: 3px solid #000;
-    border-radius: 50px;
-    width: fit-content; /* Ukuran mengikuti teks, tidak maksa lebar */
-    max-width: 90% ; /* Biar gak mentok di HP */
-    display: block;
-    
-    /* Memicu animasi naik-turun halus */
-    animation: attention-btn 2s infinite ease-in-out;
-    transition: all 0.3s ease;
-}
-
-.karya-card:hover .btn-karya-label {
-    background: #000;
-    color: #fff;
-    animation: none; /* Berhenti saat di-hover */
-    transform: translateY(-2px);
-    box-shadow: 5px 5px 0px var(--accent-gold);
-}
-
-/* --- LABEL TEKS DI ATAS VIDEO --- */
-.video-label {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    background: rgba(139, 0, 0, 0.8); /* Merah Darah Transparan */
-    color: #fff;
-    padding: 5px 15px;
-    border-radius: 50px;
-    font-size: 0.7rem;
-    font-weight: 800;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    z-index: 10;
-    border: 1px solid #fff;
-    pointer-events: none; /* Agar tidak mengganggu klik pada video */
-}
-
-/* Pastikan wrapper video bersifat relative agar label menempel di sana */
-.video-wrapper {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16/9;
-    border-radius: 20px;
-    overflow: hidden;
-    border: 2px solid #000;
-}
-
-/* Tetap pastikan video FIT/FULL */
-.video-wrapper video {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; 
-    background: #000;
-    display: block;
-}
-
-
-/* --- RESPONSIVE ADJUSTMENT --- */
-@media (max-width: 768px) {
-    .karya-container {
-        width: 95%; /* Lebih lebar di mobile agar rapi */
-        margin: 40px auto;
-    }
-    .karya-card {
-        padding: 10px; /* Lebih hemat ruang di mobile */
-    }
-    .karya-card h3 {
-        font-size: 1rem; /* Ukuran teks lebih pas di HP */
-    }
-}
-
-/* --- TOMBOL UTAMA DENGAN BINGKAI TEGAS --- */
-.btn-all-works {
-    display: inline-block;
-    background: #8b0000; /* Merah Darah */
-    color: #fff;
-    padding: 15px 35px;
-    border-radius: 50px;
-    font-weight: 900;
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 0.85rem;
-    
-    /* BINGKAI & SHADOW KHAS DF */
-    border: 3px solid #000; 
-    box-shadow: 6px 6px 0px #000; 
-    
-    /* ANIMASI MEMANGGIL (PULSE) */
-    animation: attention-button 2s infinite ease-in-out;
-    transition: all 0.2s ease;
-}
-
-.btn-all-works:hover {
-    background: #000;
-    transform: translate(-3px, -3px);
-    box-shadow: 10px 10px 0px #8b0000;
-    animation: none; /* Berhenti saat disentuh */
-}
-
-.btn-all-works:active {
-    transform: translate(2px, 2px);
-    box-shadow: 0px 0px 0px #000;
-}
-
-/* --- ANIMASI DENYUT --- */
-@keyframes attention-button {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-}
-
-/* RESPONSIVE MOBILE */
-@media (max-width: 768px) {
-    .btn-all-works {
-        width: 85%; /* Agar lebar dan mudah diklik di HP */
-        font-size: 0.75rem;
-        padding: 12px 20px;
-    }
-}
-
-@media (max-width: 768px) {
-    /* 1. Sembunyikan isi dropdown secara total saat awal */
-    .dropdown-content {
-        display: none; /* Default tertutup */
-        position: static !important; /* Agar mendorong menu di bawahnya turun */
-        width: 100% !important;
-        background: #f0f0f0 !important;
-        border: 3px solid #000 !important;
-        border-radius: 20px !important;
-        box-shadow: 6px 6px 0px #000 !important;
-        margin: 10px 0 !important;
-        padding: 10px !important;
+      .jargon-anim {
+        font-size: clamp(0.85rem, 3vw, 1.1rem);
+        font-weight: 900;
+        letter-spacing: 4px;
+        color: #000;
+        text-transform: uppercase;
         opacity: 0;
-        transform: translateY(-10px);
-        transition: all 0.4s ease; /* Efek transisi halus */
-    }
+        transform: translateY(15px);
+        transition: all 0.6s ease;
+      }
 
-    /* 2. Logika ketika Profil Aktif (Dropdown Terbuka) */
-    .dropdown.active .dropdown-content {
-        display: flex !important; /* Munculkan kembali */
-        flex-direction: column;
-        gap: 10px;
+      .jargon-anim.show {
         opacity: 1;
         transform: translateY(0);
-    }
+      }
 
-    /* 3. Gaya tombol di dalam dropdown */
-    .dropdown-content a {
-        background: #fff !important;
-        border: 2px solid #000 !important;
-        border-radius: 50px !important;
-        padding: 12px !important;
-        font-size: 0.85rem !important;
-        font-weight: 800 !important;
-        text-align: center !important;
-        color: #000 !important;
-        box-shadow: 3px 3px 0px #000 !important;
-    }
-}
-
-
-@media (max-width: 768px) {
-    /* 1. Sembunyikan salah satu hamburger jika masih muncul dua */
-    .hamburger:nth-child(3) { display: none !important; } 
-
-    .nav-menu {
-        gap: 0 !important; /* Hapus semua celah antar menu utama */
-        padding: 80px 20px !important;
-    }
-
-    .nav-menu li {
-        margin-bottom: 12px; /* Jarak antar tombol yang seragam */
+      .karya-container {
         width: 100%;
-    }
+        max-width: 850px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 5;
+      }
 
-    /* 2. Logika Naik-Turun: Harus pakai display: none agar menu bawah bisa naik */
-    .dropdown-content {
-        display: none; /* Saat tertutup, elemen benar-benar hilang dari layout */
-        position: static !important;
-        width: 90% !important;
-        margin: 0 auto !important; 
-        background: #f0f0f0 !important;
-        border: 3px solid #000 !important;
-        border-radius: 20px !important;
-        padding: 10px !important;
-        box-shadow: 6px 6px 0px #000 !important;
-    }
-
-    /* 3. Saat Profil diklik (Aktif), sub-menu turun keluar */
-    .dropdown.active .dropdown-content {
-        display: flex !important; /* Menu di bawah otomatis terdorong turun */
-        flex-direction: column;
-        gap: 8px;
-        margin-top: 10px !important;
-        margin-bottom: 15px !important;
-    }
-}
-
-/* --- EFEK WARNA SAAT KURSOR NEMPEL (HOVER) --- */
-.dropdown-content a {
-    color: #000 !important;
-    display: block;
-    padding: 12px 20px;
-    border-radius: 15px;
-    text-decoration: none;
-    font-weight: 800;
-    font-size: 0.8rem;
-    transition: 0.2s;
-    border: 2px solid transparent; /* Agar tidak goyang saat hover */
-}
-
-.dropdown-content a:hover {
-    background: var(--p-pink); /* Warna pink estetik saat kursor nempel */
-    border-color: #000;
-    transform: translateX(5px); /* Geser dikit agar interaktif */
-}
-
-/* --- TAMPILAN DESKTOP (Layar Lebar) --- */
-@media (min-width: 769px) {
-    .nav-menu {
-        display: flex !important; /* Menu berderet ke samping */
-        position: static;
-        background: none;
-        border: none;
-        box-shadow: none;
-        padding: 0;
-    }
-    .hamburger {
-        display: none; /* Sembunyikan tombol menu di desktop */
-    }
-}
-
-/* --- TAMPILAN MOBILE (Layar HP) --- */
-@media (max-width: 768px) {
-    .nav-menu {
-        display: none; /* Sembunyikan menu bawaan yang berderet */
-        position: fixed;
-        right: -100%; /* Geser ke luar layar */
-        top: 0;
-        width: 80%;
-        height: 100vh;
+      .karya-card {
         background: #fff;
-        flex-direction: column; /* Menu berderet ke bawah */
-        padding: 100px 20px;
-        border-left: 5px solid #000;
-        transition: 0.5s;
-        z-index: 4000;
-    }
-
-    /* Munculkan menu saat tombol hamburger diklik */
-    .nav-menu.active {
-        display: flex;
-        right: 0;
-    }
-
-    .hamburger {
-        display: block !important; /* Munculkan tombol garis tiga */
+        border: 4px solid #000;
+        border-radius: 30px;
+        padding: 12px;
+        position: relative;
+        box-shadow: 10px 10px 0px #000;
         cursor: pointer;
-    }
-}
+      }
 
+      .video-wrapper {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16/9;
+        border-radius: 20px;
+        overflow: hidden;
+        border: 2px solid #000;
+      }
+
+      .video-wrapper video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; 
+        background: #000;
+        display: block;
+      }
+
+      .video-label {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background: #8b0000;
+        color: #fff;
+        padding: 6px 16px;
+        border-radius: 50px;
+        font-size: 0.7rem;
+        font-weight: 900;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        z-index: 10;
+        border: 2px solid #000;
+        pointer-events: none;
+      }
+
+      .btn-all-works {
+        display: inline-block;
+        background: #8b0000;
+        color: #fff;
+        padding: 14px 32px;
+        border-radius: 50px;
+        font-weight: 900;
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 0.85rem;
+        border: 3px solid #000; 
+        box-shadow: 6px 6px 0px #000; 
+        transition: all 0.2s ease;
+      }
+
+      .btn-all-works:hover {
+        background: #000;
+        transform: translate(-3px, -3px);
+        box-shadow: 9px 9px 0px #8b0000;
+      }
+
+      /* --- SECTIONS --- */
+      section { 
+        padding: 90px 5%; 
+        width: 92%; 
+        max-width: var(--container-width); 
+        margin: 0 auto 40px auto; 
+        border-radius: 40px; 
+        border: 4px solid #000; 
+        position: relative; 
+        overflow: hidden; 
+      }
+      
+      .section-title { 
+        font-size: clamp(2rem, 5vw, 3rem); 
+        font-weight: 900; 
+        margin-bottom: 50px; 
+        text-transform: uppercase; 
+        text-align: center; 
+      }
+
+      #profil { background: var(--p-yellow); }
+
+      .profile-container { 
+        display: flex; 
+        flex-wrap: wrap; 
+        align-items: flex-start; 
+        gap: 35px; 
+        justify-content: center; 
+      }
+
+      .profile-text { 
+        flex: 1.5; 
+        min-width: 300px; 
+        text-align: justify; 
+        background: #fff; 
+        padding: 30px; 
+        border: 3px solid #000; 
+        border-radius: 25px; 
+        box-shadow: 8px 8px 0 #000; 
+      }
+
+      .profile-text p { 
+        font-size: 1rem; 
+        line-height: 1.7; 
+        font-weight: 500; 
+        color: #111; 
+        margin-bottom: 15px; 
+      }
+
+      #program { background: var(--p-purple); }
+      #prestasi { background: var(--p-green); }
+      #kegiatan { background: var(--p-pink); }
+      #acara { background: var(--p-orange); }
+
+      .acara-card-active {
+        background: #fff;
+        border: 4px solid #000;
+        border-radius: 30px;
+        padding: 30px;
+        box-shadow: 10px 10px 0px #000;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        align-items: center;
+      }
+
+      .acara-img {
+        flex: 1;
+        min-width: 280px;
+        max-width: 400px;
+        border-radius: 20px;
+        border: 3px solid #000;
+        box-shadow: 5px 5px 0px #000;
+        width: 100%;
+        object-fit: cover;
+      }
+
+      .acara-info {
+        flex: 1.2;
+        min-width: 280px;
+        text-align: left;
+      }
+
+      .acara-badge {
+        display: inline-block;
+        background: #8b0000;
+        color: #fff;
+        font-size: 0.75rem;
+        font-weight: 900;
+        padding: 6px 16px;
+        border-radius: 50px;
+        border: 2px solid #000;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 15px;
+      }
+
+      .acara-empty-state {
+        background: #fff;
+        border: 4px solid #000;
+        border-radius: 30px;
+        padding: 50px 20px;
+        text-align: center;
+        box-shadow: 8px 8px 0 #000;
+      }
+
+      .acara-empty-state h3 {
+        font-size: 1.8rem;
+        font-weight: 900;
+        color: #000;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+      }
+
+      #crew-preview { background: var(--p-blue); }
+
+      .grid-flex { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
+      .card-genz { background: #fff; border: 4px solid #000; border-radius: 20px; overflow: hidden; box-shadow: 6px 6px 0 #000; transition: 0.3s; height: 100%; }
+      .card-genz img { width: 100%; height: 230px; object-fit: cover; border-bottom: 4px solid #000; }
+
+      .btn-more {
+        display: inline-block; background: #fff; color: #000; padding: 14px 40px;
+        border: 3px solid #000; border-radius: 50px; text-decoration: none; font-weight: 900;
+        margin-top: 35px; text-transform: uppercase; font-size: 0.85rem; box-shadow: 5px 5px 0 #000; transition: 0.2s;
+      }
+      .btn-more:hover { background: #000; color: #fff; box-shadow: 8px 8px 0 var(--accent-gold); }
+
+      #kontak { 
+        background-color: #1a1a1a; 
+        color: #fff; 
+        border-radius: 40px 40px 0 0; 
+        padding: 60px 5% 40px; 
+        text-align: center; 
+        border: 4px solid #000; 
+        border-bottom: none;
+        margin-top: 60px;
+        width: 100%;
+      }
+
+      #kontak h2 {
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 4px;
+        margin-bottom: 15px;
+        color: var(--accent-gold); 
+        text-transform: uppercase;
+      }
+
+      #kontak a { 
+        color: #fff; 
+        font-size: clamp(1.2rem, 4vw, 2.2rem); 
+        text-decoration: none; 
+        font-weight: 900; 
+        transition: 0.3s;
+      }
+
+      #kontak a:hover { color: var(--accent-gold); }
+
+      .copyright { 
+        background: #1a1a1a; 
+        color: rgba(255, 255, 255, 0.4); 
+        padding: 15px; 
+        text-align: center; 
+        border-top: 1px solid rgba(255, 255, 255, 0.1); 
+        font-size: 0.7rem; 
+        letter-spacing: 2px; 
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease-out;
+      }
+
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
     </style>
   </head>
+  
   <body>
 
-    <div class="modal-overlay" id="eventModal">
-    <div class="modal-content" id="modalContent">
-        <!-- Tombol Silang Lingkaran Merah -->
-        <div class="close-btn" onclick="closeModal()">&times;</div>
-        
-        <!-- Header Pop-up -->
-        <p style="font-size: 0.7rem; letter-spacing: 3px; font-weight: 700; color: #8b0000; margin-bottom: 5px; text-transform: uppercase;">
-            Acara Mendatang
-        </p>
-        <h2 style="font-weight: 900; font-size: 1.5rem; margin-bottom: 15px; line-height: 1.2; text-transform: uppercase;">
-            NYABAR VOL.3 2026
-        </h2>
-
-        <!-- Poster/Gambar Acara -->
-        <div style="border: 2px solid #000; border-radius: 15px; overflow: hidden; margin-bottom: 20px;">
-            <img src="WhatsApp Image 2026-05-04 at 12.28.16 (1).jpeg" style="width: 100%; display: block;" />
-        </div>
-
-        <!-- Tombol Aksi -->
-        <a href="event.html" class="btn-more-popup">
-            LIHAT SELENGKAPNYA
-        </a>
-    </div>
-</div>
-
+    <!-- NAVBAR -->
     <nav>
       <div class="nav-container">
-        <a href="javascript:void(0)" class="nav-brand" style="cursor: default;"> 
-          <img src="df merah darah.png" class="logo-img" /><span class="logo-nav">DOLANAN FILM</span></a>
+        <!-- LOGO BRAND DISAMAKAN DENGAN ACARA.HTML -->
+        <a href="#home" class="nav-brand"> 
+          <img src="df merah darah.png" class="logo-img" alt="Logo Dolanan Film" />
+          <span>DOLANAN FILM</span>
+        </a>
 
-<div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+        <div class="hamburger" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
 
         <ul class="nav-menu" id="navMenu">
-          <li><a href="#home" onclick="toggleMenu()">Beranda</a></li>
+          <li><a href="#home" onclick="closeMenuOnLinkClick()">Beranda</a></li>
           <li class="dropdown" id="profileDropdown">
-    <!-- Hilangkan toggleMenu() dari link utama agar tidak langsung menutup navbar -->
-    <a href="javascript:void(0)" onclick="toggleDropdown(event)">Profil ▾</a>
-
-    <div class="dropdown-content">
-    <a href="#profil" onclick="toggleMenu()">Tentang DF</a>
-    <a href="#crew-preview" onclick="toggleMenu()">Crew DF</a>
-    <!-- Link diubah agar memicu fungsi scroll ke container karya -->
-    <a href="hasil_karya.html" onclick="scrollToKarya()">Lihat Karya</a>
-</div>
-</li>
-          <li><a href="#program" onclick="toggleMenu()">Program</a></li>
-          <li><a href="#prestasi" onclick="toggleMenu()">Prestasi</a></li>
-          <li><a href="#kegiatan" onclick="toggleMenu()">Kegiatan</a></li>
-          <li><a href="#kontak" onclick="toggleMenu()">Kontak</a></li>
+            <a href="javascript:void(0)" onclick="toggleDropdown(event)">Profil ▾</a>
+            <div class="dropdown-content">
+              <a href="#profil" onclick="closeMenuOnLinkClick()">Tentang DF</a>
+              <a href="#crew-preview" onclick="closeMenuOnLinkClick()">Crew DF</a>
+              <a href="javascript:void(0)" onclick="scrollToKarya()">Lihat Karya</a>
+            </div>
+          </li>
+          <li><a href="#program" onclick="closeMenuOnLinkClick()">Program</a></li>
+          <li><a href="#prestasi" onclick="closeMenuOnLinkClick()">Prestasi</a></li>
+          <li><a href="#kegiatan" onclick="closeMenuOnLinkClick()">Kegiatan</a></li>
+          <li><a href="#acara">Acara</a></li>
+          <li><a href="#kontak" onclick="closeMenuOnLinkClick()">Kontak</a></li>
         </ul>
       </div>
     </nav>
 
-   <header id="home">
-    <video autoplay muted loop playsinline class="video-bg-hero"><source src="DJI_0008.mp4" type="video/mp4" /></video>
-    
-    <div class="hero-content">
-        <!-- Judul & Jargon -->
-        <div class="hero-title"><h1>DOLANAN FILM</h1></div>
-        <div class="jargon-wrapper"><p id="jargon-text" class="jargon-anim">A Production house from Cirebon</p></div>
-
-        <!-- PAMFLET ACARA MENDATANG -->
-<div class="highlight-permanen reveal pulse-anim" id="countdownSection">
-  <div class="pamflet-wrapper">
-    <!-- Gambar Poster -->
-    <img src="WhatsApp Image 2026-05-04 at 12.28.16 (1).jpeg" class="pamflet-img" />
-    
-    <div class="pamflet-info">
-    <!-- Judul Kategori dengan Tanda Seru -->
-    <p style="font-size: 0.75rem; letter-spacing: 4px; font-weight: 800; color: #8b0000; margin-bottom: 8px; text-transform: uppercase; opacity: 1;">
-        ACARA MENDATANG !
-    </p>
-    
-    <!-- Nama Acara Utama -->
-    <h2 class="event-title" style="margin-top: 0; font-size: 1.8rem; font-weight: 900; line-height: 1.1; color: #000;">
-        NYABAR VOL.3 2026
-    </h2>
-    
-    <p class="event-desc" style="margin-top: 10px; color: #333; font-size: 0.95rem;">
-       Saksikan Karya - karya terbaik & Pemutaran Film Pendek
-    </p>
+    <!-- HEADER / HERO -->
+    <header id="home">
+      <video autoplay muted loop playsinline class="video-bg-hero">
+        <source src="DJI_0008.mp4" type="video/mp4" />
+      </video>
       
-      <!-- Countdown dengan Sekat -->
-      <div class="timer-container">
-        <div class="time-box">
-          <span id="days">00</span>
-          <p>Hari</p>
+      <div class="hero-content">
+          <div class="hero-title">
+            <h1>DOLANAN FILM</h1>
+          </div>
+          <div class="jargon-wrapper">
+            <p id="jargon-text" class="jargon-anim">A Production house from Cirebon</p>
+          </div>
+
+          <div id="section-karya" class="karya-container reveal">
+              <div class="karya-card" onclick="location.href='Hasil_karya.html'">
+                  <div class="video-wrapper">
+                      <div class="video-label">KARYA DF</div>
+                      <video autoplay muted loop playsinline>
+                          <source src="kumpul.mp4" type="video/mp4" />
+                      </video>
+                  </div>
+              </div>
+
+              <div style="text-align: center; margin-top: 25px;">
+                  <a href="Hasil_karya.html" class="btn-all-works">LIHAT SEMUA KARYA</a>
+              </div>
+          </div>
+      </div>
+    </header>
+
+    <!-- SEKSI PROFIL -->
+    <section id="profil" class="reveal">
+      <h2 class="section-title">Profil</h2>
+      <div class="profile-container">
+        <div style="flex: 1; display: flex; justify-content: center;">
+            <img src="BLU.png" style="width: 100%; max-width: 320px; border: 4px solid #000; border-radius: 25px; box-shadow: 8px 8px 0px #000;" alt="Profil Photo" />
         </div>
-        <div class="timer-divider">|</div>
-        <div class="time-box">
-          <span id="hours">00</span>
-          <p>Jam</p>
-        </div>
-        <div class="timer-divider">|</div>
-        <div class="time-box">
-          <span id="mins">00</span>
-          <p>Min</p>
-        </div>
-        <div class="timer-divider">|</div>
-        <div class="time-box">
-          <span id="secs">00</span>
-          <p>Det</p>
+
+        <div class="profile-text">
+          <h3 style="font-size: 1.8rem; color: #000; margin-bottom: 15px; font-weight: 900;">Kula Nuun,</h3>
+          <p>Dolanan Film merupakan rumah produksi film lokal yang berdiri pada 10 Oktober 2022 di Karangsari, Cirebon. Sebagai wadah kreatif bagi generasi muda, kami berfokus pada film pendek yang mengangkat isu sosial, budaya, dan kehidupan sehari-hari.</p>
+          <p>Selain kegiatan produksi, kami aktif menyelenggarakan program screening film untuk mendekatkan karya audio visual kepada masyarakat sekaligus membangun ruang diskusi yang sehat.</p>
+          <p> Kolaborasi dan kreativitas pemuda menjadi pondasi utama kami dalam mendorong pengembangan potensi generasi muda melalui karya film yang berkualitas dan bermakna.</p>
         </div>
       </div>
-      
-      <a href="event.html" class="btn-event-link">LIHAT SELENGKAPNYA</a>
-    </div>
-  </div>
-</div>
-<!-- SEBELUMNYA -->
-<div class="karya-container reveal">
-<!-- KEDUA: PREVIEW HASIL KARYA (DENGAN EFEK CAHAYA) -->
-<div id="section-karya" class="karya-container reveal">
-    <!-- Bingkai Video -->
-    <div class="karya-card" onclick="location.href='hasil_karya.html'">
-        <div class="video-wrapper">
-            <div class="video-label">Karya Dolanan Film</div>
-            <video autoplay muted loop playsinline>
-                <source src="kumpul.mp4" type="video/mp4" />
-            </video>
-        </div>
-    </div>
+    </section>
 
-    <!-- Tombol Mandiri dengan Bingkai (Diletakkan di Luar Card) -->
-    <div style="text-align: center; margin-top: 30px;">
-        <a href="Hasil_karya.html" class="btn-all-works">LIHAT SEMUA KARYA</a>
-    </div>
-</div>
-</div>
-    </div>
-</header>
-      
-
-
-
-
-   <section id="profil" class="reveal">
-  <h2 class="section-title">Profil</h2>
-  <div class="profile-container">
-    <!-- FOTO PROFIL -->
-    <div style="flex: 1; display: flex; justify-content: center;">
-        <img src="BLU.png" style="width: 100%; max-width: 350px; border: 4px solid #000; border-radius: 30px; box-shadow: 10px 10px 0px #000;" />
-    </div>
-
-    <!-- BOX TEKS (BISA DIISI BANYAK PARAGRAF) -->
-    <div class="profile-text">
-      <h3 style="font-size: 2rem; color: #000; margin-bottom: 20px; font-weight: 900;">Kula Nuun,</h3>
-      <p> Dolanan Film merupakan rumah produksi film lokal yang berdiri pada 10 Oktober 2022 di Karangsari, Cirebon. Sebagai wadah kreatif bagi generasi muda, kami berfokus pada film pendek yang mengangkat isu sosial, budaya, dan kehidupan sehari-hari.</p>
-      
-      <!-- Kamu bisa tambah paragraf sebanyak mungkin di bawah ini -->
-      <p>Selain kegiatan produksi, kami aktif menyelenggarakan program screening film untuk mendekatkan karya audio visual kepada masyarakat sekaligus membangun ruang diskusi yang sehat.</p>
-
-      <p> Kolaborasi dan kreativitas pemuda menjadi pondasi utama kami dalam mendorong pengembangan potensi generasi muda melalui karya film yang berkualitas dan bermakna.</p>
-    </div>
-  </div>
-</section>
-
+    <!-- SEKSI PROGRAM -->
     <section id="program" class="reveal">
         <h2 class="section-title">Program</h2>
         <div class="grid-flex">
           <div class="card-genz" style="padding: 25px; text-align: left;">
-            <h3 style="font-weight: 900; color: var(--accent-gold); margin-bottom: 15px;">SEGERA HADIR</h3>
-            <p style="font-size: 0.85rem;"> .</p>
+            <h3 style="font-weight: 900; color: #8b0000; margin-bottom: 10px;">NYAWANG LAYAR BARENG</h3>
+            <p style="font-size: 0.85rem; color: #555;">Program apresiasi dan pemutaran film lokal secara rutin.</p>
           </div>
           <div class="card-genz" style="padding: 25px; text-align: left;">
-            <h3 style="font-weight: 900; color: var(--accent-gold); margin-bottom: 15px;">SEGERA HADIR</h3>
-            <p style="font-size: 0.85rem;"> .</p>
+            <h3 style="font-weight: 900; color: #8b0000; margin-bottom: 10px;">LOAD...</h3>
+            <p style="font-size: 0.85rem; color: #555;">.</p>
           </div>
         </div>
     </section>
 
+    <!-- SEKSI PRESTASI -->
     <section id="prestasi" class="reveal">
       <h2 class="section-title">Prestasi</h2>
       <div class="grid-flex">
-        <div class="card-genz"><img src="juara1.png" /><div style="padding:20px;"><h3>JUARA 1</h3><p>Tingkat Kabupaten Cirebon 2024.</p></div></div>
-        <div class="card-genz"><img src="juaras.jpg" /><div style="padding:20px;"><h3>Juara 1 </h3><p>Tingkat Kabupaten Cirebon 2023.</p></div></div>
-        <div class="card-genz"><img src="mitra.png" /><div style="padding:20px;"><h3>. </h3><p>BELUM TERSEDIA</p></div></div>
+        <div class="card-genz"><img src="juara1.png" alt="Juara 1 2024" /><div style="padding:15px;"><h3>JUARA 1</h3><p>Tingkat Kabupaten Cirebon 2024.</p></div></div>
+        <div class="card-genz"><img src="juaras.jpg" alt="Juara 1 2023" /><div style="padding:15px;"><h3>JUARA 1</h3><p>Tingkat Kabupaten Cirebon 2023.</p></div></div>
+        <div class="card-genz"><img src="mitra.png" alt="df" /><div style="padding:15px;"><h3></h3><p>tidak ada info.</p></div></div>
       </div>
-      <a href="prestasi_lengkap.html" class="btn-more">Lihat Semua Prestasi</a>
+      <div style="text-align: center;">
+        <a href="prestasi_lengkap.html" class="btn-more">Lihat Semua Prestasi</a>
+      </div>
     </section>
 
+    <!-- SEKSI KEGIATAN -->
     <section id="kegiatan" class="reveal"> 
       <h2 class="section-title">Kegiatan</h2>
       <div class="grid-flex">
-        <div class="card-genz"><img src="WhatsApp Image 2026-05-04 at 12.28.16.jpeg" /><div style="padding:15px;"><h3>SESI HADIAH</h3><p>Doorprize penonton aktif.</p></div></div>
-        <div class="card-genz"><img src="WhatsApp Image 2026-05-04 at 12.28.17.jpeg" /><div style="padding:15px;"><h3>DISKUSI FILM</h3><p>Tanya jawab dengan penonton.</p></div></div>
-        <div class="card-genz"><img src="IMG-20240808-WA0042-01.jpeg" /><div style="padding:15px;"><h3>KEBERSAMAAN CREW</h3><p>Kemenangan di Kabupaten Cirebon.</p></div></div>
+        <div class="card-genz"><img src="WhatsApp Image 2026-05-04 at 12.28.16.jpeg" alt="Sesi Hadiah" /><div style="padding:15px;"><h3>SESI HADIAH</h3><p>Doorprize penonton aktif.</p></div></div>
+        <div class="card-genz"><img src="WhatsApp Image 2026-05-04 at 12.28.17.jpeg" alt="Diskusi Film" /><div style="padding:15px;"><h3>DISKUSI FILM</h3><p>Tanya jawab interaktif.</p></div></div>
+        <div class="card-genz"><img src="IMG-20240808-WA0042-01.jpeg" alt="Kebersamaan Crew" /><div style="padding:15px;"><h3>KEBERSAMAAN CREW</h3><p>Kemenangan di Cirebon.</p></div></div>
       </div>
-      <a href="kegiatan_lengkap.html" class="btn-more">Lihat Semua Kegiatan</a>
+      <div style="text-align: center;">
+        <a href="kegiatan_lengkap.html" class="btn-more">Lihat Semua Kegiatan</a>
+      </div>
     </section>
 
+    <!-- SEKSI ACARA -->
+    <section id="acara" class="reveal">
+      <h2 class="section-title">Acara Kami</h2>
+      <div id="acara-container">
+        <!-- Terisi dinamis oleh JavaScript -->
+      </div>
+    </section>
+
+    <!-- CREW PREVIEW -->
     <section id="crew-preview" class="reveal">
-      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 40px;">
-        <div style="flex: 1; text-align: left;"><h2 style="font-size: 3rem; font-weight: 900;">CREW DOLANAN FILM</h2><a href="crewdf.html" class="btn-more">LIHAT SEMUA CREW</a></div>
-        <div style="flex: 1; min-width: 320px;"><div style="border:4px solid #000; border-radius:20px; overflow:hidden; background:#fff; padding:10px;"><div style="display:flex; animation: slideH 8s infinite linear; height:350px"><img src="IMG_9364.JPG" style="min-width:100%; object-fit:cover;"><img src="IMG_9514.JPG" style="min-width:100%; object-fit:cover;"></div></div></div>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 30px;">
+        <div style="flex: 1; text-align: left; min-width: 280px;">
+          <h2 style="font-size: 2.5rem; font-weight: 900; margin-bottom: 15px;">CREW DOLANAN FILM</h2>
+          <p style="margin-bottom: 20px; font-weight: 600;">Dibalik layar orang-orang hebat pembuat karya.</p>
+          <a href="Crewdf.html" class="btn-more" style="margin-top:0;">LIHAT SEMUA CREW</a>
+        </div>
+        <div style="flex: 1; min-width: 280px;">
+          <div style="border:4px solid #000; border-radius:20px; overflow:hidden; background:#fff; box-shadow: 6px 6px 0 #000;">
+             <img src="IMG_9364.JPG" style="width:100%; height: 300px; object-fit:cover; display: block;" alt="Crew Dolanan Film" />
+          </div>
+        </div>
       </div>
     </section>
 
+    <!-- KONTAK -->
     <section id="kontak">
       <h2>KUNJUNGI INSTAGRAM KAMI</h2>
-      <a href="https://www.instagram.com/dolanan_film/" target="_blank">@DOLANAN_FILM</a>
+      <a href="https://www.instagram.com/dolanan_film/" target="_blank" rel="noopener noreferrer">@DOLANAN_FILM</a>
     </section>
 
-    <!-- Bagian Copyright 2026 Dolanan Film[cite: 1] -->
+    <!-- FOOTER -->
     <footer class="copyright">
         &copy; 2026 DOLANAN FILM • A Production house from Cirebon.
     </footer>
 
+    <!-- FILE DATA ACARA TERINTEGRASI -->
+    <script src="acara-data.js"></script>
+
+    <!-- JAVASCRIPT UTAMA -->
     <script>
-// 1. FUNGSI SCROLL REVEAL
-function reveal() {
-    var reveals = document.querySelectorAll(".reveal");
-    for (var i = 0; i < reveals.length; i++) {
-        var windowHeight = window.innerHeight;
-        var elementTop = reveals[i].getBoundingClientRect().top;
-        var elementVisible = 100; // Jarak pemicu elemen muncul
+      // RENDERING PANEL ACARA DI BERANDA
+      function renderAcaraPanel() {
+        const container = document.getElementById("acara-container");
+        if (!container) return;
 
-        if (elementTop < windowHeight - elementVisible) {
-            reveals[i].classList.add("active");
-        }
-    }
-}
+        const listAcara = window.acaraData || window.dataAcara || [];
+        const now = new Date();
 
-// Jalankan fungsi saat scroll dan saat halaman dimuat
-window.addEventListener("scroll", reveal);
-window.addEventListener("DOMContentLoaded", reveal);
-
-// 2. FUNGSI JARGON BERGANTIAN
-const jargons = [
-    "A Production house from Cirebon", 
-    "Kreatif & Inovatif", 
-    "Muda Bertalenta",
-    "Karangsari Pride"
-];
-let jargonIdx = 0;
-
-function switchJargon() {
-    const jargonEl = document.getElementById("jargon-text");
-    if(jargonEl) {
-        jargonEl.classList.remove("show");
-        setTimeout(() => {
-            jargonEl.innerText = jargons[jargonIdx];
-            jargonEl.classList.add("show");
-            jargonIdx = (jargonIdx + 1) % jargons.length;
-        }, 800);
-    }
-}
-
-// 3. INISIALISASI SAAT HALAMAN DIBUKA
-window.onload = () => {
-    // Mulai Jargon
-    switchJargon();
-    setInterval(switchJargon, 3500);
-
-    // Cek Pop-up (Hanya Muncul Sekali)
-    const target = new Date("July 10, 2026 18:00:00").getTime();
-    if (target - new Date().getTime() > 0 && !sessionStorage.getItem("modalShown")) {
-        setTimeout(() => {
-            document.getElementById("eventModal").style.display = "flex";
-            sessionStorage.setItem("modalShown", "true");
-        }, 1500);
-    }
-    
-    // Jalankan Reveal pertama kali
-    reveal();
-};
-
-const eventDate = new Date("July 10, 2026 18:00:00").getTime();
-
-const countdownTask = setInterval(() => {
-    const now = new Date().getTime();
-    const distance = eventDate - now;
-    const section = document.getElementById("countdownSection");
-
-    // Jika waktu habis, hilangkan pamflet
-    if (distance < 0) {
-        clearInterval(countdownTask);
-        if (section) section.style.display = "none";
-        return;
-    }
-
-    // Update Angka
-    document.getElementById("days").innerText = Math.floor(distance / 86400000).toString().padStart(2, '0');
-    document.getElementById("hours").innerText = Math.floor((distance % 86400000) / 3600000).toString().padStart(2, '0');
-    document.getElementById("mins").innerText = Math.floor((distance % 3600000) / 60000).toString().padStart(2, '0');
-    document.getElementById("secs").innerText = Math.floor((distance % 60000) / 1000).toString().padStart(2, '0');
-}, 1000);
-
-function toggleMenu() { document.getElementById("navMenu").classList.toggle("active"); }
-function closeModal() { document.getElementById("eventModal").style.display = "none"; }
-
-function handleNavbar() {
-    const navbar = document.querySelector("nav");
-    // Jika posisi scroll lebih dari 50px, tambahkan class 'scrolled'
-    if (window.scrollY > 50) {
-        navbar.classList.add("scrolled");
-    } else {
-        navbar.classList.remove("scrolled");
-    }
-}
-
-// Jalankan saat scroll dan saat muat halaman
-window.addEventListener("scroll", handleNavbar);
-window.addEventListener("DOMContentLoaded", handleNavbar);
-
-function openEventModal() {
-    const modal = document.getElementById("eventModal");
-    const content = document.getElementById("modalContent");
-    
-    if (modal && content) {
-        // 1. Munculkan modal terlebih dahulu
-        modal.style.display = "flex";
-        
-        // 2. Beri jeda 10ms lalu paksa animasi jalan
-        setTimeout(() => {
-            content.classList.remove("shake"); // Bersihkan class lama
-            void content.offsetWidth;          // Paksa browser menghitung ulang (Reflow)
-            content.classList.add("shake");    // Pasang class getar
-        }, 10);
-
-        // 3. Getar Fisik untuk Mobile (Tetap ada)
-        if ("vibrate" in navigator) {
-            navigator.vibrate([300, 100, 300]);
-        }
-    }
-}
-
-// JANGAN PAKAI window.onload murni, tapi deteksi interaksi pertama
-// Browser modern blokir getar otomatis tanpa klik/scroll dari user
-window.addEventListener("scroll", function triggerOnce() {
-    if (!sessionStorage.getItem("modalShown")) {
-        // Pop-up muncul setelah user sedikit scroll (interaksi terdeteksi)
-        setTimeout(openEventModal, 500);
-        sessionStorage.setItem("modalShown", "true");
-        window.removeEventListener("scroll", triggerOnce);
-    }
-}, { passive: true });
-
-
-
-// Pastikan fungsi toggleMenu yang lama tetap ada untuk menutup navbar secara keseluruhan
-function toggleMenu() {
-    document.getElementById("navMenu").classList.toggle("active");
-    // Opsional: Tutup semua dropdown saat navbar ditutup
-    document.getElementById("profileDropdown").classList.remove("active");
-}
-
-function scrollToKarya() {
-    // 1. Cari elemen kontainer karya
-    const karyaSection = document.querySelector(".karya-container");
-    
-    if (karyaSection) {
-        // 2. Tutup menu navigasi (terutama untuk tampilan mobile)
-        toggleMenu(); 
-        
-        // 3. Lakukan scroll halus ke posisi kontainer karya
-        const offset = 100; // Jarak aman agar tidak tertutup navbar
-        const bodyRect = document.body.getBoundingClientRect().top;
-        const elementRect = karyaSection.getBoundingClientRect().top;
-        const elementPosition = elementRect - bodyRect;
-        const offsetPosition = elementPosition - offset;
-
-        window.scrollTo({
-            top: offsetPosition,
-            behavior: "smooth"
+        // Filter: Status Admin 'aktif' & disetujui admin untuk tampil di panel
+        let acaraPanel = listAcara.filter(item => {
+          const isAktif = (item.statusAdmin || item.status) === "aktif";
+          return isAktif && item.tampilDiPanel === true;
         });
-    }
-}
 
-function toggleDropdown(e) {
-    if (window.innerWidth <= 768) {
-        e.preventDefault();
-        const dropdownParent = e.target.closest('.dropdown');
-        if (dropdownParent) {
-            // Menambah/menghapus class active secara instan
-            dropdownParent.classList.toggle("active");
+        // Maksimal 4 acara di panel beranda[cite: 1]
+        if (acaraPanel.length > 4) {
+          acaraPanel = acaraPanel.slice(0, 4);
         }
-    }
-}
 
+        if (acaraPanel.length > 0) {
+          container.innerHTML = `
+            <div class="panel-grid-wrapper" style="display: flex; flex-direction: column; gap: 25px;">
+              ${acaraPanel.map(item => {
+                const tglMulai = new Date(item.tanggalMulai || item.tanggal);
+                const tglSelesai = item.tanggalSelesai ? new Date(item.tanggalSelesai) : new Date(item.tanggal + "T23:59:59");
+                
+                let statusBadge = "AKAN DATANG";
+                if (now >= tglMulai && now <= tglSelesai) {
+                  statusBadge = "SEDANG BERLANGSUNG";
+                } else if (now > tglSelesai) {
+                  statusBadge = "SELESAI";
+                }
 
+                return `
+                  <div class="acara-card-active">
+                    <img src="${item.poster || 'WhatsApp Image 2026-05-04 at 12.28.16 (1).jpeg'}" class="acara-img" alt="${item.judul}" />
+                    <div class="acara-info">
+                      <span class="acara-badge">${statusBadge}</span>
+                      <h3 style="font-size: 1.8rem; font-weight: 900; margin-bottom: 10px; color: #000;">${item.judul}</h3>
+                      <p style="font-weight: 700; color: #8b0000; margin-bottom: 10px;">
+                        📅 ${item.tanggalFormatted || item.tanggal} ${item.waktuFormatted || item.waktu || ''}<br>📍 ${item.lokasi || 'Karangsari, Cirebon'}
+                      </p>
+                      <p style="font-size: 0.95rem; color: #333; line-height: 1.6; margin-bottom: 20px;">${item.deskripsi}</p>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
 
-</script>
-    <style> @keyframes slideH { 0% { transform: translateX(0); } 100% { transform: translateX(-200%); } } </style>
+              <div style="text-align: center; margin-top: 10px;">
+                <a href="acara.html" class="btn-more" style="background:#8b0000; color:#fff;">CEK ACARA LAINNYA →</a>
+              </div>
+            </div>
+          `;
+        } else {
+          container.innerHTML = `
+            <div class="acara-empty-state">
+              <div style="font-size: 3rem; margin-bottom: 10px;">🎬</div>
+              <h3>Belum ada acara di beranda</h3>
+              <p style="font-weight: 600; color: #666; font-size: 0.95rem; margin-bottom: 20px;">Lihat seluruh agenda dan sejarah kegiatan kami di direktori acara.</p>
+              <a href="acara.html" class="btn-more" style="margin-top:0; background:#8b0000; color:#fff;">CEK ACARA LAINNYA</a>
+            </div>
+          `;
+        }
+      }
 
-    
+      // NAVIGASI MOBILE & HAMBURGER LOGIC
+      function toggleMenu() { 
+        const navMenu = document.getElementById("navMenu");
+        const hamburger = document.querySelector(".hamburger");
+        if (navMenu && hamburger) {
+          navMenu.classList.toggle("active");
+          hamburger.classList.toggle("active");
+        }
+      }
+
+      function toggleDropdown(e) {
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          e.stopPropagation();
+          const dropdownParent = e.target.closest('.dropdown');
+          if (dropdownParent) {
+            dropdownParent.classList.toggle("active");
+          }
+        }
+      }
+
+      function closeMenuOnLinkClick() {
+        if (window.innerWidth <= 768) {
+          const navMenu = document.getElementById("navMenu");
+          const hamburger = document.querySelector(".hamburger");
+          if (navMenu && navMenu.classList.contains("active")) {
+            navMenu.classList.remove("active");
+            hamburger.classList.remove("active");
+          }
+        }
+      }
+
+      function scrollToKarya() {
+        closeMenuOnLinkClick();
+        const karyaSection = document.getElementById("section-karya");
+        if (karyaSection) {
+          karyaSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+
+      // SCROLL REVEAL FUNGSI
+      function reveal() {
+          var reveals = document.querySelectorAll(".reveal");
+          for (var i = 0; i < reveals.length; i++) {
+              var windowHeight = window.innerHeight;
+              var elementTop = reveals[i].getBoundingClientRect().top;
+              if (elementTop < windowHeight - 80) {
+                  reveals[i].classList.add("active");
+              }
+          }
+      }
+
+      // JARGON BERGANTIAN
+      const jargons = [
+          "A Production house from Cirebon", 
+          "Kreatif & Inovatif", 
+          "Muda Bertalenta",
+          "Karangsari Pride"
+      ];
+      let jargonIdx = 0;
+
+      function switchJargon() {
+          const jargonEl = document.getElementById("jargon-text");
+          if(jargonEl) {
+              jargonEl.classList.remove("show");
+              setTimeout(() => {
+                  jargonEl.innerText = jargons[jargonIdx];
+                  jargonEl.classList.add("show");
+                  jargonIdx = (jargonIdx + 1) % jargons.length;
+              }, 600);
+          }
+      }
+
+      // NAV SCROLL EFFECT
+      function handleNavbar() {
+          const navbar = document.querySelector("nav");
+          if (window.scrollY > 50) {
+              navbar.classList.add("scrolled");
+          } else {
+              navbar.classList.remove("scrolled");
+          }
+      }
+
+      // INITIALIZATION
+      window.addEventListener("scroll", () => {
+        reveal();
+        handleNavbar();
+      });
+
+      window.addEventListener("DOMContentLoaded", () => {
+        renderAcaraPanel();
+        reveal();
+        handleNavbar();
+        switchJargon();
+        setInterval(switchJargon, 3500);
+      });
+    </script>
   </body>
 </html>
-
