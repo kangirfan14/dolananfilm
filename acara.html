@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta charset="UTF-8" />
+    <title>Daftar Acara | DOLANAN FILM</title>
+    <link rel="icon" type="image/png" href="logdf.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet" />
+    
+    <style>
+      :root {
+        --accent-gold: #c5a059;
+        --p-orange: #ffe5d9;
+        --p-pink: #ffdae9;
+      }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { 
+        font-family: 'Montserrat', sans-serif; 
+        background: #fdfaf5; 
+        color: #1a1a1a;
+        padding-bottom: 60px;
+      }
+
+      header {
+        background: #fff;
+        border-bottom: 4px solid #000;
+        padding: 20px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        color: #8b0000;
+        font-weight: 900;
+        font-size: 1.1rem;
+      }
+
+      .btn-back {
+        background: #fff;
+        color: #000;
+        padding: 8px 18px;
+        border: 3px solid #000;
+        border-radius: 50px;
+        font-weight: 900;
+        text-decoration: none;
+        box-shadow: 4px 4px 0 #000;
+        font-size: 0.8rem;
+        transition: 0.2s;
+      }
+
+      .btn-back:hover {
+        background: #000;
+        color: #fff;
+      }
+
+      .main-container {
+        max-width: 1100px;
+        margin: 40px auto;
+        padding: 0 20px;
+      }
+
+      .page-title {
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 900;
+        text-transform: uppercase;
+        margin-bottom: 30px;
+        text-align: center;
+      }
+
+      .tabs-wrapper {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+      }
+
+      .tab-btn {
+        background: #fff;
+        border: 3px solid #000;
+        padding: 10px 24px;
+        border-radius: 50px;
+        font-weight: 900;
+        font-size: 0.85rem;
+        cursor: pointer;
+        box-shadow: 4px 4px 0 #000;
+        transition: all 0.2s ease;
+      }
+
+      .tab-btn:hover, .tab-btn.active {
+        background: #8b0000;
+        color: #fff;
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0 #000;
+      }
+
+      .acara-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 30px;
+      }
+
+      .card-event {
+        background: #fff;
+        border: 4px solid #000;
+        border-radius: 25px;
+        overflow: hidden;
+        box-shadow: 8px 8px 0 #000;
+        display: flex;
+        flex-direction: column;
+        transition: 0.3s;
+      }
+
+      .card-event:hover {
+        transform: translateY(-5px);
+        box-shadow: 12px 12px 0 #000;
+      }
+
+      .event-poster {
+        width: 100%;
+        height: 240px;
+        object-fit: cover;
+        border-bottom: 4px solid #000;
+      }
+
+      .event-body {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+      }
+
+      .event-badge {
+        align-self: flex-start;
+        font-size: 0.65rem;
+        font-weight: 900;
+        padding: 4px 12px;
+        border-radius: 50px;
+        border: 2px solid #000;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+      }
+
+      .badge-akan_datang { background: #fff4d1; color: #000; }
+      .badge-berlangsung { background: #e1f7d5; color: #000; }
+      .badge-selesai { background: #e8dff5; color: #555; }
+
+      .event-title {
+        font-size: 1.3rem;
+        font-weight: 900;
+        margin-bottom: 10px;
+      }
+
+      .event-meta {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: #8b0000;
+        margin-bottom: 12px;
+      }
+
+      .event-desc {
+        font-size: 0.85rem;
+        line-height: 1.5;
+        color: #444;
+        margin-bottom: 20px;
+        flex-grow: 1;
+      }
+
+      .empty-notice {
+        text-align: center;
+        padding: 60px 20px;
+        background: #fff;
+        border: 4px solid #000;
+        border-radius: 30px;
+        box-shadow: 8px 8px 0 #000;
+        grid-column: 1 / -1;
+      }
+    </style>
+  </head>
+  <body>
+
+    <header>
+      <a href="index.html" class="logo-brand">
+        <img src="df merah darah.png" alt="Logo" style="width:35px;" />
+        <span>DOLANAN FILM</span>
+      </a>
+      <a href="index.html#acara" class="btn-back">← Kembali ke Beranda</a>
+    </header>
+
+    <div class="main-container">
+      <h1 class="page-title">Acara</h1>
+
+      <div class="tabs-wrapper">
+        <button class="tab-btn active" onclick="filterAcara('semua', event)">Semua Acara</button>
+        <button class="tab-btn" onclick="filterAcara('akan_datang', event)">Mendatang</button>
+        <button class="tab-btn" onclick="filterAcara('berlangsung', event)">Sedang Berlangsung</button>
+        <button class="tab-btn" onclick="filterAcara('selesai', event)">Selesai</button>
+      </div>
+
+      <div id="grid-acara" class="acara-grid"></div>
+    </div>
+
+    <!-- PANGGIL DATA ACARA -->
+    <script src="acara-data.js"></script>
+
+    <script>
+      let currentFilter = 'semua';
+
+      function getStatusAcara(item) {
+        const now = new Date();
+        const tglMulai = new Date(item.tanggalMulai || item.tanggal);
+        const tglSelesai = item.tanggalSelesai ? new Date(item.tanggalSelesai) : new Date(item.tanggal + "T23:59:59");
+
+        if (now < tglMulai) {
+          return 'akan_datang';
+        } else if (now >= tglMulai && now <= tglSelesai) {
+          return 'berlangsung';
+        } else {
+          return 'selesai';
+        }
+      }
+
+      function renderAcaraList() {
+        const grid = document.getElementById("grid-acara");
+        const listData = window.acaraData || window.dataAcara || [];
+
+        const filtered = listData.filter(item => {
+          const statusAdmin = item.statusAdmin || item.status;
+          if (statusAdmin === 'nonaktif') return false;
+
+          const status = getStatusAcara(item);
+          if (currentFilter === 'semua') return true;
+          return status === currentFilter;
+        });
+
+        if (filtered.length === 0) {
+          grid.innerHTML = `
+            <div class="empty-notice">
+              <h3 style="font-size: 1.5rem; font-weight: 900;">Belum Ada Informasi Acara</h3>
+              <p style="color: #666; margin-top: 5px;">Tidak ada acara pada kategori ini untuk saat ini.</p>
+            </div>
+          `;
+          return;
+        }
+
+        grid.innerHTML = filtered.map(item => {
+          const status = getStatusAcara(item);
+          let badgeLabel = '';
+
+          if (status === 'akan_datang') badgeLabel = 'Mendatang';
+          else if (status === 'berlangsung') badgeLabel = 'Sedang Berlangsung';
+          else badgeLabel = 'Selesai';
+
+          return `
+            <div class="card-event">
+              <img src="${item.poster || 'WhatsApp Image 2026-05-04 at 12.28.16 (1).jpeg'}" class="event-poster" alt="${item.judul}" />
+              <div class="event-body">
+                <span class="event-badge badge-${status}">${badgeLabel}</span>
+                <h2 class="event-title">${item.judul}</h2>
+                <div class="event-meta">
+                  📍 ${item.lokasi || 'Karangsari, Cirebon'}<br>
+                  📅 ${item.tanggalFormatted || item.tanggal} ${item.waktuFormatted || item.waktu || ''}
+                </div>
+                <p class="event-desc">${item.deskripsi}</p>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      function filterAcara(status, evt) {
+        currentFilter = status;
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        if (evt && evt.target) {
+          evt.target.classList.add('active');
+        }
+        renderAcaraList();
+      }
+
+      window.addEventListener('DOMContentLoaded', renderAcaraList);
+    </script>
+  </body>
+</html>
